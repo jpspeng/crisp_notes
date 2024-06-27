@@ -8,7 +8,7 @@ Please see this page for basic R tutorials and exercises.
 3. Read in data
 4. Subsetting data (using the `dplyr` package)
 5. Descriptive statistics
-6. Exercise: Create a table 1 from data 
+6. Exercise: Create a Table 1 from data 
 7. ggplot2
 
 If you have any questions, you can email James at jpspeng@uw.edu. 
