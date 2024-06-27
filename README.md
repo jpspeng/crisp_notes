@@ -9,6 +9,6 @@ Please see this page for basic R tutorials and exercises.
 4. Subsetting data (using the `dplyr` package)
 5. Descriptive statistics
 6. Exercise: Create a Table 1 from data 
-7. ggplot2
+7. Plotting using `ggplot2`
 
 If you have any questions, you can email James at jpspeng@uw.edu. 
