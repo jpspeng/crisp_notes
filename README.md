@@ -2,7 +2,7 @@
 
 Please see this page for basic R tutorials and exercises. 
 
-0. Installing R and R Studio
+0. [Installing R and R Studio](https://jpspeng.github.io/crisp_notes/pages/installing_R.html)
 1. Installing and using packages
 2. Basic operations in R
 3. Read in data
