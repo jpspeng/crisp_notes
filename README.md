@@ -1,6 +1,6 @@
 # Welcome to the CRISP R notes page
 
-Please see this page for basic R tutorials and exercises. 
+These are basic R tutorials and exercises for getting started with R programming, created for [Clinical Research Intensive Summer Program](https://www.iths.org/education/professional-development/crisp/) (CRISP) through UW ITHS.
 
 0. [Installing R and R Studio](https://jpspeng.github.io/crisp_notes/pages/installing_R.html)
 1. Installing and using packages
