@@ -1,0 +1,34 @@
+---
+title: "Installing R and R Studio"
+output: html_document
+---
+
+<style type="text/css">
+  body{
+  font-size: 12pt;
+}
+</style>
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+**R** is a programming language and software environment specifically designed for 
+statistical computing, data analysis, and graphical representation. **RStudio** is
+an integrated development environment 
+(IDE) for R. It provides a user-friendly interface that makes working with R 
+easier and more efficient. We will need both for the CRISP course. 
+
+For instructions on how to install, please read this page 
+[this page](https://rstudio-education.github.io/hopr/starting.html).
+
+Here are some video resources in case you are having trouble: 
+
+* [For Windows](https://www.youtube.com/watch?v=H9EBlFDGG4k&ab_channel=ProgrammingKnowledge)
+* [For Mac](https://www.youtube.com/watch?v=I5WIMX4LK8M&t=2s&ab_channel=ProgrammingKnowledge)
+
+&nbsp; &nbsp; &nbsp;
+
+*[Click here](https://jpspeng.github.io/crisp_notes/) to go back to the CRISP R notes homepage.*
+

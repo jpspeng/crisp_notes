@@ -1,0 +1,33 @@
+---
+title: "Reading in data into R"
+output: html_document
+---
+
+<style type="text/css">
+  body{
+  font-size: 12pt;
+}
+</style>
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Say that you have a dataset. The first step is to read in data into `R`. You can do
+this using the `read.csv()` function. 
+
+The easiest way to use this function is to put the data file in the **same folder** 
+as your R code. Otherwise, you may have to include the directory path to the data in the argument when
+calling `read.csv()`. 
+
+```{r}
+# if data is in the same folder 
+
+# if data is in a different folder
+```
+
+After reading in the data, you can print the dataset by just referencing
+the variable in a code chunk. 
+
+

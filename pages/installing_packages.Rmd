@@ -1,0 +1,52 @@
+---
+title: "Installing and using packages"
+output: html_document
+---
+
+<style type="text/css">
+  body{
+  font-size: 12pt;
+}
+</style>
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+One of the main advantages of `R` are its packages. 
+
+An R package is a collection of functions, data, and documentation that extends the capabilities 
+of R, a programming language and software environment used for statistical computing 
+and graphics. R packages are used to share code and data with others and to 
+reuse code in different projects. They can include:
+
+1. **Functions**: Custom functions that perform specific tasks.
+2. **Data**: Datasets that can be used for analysis and examples.
+3. **Documentation**: Help files and vignettes that explain how to use the functions and datasets.
+
+R packages are typically installed from CRAN (Comprehensive R Archive Network). Packages
+tend to have specific uses. For example, there are packages specifically for 
+making graphs, others for creating manuscript-ready tables, and others to simplify 
+data processing. 
+
+You can install a package in R using the `install.packages()` function, and load 
+it using the `library()`.
+
+```{r eval = F}
+# Install a package from CRAN
+install.packages("dplyr")
+
+# Load the package
+library(dplyr)
+```
+
+Most packages have documentation on how to use specific functions. For example, 
+the `dplyr` documentation is [here](https://dplyr.tidyverse.org/). 
+
+Each time you use R, you will have to load in the packages that you want to use
+during the session. 
+
+## Exercises
+
+Install and load in the following packages: `dplyr` and `ggplot2`.

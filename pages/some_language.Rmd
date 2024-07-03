@@ -1,0 +1,96 @@
+---
+title: "Basic language and operations"
+output: html_document
+---
+
+<style type="text/css">
+  body{
+  font-size: 12pt;
+}
+</style>
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+We'll start off by just introducing some language with basic examples that will 
+be used with R. 
+
+## Expression 
+
+An **expression** is a line of code that just evaluates. Nothing is saved - the output 
+is simply evaluated and printed. For example, we can perform the operation 5 + 5 and 
+print the result in R. 
+
+```{r}
+5 + 5
+```
+
+## Variable 
+
+We can save **expressions** into **variables**. We can do this using the -> symbol. 
+For example, the line of code below saves 5 + 5 into a new variable `my_num`: 
+
+```{r}
+my_var <- 5 + 5 
+
+my_var
+```
+
+After we save a variable, we can reference and perform operations on this variable 
+later on in our code: 
+
+```{r}
+my_var + 10
+```
+
+## Variable types 
+
+We can save different types of objects into variables. Two of the most common types of
+objects are **numeric** variables and **string** variables. Numeric variables are 
+numbers; string variables are text. 
+
+```{r}
+my_num <- 5 
+
+my_str <- "This is my string"
+```
+
+## Vector 
+
+A vector is an ordered collection of numeric or string objects. We can create
+a vector by using the `c()` syntax. For example, the code below creates a vector of 
+5 numbers, from 1 to 5. 
+
+```{r}
+my_vec <- c(1,2,3,4,5)
+```
+
+We can select specific elements of the vector by calling the vector, followed by 
+`[]`. For example, this line of code selects the first element:  
+
+```{r}
+my_vec[1]
+```
+
+This line of code selects the fourth element of the vector: 
+
+```{r}
+my_vec[4]
+```
+
+## Function 
+
+The thing(s) that you put into a function are called argument(s). 
+
+## Dataframe 
+
+## Comments
+
+## Exercises
+
+1. 
+
+2. 
+
