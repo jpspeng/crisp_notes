@@ -45,6 +45,22 @@ later on in our code:
 my_var + 10
 ```
 
+Note that doing this operation does not change our variable. If we take a look at 
+`my_var`, it still equals 10. 
+
+```{r}
+my_var
+```
+
+We can change our variable by assigning the result of `my_var + 10` to `my_var`. 
+
+```{r}
+my_var <- my_var + 10 
+
+my_var
+```
+
+
 ## Variable types 
 
 We can save different types of objects into variables. Two of the most common types of
@@ -59,12 +75,12 @@ my_str <- "This is my string"
 
 ## Vector 
 
-A vector is an ordered collection of numeric or string objects. We can create
+A **vector** is an ordered collection of numeric or string objects. We can create
 a vector by using the `c()` syntax. For example, the code below creates a vector of 
 5 numbers, from 1 to 5. 
 
 ```{r}
-my_vec <- c(1,2,3,4,5)
+my_vec <- c(1, 2, 3, 4, 5)
 ```
 
 We can select specific elements of the vector by calling the vector, followed by 
@@ -80,17 +96,72 @@ This line of code selects the fourth element of the vector:
 my_vec[4]
 ```
 
+Vectors can also consist of strings. 
+
+```{r}
+my_str_vec <- c("a", "b", "c")
+
+my_str_vec[1]
+```
+
 ## Function 
 
-The thing(s) that you put into a function are called argument(s). 
+A **function** is an object that does a pre-determined set of operations. A function 
+looks something like `function()`, and you put the arguments inside the parenthesis. 
+
+R has a lot of pre-built functions. One example is the function `mean()`. Take a look 
+at the below code. The `mean()` function takes in as an argument a vector of numbers, 
+and returns the mean of the vector.
+
+```{r}
+my_numbers <- c(1, 2, 4, 5, 6)
+
+mean(my_numbers)
+```
+
+Another function is `median()`, which will give us the median of a vector of numbers: 
+
+```{r}
+median(my_numbers)
+```
+
+For all prebuilt functions in R, you can find the documentation online. The simplest way
+is by Googling it. [Here](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/mean) 
+is the documentation for the `mean()` function.
 
 ## Dataframe 
 
+A **dataframe** is a data object in `R`. There are several dataframes included when you download R. 
+For example, the `cars` dataset is one that tabulates the speed and distance of different cars' journeys. 
+
+We can use the `head()` function to look at the first few rows of the `cars` dataset.
+
+```{r}
+head(cars)
+```
+
+We can also read in dataframes. If your data is in a csv format, then you can use 
+the `read.csv()` function. It looks something like this:  
+
+```{r}
+my_data <- read.csv("crisp-2024-sample100.csv")
+
+head(my_data)
+```
+
 ## Comments
+
+Code that has a # before it is a **comment** and will not run. Comments are often used 
+for documentation - so that you know what code does after you write it. 
+
+```{r}
+# This line of code finds the mean of a vector(1,4,6)
+mean(c(1, 4, 6))
+```
 
 ## Exercises
 
-1. 
-
-2. 
+Write code to find the mean of 1, 10, 40, 80, 120, 150. How about the median? 
+Standard deviation? Maximum? Minimum? (Hint: look up functions for the standard
+deviation, maximum, and minimum.)
 

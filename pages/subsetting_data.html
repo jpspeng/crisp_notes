@@ -11,7 +11,7 @@
 
 
 
-<title>Subsetting data</title>
+<title>Dataset operations</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -354,7 +354,7 @@ pre code {
 
 
 
-<h1 class="title toc-ignore">Subsetting data</h1>
+<h1 class="title toc-ignore">Dataset operations</h1>
 
 </div>
 
@@ -364,6 +364,108 @@ pre code {
   font-size: 12pt;
 }
 </style>
+<div id="dataset-operations" class="section level2">
+<h2>Dataset operations</h2>
+<p>We start off by reading in the crisp-2024-sample100.csv dataset into
+our R session.</p>
+<pre class="r"><code>df &lt;- read.csv(&quot;crisp-2024-sample100.csv&quot;)</code></pre>
+<p>After reading in the data, a good first step is to just take a peak
+at this dataset. We can do this using the <code>head()</code>
+function:</p>
+<pre class="r"><code>head(df)</code></pre>
+<pre><code>##    id tx age sex educyrs bmi insure smoke100 coclft canlft mhdx
+## 1  84  0  22   0      12  22      1        1      0      1    1
+## 2 468  0  24   1      12  20      1        1      0      1    1
+## 3 225  0  34   0      11  22      0        1      1      1    0
+## 4 430  0  34   0      11  21      1        1      0      1    0
+## 5  35  0  32   0      13  22      1        1      1      1    0
+## 6 189  1  33   0      11  32      1        1      1      1    0</code></pre>
+<p>Next, we might want to get to know the dataset. We can pull a
+specific column from the dataset as a vector by using the dollar sign $
+operator. For example, we can pull out the ages and save as the
+<code>age_vec</code> variable.</p>
+<pre class="r"><code>age_vec &lt;- df$age
+
+age_vec</code></pre>
+<pre><code>##   [1] 22 24 34 34 32 33 56 30 26 24 35 33 52 36 30 29 22 29 21 28 42 32 25 24 28
+##  [26] 21 30 36 27 23 38 24 36 37 33 53 36 58 27 38 23 47 32 32 30 44 55 36 37 31
+##  [51] 22 25 35 30 25 32 26 34 25 29 24 31 38 29 21 24 51 35 23 37 32 27 39 25 30
+##  [76] 31 31 34 23 49 24 25 52 29 29 51 26 25 32 38 50 43 37 26 42 25 24 30 28 52</code></pre>
+<p>Next, we can get some summaries of the column. For example, we can
+obtain the mean age by using the <code>mean()</code> function:</p>
+<pre class="r"><code>mean(age_vec)</code></pre>
+<pre><code>## [1] 32.7</code></pre>
+<p>Note that we combine this into a single step by just directly taking
+the mean of <code>age</code> column in <code>df</code>:</p>
+<pre class="r"><code>mean(df$age)</code></pre>
+<pre><code>## [1] 32.7</code></pre>
+<p>Similarly, we can use the <code>median()</code>, <code>sd()</code>,
+<code>min()</code>, and <code>max()</code> functions to obtain other
+descriptive statistics:</p>
+<pre class="r"><code># median 
+median(df$age)</code></pre>
+<pre><code>## [1] 31</code></pre>
+<pre class="r"><code># standard deviation
+sd(df$age)</code></pre>
+<pre><code>## [1] 9.023538</code></pre>
+<pre class="r"><code># min
+min(df$age)</code></pre>
+<pre><code>## [1] 21</code></pre>
+<pre class="r"><code># max 
+max(df$age)</code></pre>
+<pre><code>## [1] 58</code></pre>
+<p>What if we want to obtain multiple summaries of the data at once? We
+can use the <code>summary()</code> function to obtain the minimum, 25th
+percentile, median, mean, 75th percentile, and maximum of the data, with
+one line of code:</p>
+<pre class="r"><code>summary(df$age)</code></pre>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   21.00   25.00   31.00   32.70   36.25   58.00</code></pre>
+<p>What about categorical data? For example, the treatment
+<code>tx</code> variable takes the value of 0 or 1, corresponding to
+control and treatment, respectively. How can we get counts of each
+category? We can use the <code>table()</code> function to obtain these
+counts:</p>
+<pre class="r"><code>table(df$tx)</code></pre>
+<pre><code>## 
+##  0  1 
+## 56 44</code></pre>
+<p>If we use <code>table()</code>, it will not tabulate the missing
+data, which are coded as NA in the dataset. To show the missing data, we
+have to add an extra argument <code>useNA = &quot;always&quot;</code> to our
+function call:</p>
+<pre class="r"><code># tabulating the mhdx column, don&#39;t show NAs
+table(df$mhdx)</code></pre>
+<pre><code>## 
+##  0  1 
+## 79 18</code></pre>
+<pre class="r"><code># tabulating the mhdx column, show NAs
+table(df$mhdx, useNA = &quot;always&quot;)</code></pre>
+<pre><code>## 
+##    0    1 &lt;NA&gt; 
+##   79   18    3</code></pre>
+</div>
+<div id="subsetting-datasets" class="section level2">
+<h2>Subsetting datasets</h2>
+<p>Subsetting datasets refers to filtering the dataset, by either
+selecting a set of the dataset columns or filtering the rows based on
+some logic. In our short course, we will subset the data using the
+<code>dplyr</code> package. First, we read in the <code>dplyr</code>
+package, which you should have already installed:</p>
+<pre class="r"><code>library(dplyr)</code></pre>
+<pre><code>## 
+## Attaching package: &#39;dplyr&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:stats&#39;:
+## 
+##     filter, lag</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     intersect, setdiff, setequal, union</code></pre>
+<p><em>More to come next week…</em></p>
+<p>     </p>
+<p><em><a href="https://jpspeng.github.io/crisp_notes/">Click here</a>
+to go back to the CRISP R notes homepage.</em></p>
+</div>
 
 
 

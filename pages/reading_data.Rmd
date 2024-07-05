@@ -14,20 +14,33 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-Say that you have a dataset. The first step is to read in data into `R`. You can do
+Say that you have a dataset. The first step is to read in data into R. You can do
 this using the `read.csv()` function. 
 
 The easiest way to use this function is to put the data file in the **same folder** 
-as your R code. Otherwise, you may have to include the directory path to the data in the argument when
-calling `read.csv()`. 
+as your R (or Rmd) code. For example, please download the crisp-2024-sample100.csv 
+file from ITHS Tree and put it in the same folder as this R Markdown file, 
+and try to run the following code: 
 
 ```{r}
-# if data is in the same folder 
+# we read the crisp-2024-sample100.csv and save it into df 
+df <- read.csv("crisp-2024-sample100.csv")
 
-# if data is in a different folder
+# use head function to print out the first few rows
+head(df)
 ```
 
-After reading in the data, you can print the dataset by just referencing
-the variable in a code chunk. 
+Did it run? Then great! That means that the data is now in our R session, saved
+in the variable `df`. We can now manipulate and analyze the data, which we will 
+do in the next few tutorials.
 
+If the data is not in the same folder as your R file, you may have to include the directory path to the data in the argument when calling `read.csv()`.
 
+```{r}
+# if data is in a different folder, it may look like this: 
+# df <- read.csv("C:/path/to/directory/crisp-2024-sample100.csv")
+```
+
+&nbsp; &nbsp; &nbsp;
+
+*[Click here](https://jpspeng.github.io/crisp_notes/) to go back to the CRISP R notes homepage.*

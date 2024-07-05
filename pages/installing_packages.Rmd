@@ -14,7 +14,7 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-One of the main advantages of `R` are its packages. 
+One of the main advantages of R are its packages. 
 
 An R package is a collection of functions, data, and documentation that extends the capabilities 
 of R, a programming language and software environment used for statistical computing 
@@ -50,3 +50,8 @@ during the session.
 ## Exercises
 
 Install and load in the following packages: `dplyr` and `ggplot2`.
+
+&nbsp; &nbsp; &nbsp;
+
+*[Click here](https://jpspeng.github.io/crisp_notes/) to go back to the CRISP R notes homepage.*
+

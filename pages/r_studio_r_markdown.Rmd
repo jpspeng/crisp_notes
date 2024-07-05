@@ -1,0 +1,52 @@
+---
+title: "R Studio and R Markdown"
+output: html_document
+---
+
+<style type="text/css">
+  body{
+  font-size: 12pt;
+}
+</style>
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Studio
+
+When writing R code, we will spend most of our time in R Studio. R Studio is a 
+program which is a nice environment for writing and running R code. 
+
+Please watch [this video](https://www.youtube.com/watch?v=FIrsOBy5k58) 
+for a short introduction on R Studio.  
+
+## R Markdown 
+
+There are two ways to write and run **R code**. The first is by using a normal R script. These are files with a .R ending. These are standalone scripts, where you can run 
+all the code, from top to bottom. 
+
+The second way is by using an **R Markdown**. These are files with a .Rmd ending. 
+
+Please watch [this video](https://www.youtube.com/watch?v=DNS7i2m4sB0) for a short introduction into R Markdown. 
+
+There are two major advantages (in my mind) of using R Markdown:
+
+1. You can run and see the output of code chunks one at time, so you can separate out your work into clearly defined steps. 
+2. You can integrate your code and comments into a nicely formatted document, 
+which can show both your thinking and your steps for implementation. In fact, 
+I'm using R Markdown for these tutorials! 
+
+I would highly encourage you to use R Markdown for this short course! The ideal way 
+to do that is to **download** the R Markdown files on the website, open it 
+in your computer in R Studio, try to run all of the code chunks yourself, 
+on your computer. When reading through the documents, try to modify the code a little 
+bit and see what happens to the output. 
+
+Learning to code in R can be difficult, especially if you have never coded before, but the best way to learn is to try things out, make mistakes, and work through them! 
+
+&nbsp; &nbsp; &nbsp;
+
+*[Click here](https://jpspeng.github.io/crisp_notes/) to go back to the CRISP R notes homepage.*
+

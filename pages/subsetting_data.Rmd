@@ -1,5 +1,5 @@
 ---
-title: "Subsetting data"
+title: "Dataset operations"
 output: html_document
 ---
 
@@ -13,5 +13,105 @@ output: html_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+
+## Dataset operations
+
+We start off by reading in the crisp-2024-sample100.csv dataset into our R session. 
+
+```{r}
+df <- read.csv("crisp-2024-sample100.csv")
+```
+
+After reading in the data, a good first step is to just take a peak at this dataset. 
+We can do this using the `head()` function: 
+
+```{r}
+head(df)
+```
+
+Next, we might want to get to know the dataset. We can pull a specific 
+column from the dataset as a vector by using the dollar sign $ operator. 
+For example, we can pull out the ages and save as the `age_vec` variable. 
+
+```{r}
+age_vec <- df$age
+
+age_vec
+```
+
+Next, we can get some summaries of the column. For example, we can obtain the 
+mean age by using the `mean()` function: 
+
+```{r}
+mean(age_vec)
+```
+
+Note that we combine this into a single step by just directly taking the mean 
+of `age` column in `df`: 
+
+```{r}
+mean(df$age)
+```
+
+Similarly, we can use the `median()`, `sd()`, `min()`, and `max()` functions to 
+obtain other descriptive statistics: 
+
+```{r}
+# median 
+median(df$age)
+
+# standard deviation
+sd(df$age)
+
+# min
+min(df$age)
+
+# max 
+max(df$age)
+```
+
+What if we want to obtain multiple summaries of the data at once? We can use
+the `summary()` function to obtain the minimum, 25th percentile, median, 
+mean, 75th percentile, and maximum of the data, with one line of code: 
+
+```{r}
+summary(df$age)
+```
+
+What about categorical data? For example, the treatment `tx` variable takes the value 
+of 0 or 1, corresponding to control and treatment, respectively. How can we get counts 
+of each category? We can use the `table()` function to obtain these counts: 
+
+```{r}
+table(df$tx)
+```
+
+If we use `table()`, it will not tabulate the missing data, which are coded as NA 
+in the dataset. To show the missing data, we have to add an extra argument 
+`useNA = "always"` to our function call: 
+
+```{r}
+# tabulating the mhdx column, don't show NAs
+table(df$mhdx)
+
+# tabulating the mhdx column, show NAs
+table(df$mhdx, useNA = "always")
+```
+
+## Subsetting datasets
+
+Subsetting datasets refers to filtering the dataset, by either selecting a set of 
+the dataset columns or filtering the rows based on some logic. In our short course, 
+we will subset the data using the `dplyr` package. First, we read in the `dplyr` package, which you should have already installed: 
+
+```{r, warning = F}
+library(dplyr)
+```
+
+*More to come next week...*
+
+&nbsp; &nbsp; &nbsp;
+
+*[Click here](https://jpspeng.github.io/crisp_notes/) to go back to the CRISP R notes homepage.*
 
 
