@@ -1,6 +1,9 @@
 ---
-title: "Dataset operations"
-output: html_document
+title: "Dataset operations and subsetting"
+output:
+  html_document:
+    toc: true
+    toc_float: true
 ---
 
 <style type="text/css">
@@ -29,9 +32,14 @@ We can do this using the `head()` function:
 head(df)
 ```
 
-Next, we might want to get to know the dataset. We can pull a specific 
-column from the dataset as a vector by using the dollar sign $ operator. 
-For example, we can pull out the ages and save as the `age_vec` variable. 
+We'll start off by getting to know the dataset. We may want to count the number 
+of rows. We can use the `nrow()` function to do this: 
+
+```{r}
+nrow(df)
+```
+
+Next, we can pull a specific column from the dataset as a vector by using the dollar sign $ operator. For example, we can pull out the ages and save as the `age_vec` variable. 
 
 ```{r}
 age_vec <- df$age
@@ -51,6 +59,20 @@ of `age` column in `df`:
 
 ```{r}
 mean(df$age)
+```
+
+What happens if the column of interest has missing data (which are coding as 
+NA in R)? Let's take a look, using the `mhdx` column as an example: 
+
+```{r}
+mean(df$mhdx)
+```
+
+It will give NA as the result! What should we do in this case? We could take the 
+mean of the non-missing data. To do this, we can add an extra argument `na.rm = TRUE`:
+
+```{r}
+mean(df$mhdx, na.rm = TRUE)
 ```
 
 Similarly, we can use the `median()`, `sd()`, `min()`, and `max()` functions to 
@@ -79,16 +101,14 @@ summary(df$age)
 ```
 
 What about categorical data? For example, the treatment `tx` variable takes the value 
-of 0 or 1, corresponding to control and treatment, respectively. How can we get counts 
+of 0 or 1, corresponding to BUP-NX and XR-NTX, respectively. How can we get counts 
 of each category? We can use the `table()` function to obtain these counts: 
 
 ```{r}
 table(df$tx)
 ```
 
-If we use `table()`, it will not tabulate the missing data, which are coded as NA 
-in the dataset. To show the missing data, we have to add an extra argument 
-`useNA = "always"` to our function call: 
+If we use `table()`, it will not tabulate the missing data (NAs). To show the missing data, we have to add an extra argument `useNA = "always"` to our function call: 
 
 ```{r}
 # tabulating the mhdx column, don't show NAs
@@ -108,7 +128,175 @@ we will subset the data using the `dplyr` package. First, we read in the `dplyr`
 library(dplyr)
 ```
 
-*More to come next week...*
+The `dplyr` package using a special syntax called **piping**. This involves using a 
+special symbol that looks like this `%>%`. This is equivalent to applying a function 
+to an object. For example, to find the mean age, we could use the following code: 
+
+```{r}
+mean(df$age)
+```
+
+Alternatively, we could write the following code, using this special syntax: 
+
+```{r}
+df$age %>% 
+  mean()
+```
+
+This line of code says to take the `df$age` column and apply the `mean()` function to it. Functionally, this is the same as doing `mean(df$age)`. We'll use this syntax when manipulating datasets. 
+
+### Selecting specific columns
+
+Suppose that we want to reduce
+the dataset `df` to a specific set of columns - id, tx, age, and sex. We can use 
+the `select()` function in the `dplyr` package:
+
+```{r}
+# select id, tx, age, and sex
+# then, view the first few rows using head()
+df %>% 
+  select(id, tx, age, sex) %>% 
+  head() 
+```
+Note that this will NOT change the original `df` object. If we look at `df`, we can
+still see that it has all of the original columns: 
+
+```{r}
+df %>% 
+  head()
+```
+
+If we want to save the dataframe with the select columns, we can save it as a new 
+object: 
+
+```{r}
+# create new variable df_select_columns
+# which is a dataframe with only the id, tx, age, and sex columns
+df_select_columns <- df %>% 
+  select(id, tx, age, sex)
+
+# view the first few rows 
+df_select_columns %>% 
+  head()
+```
+
+## Selecting specific rows
+
+Next, we will learn how to select specific rows of a dataframe. We can filter 
+using the `filter()` function based on some logic. For example, suppose that we 
+want to create a dataframe which only includes BUP-NX (where tx takes the value 
+of 0) participants: 
+
+```{r}
+df %>% 
+  filter(tx == 0) %>% 
+  head()
+```
+
+Inside the `filter()` function, we specify the logic. In this example, you can see
+that we specify `tx == 0`, which means that we only want to include treatment = 0 
+participants in our filtered dataset. 
+
+Note that we use a double equal sign `==`, NOT a single equal sign `=` in this logic statement. 
+
+Some other examples: 
+
+1. Greater or less than (< or >): 
+
+```{r}
+# filter for age > 30 participants 
+df %>% 
+  filter(age > 30) %>% 
+  head()
+```
+
+2. Not (using !)
+
+```{r}
+# filter for sex NOT equal to 1  
+# use != to say "not equal to 
+df %>% 
+  filter(sex != 1) %>% 
+  head()
+```
+
+3. Composite logic using and (&) / or (|)
+
+```{r}
+# filter for male and BUP-NX participants 
+df %>% 
+  filter(sex == 0 & tx == 0) %>% 
+  head()
+```
+
+```{r}
+# filter for male OR BUP-NX participants
+df %>% 
+  filter(sex == 0 | tx == 0) %>% 
+  head()
+```
+4. Missing rows using (`is.na()`)
+
+```{r}
+# select rows that are missing their mhdx value
+df %>% 
+  filter(is.na(mhdx))
+```
+
+```{r}
+# select rows that are NOT missing their mhdx value
+df %>% 
+  filter(!is.na(mhdx)) %>% 
+  head()
+```
+
+
+## Exercises 
+
+1. Explain what these lines of code do: 
+
+```{r}
+df_new <- df %>% 
+  filter(!is.na(mhdx) & age > 30 & tx == 0) %>% 
+  select(id, tx, age, mhdx)
+```
+
+2. Explain what these lines of code do: 
+
+```{r}
+df %>% 
+  filter(sex == 0) %>% 
+  nrow()
+```
+
+3. Explain what these lines of code do: 
+
+```{r}
+df_new2 <- df %>% 
+  filter(sex == 0)
+
+summary(df_new2$age)
+
+```
+
+4. Explain what these lines of code do: 
+
+```{r}
+df %>% 
+  filter(is.na(mhdx)) %>% 
+  nrow()
+```
+
+
+5. Find the mean BMI of males in the dataset. How about females? 
+
+6. What proportion of those under 30 used marijuana? How about those over 30? If 
+there is missing data, then please report the proportion among those not missing 
+the relevant data.
+
+6. What proportion of males in the tx = 1 arm have insurance? How about females
+in the tx = 1 arm? 
+
 
 &nbsp; &nbsp; &nbsp;
 
