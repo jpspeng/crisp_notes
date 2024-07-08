@@ -11,7 +11,7 @@ Here is the [data documentation](Crisp-2024-sample100-dictionary.pdf).
 
 ## Schedule 
 
-1. Complete mini-lessons 0-5 (including the exercises) by Thursday, July 11.
+1. Complete mini-lessons 1-6 (including the exercises) by Thursday, July 11.
 
 ## Mini-Lessons 
 
