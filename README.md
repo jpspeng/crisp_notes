@@ -7,7 +7,7 @@ These are basic R tutorials and exercises for getting started with R programming
 We will be using the following sample data in our tutorials: 
 [CSV file](https://jpspeng.github.io/crisp_notes/pages/crisp-2024-sample100.csv) 
 
-Here is the [data documentation](Crisp-2024-sample100-dictionary.pdf). 
+Here is the [data documentation](https://jpspeng.github.io/crisp_notes/pages/Crisp-2024-sample100-dictionary.pdf). 
 
 ## Schedule 
 
