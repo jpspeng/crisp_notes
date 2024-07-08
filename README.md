@@ -12,4 +12,8 @@ These are basic R tutorials and exercises for getting started with R programming
 
 ## More advanced coding (optional)
 
+1.  Loops 
+2.  Functions
+
+
 If you have any questions, you can email James at jpspeng@uw.edu. 
