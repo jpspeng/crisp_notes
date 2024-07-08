@@ -15,12 +15,12 @@ Here is the [data documentation](Crisp-2024-sample100-dictionary.pdf).
 
 ## Mini-Lessons 
 
-0. [Installing R and R Studio](https://jpspeng.github.io/crisp_notes/pages/installing_R.html) ([Download RMD](https://jpspeng.github.io/crisp_notes/pages/installing_R.Rmd))
-1. [Using R Studio](https://jpspeng.github.io/crisp_notes/pages/r_studio_r_markdown.html) ([Download RMD](https://jpspeng.github.io/crisp_notes/pages/r_studio_r_markdown.Rmd))
-2. [Installing and using packages](https://jpspeng.github.io/crisp_notes/pages/installing_packages.html) ([Download RMD](https://jpspeng.github.io/crisp_notes/pages/installing_packages.Rmd))
-3. [Basic language and operations in R](https://jpspeng.github.io/crisp_notes/pages/some_language.html) ([Download RMD](https://jpspeng.github.io/crisp_notes/pages/some_language.Rmd))
-4. [Read in data](https://jpspeng.github.io/crisp_notes/pages/reading_data.html) ([Download RMD](https://jpspeng.github.io/crisp_notes/pages/reading_data.Rmd))
-5. [Dataframe operations and subsetting data (using the `dplyr` package)](https://jpspeng.github.io/crisp_notes/pages/subsetting_data.html) ([Download RMD](https://jpspeng.github.io/crisp_notes/pages/subsetting_data.Rmd))
+1. [Installing R and R Studio](https://jpspeng.github.io/crisp_notes/pages/installing_R.html) ([Download RMD](https://jpspeng.github.io/crisp_notes/pages/installing_R.Rmd))
+2. [Using R Studio](https://jpspeng.github.io/crisp_notes/pages/r_studio_r_markdown.html) ([Download RMD](https://jpspeng.github.io/crisp_notes/pages/r_studio_r_markdown.Rmd))
+3. [Installing and using packages](https://jpspeng.github.io/crisp_notes/pages/installing_packages.html) ([Download RMD](https://jpspeng.github.io/crisp_notes/pages/installing_packages.Rmd))
+4. [Basic language and operations in R](https://jpspeng.github.io/crisp_notes/pages/some_language.html) ([Download RMD](https://jpspeng.github.io/crisp_notes/pages/some_language.Rmd))
+5. [Read in data](https://jpspeng.github.io/crisp_notes/pages/reading_data.html) ([Download RMD](https://jpspeng.github.io/crisp_notes/pages/reading_data.Rmd))
+6. [Dataframe operations and subsetting data (using the `dplyr` package)](https://jpspeng.github.io/crisp_notes/pages/subsetting_data.html) ([Download RMD](https://jpspeng.github.io/crisp_notes/pages/subsetting_data.Rmd))
 
 ## More advanced coding (optional)
 
