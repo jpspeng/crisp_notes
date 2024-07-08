@@ -21,7 +21,6 @@ Here is the [data documentation](Crisp-2024-sample100-dictionary.pdf).
 3. [Basic language and operations in R](https://jpspeng.github.io/crisp_notes/pages/some_language.html) ([Download RMD](https://jpspeng.github.io/crisp_notes/pages/some_language.Rmd))
 4. [Read in data](https://jpspeng.github.io/crisp_notes/pages/reading_data.html) ([Download RMD](https://jpspeng.github.io/crisp_notes/pages/reading_data.Rmd))
 5. [Dataframe operations and subsetting data (using the `dplyr` package)](https://jpspeng.github.io/crisp_notes/pages/subsetting_data.html) ([Download RMD](https://jpspeng.github.io/crisp_notes/pages/subsetting_data.Rmd))
-6. Exercise: Create a Table 1 from data
 
 ## More advanced coding (optional)
 
