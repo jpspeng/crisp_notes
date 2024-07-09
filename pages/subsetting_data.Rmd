@@ -180,7 +180,7 @@ df_select_columns %>%
   head()
 ```
 
-## Selecting specific rows
+### Selecting specific rows
 
 Next, we will learn how to select specific rows of a dataframe. We can filter 
 using the `filter()` function based on some logic. For example, suppose that we 
