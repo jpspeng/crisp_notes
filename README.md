@@ -12,7 +12,7 @@ Here is the [data documentation](https://jpspeng.github.io/crisp_notes/pages/Cri
 ## Suggested schedule 
 
 1. **By Thursday, July 11**: Complete mini-lessons 1-6 (including the exercises).
-2. **By Sunday, July 14**: TBD
+2. **By Sunday, July 14**: Complete mini-lessons 7-9.
 
 ## Mini-Lessons 
 
