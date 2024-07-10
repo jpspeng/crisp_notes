@@ -12,6 +12,8 @@ Here is the [data documentation](https://jpspeng.github.io/crisp_notes/pages/Cri
 ## Schedule 
 
 1. **By Thursday, July 11**: Complete mini-lessons 1-6 (including the exercises).
+2. **By Monday, July 15**: TBD
+3. **By Thursday, July 18**: TBD
 
 ## Mini-Lessons 
 
@@ -21,6 +23,9 @@ Here is the [data documentation](https://jpspeng.github.io/crisp_notes/pages/Cri
 4. [Basic language and operations in R](https://jpspeng.github.io/crisp_notes/pages/some_language.html) ([Download RMD](https://jpspeng.github.io/crisp_notes/pages/some_language.Rmd))
 5. [Read in data](https://jpspeng.github.io/crisp_notes/pages/reading_data.html) ([Download RMD](https://jpspeng.github.io/crisp_notes/pages/reading_data.Rmd))
 6. [Dataframe operations and subsetting data (using the `dplyr` package)](https://jpspeng.github.io/crisp_notes/pages/subsetting_data.html) ([Download RMD](https://jpspeng.github.io/crisp_notes/pages/subsetting_data.Rmd))
+7. Factor variables  
+8. Simple comparison of means / proportion hypothesis tests 
+9. Exercise: Create a Table 1 
 
 ## More advanced coding (optional)
 
