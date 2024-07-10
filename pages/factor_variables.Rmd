@@ -1,0 +1,76 @@
+---
+title: "Factor variables"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+<style type="text/css">
+  body{
+  font-size: 12pt;
+}
+</style>
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+## Variable types
+
+Each dataframe column can have different types. Some variable are *string* variables 
+(e.g. text); others are *numeric* variables (e.g. numbers). There is another type 
+of variable in R, called a **factor**. These are categorical variables, which often 
+are coded as integers in a dataset (e.g. 0, 1, 2, etc.). 
+
+One example: we may want to consider the variable `tx` in the crisp-2024-sample100.csv 
+dataset as a factor variable because it only takes two distinct values: 0 and 1, where
+0 corresponds to BUP-NX and 1 corresponds to XR-NTX. 
+
+```{r}
+df <- read.csv("crisp-2024-sample100.csv")
+
+table(df$tx)
+```
+
+By default, R will read in this variables as in *numeric*. It starts off by thinking this column is just a number. But, we may want to change 
+it into a factor before we perform our analysis. To do this, we can use the following line of code: 
+
+```{r}
+df$tx <- factor(df$tx)
+```
+
+This code to the right hand side of `<-`  converts the `tx` column of `df` 
+into a factor, and then we save it back into the `tx` column of `df`. 
+
+We can tell that it is a factor because "Levels: 0 1" is displayed on the bottom of the output when printing `df$tx`.
+
+```{r}
+df$tx
+```
+
+We can also provide distinct labels to this variable. To do this, we specify 
+an additional argument: `labels = c("BUP-NX", "XR-NTX")` in the output. This will 
+assign the 0 to BUP-NX and 1 to XR-NTX. 
+
+```{r}
+df$tx <- factor(df$tx, labels = c("BUP-NX", "XR-NTX"))
+
+df$tx
+```
+
+It is generally a good idea to convert categorical variables into factors
+before performing analysis in R. That way, R knows that these are categorical variables 
+and not numbers. 
+
+## Exercises 
+
+Examine the data dictionary for crisp-2024-sample100.csv. Which are categorical variables? Write some code to convert these columns into factors. 
+
+&nbsp; &nbsp; &nbsp;
+
+*[Click here](https://jpspeng.github.io/crisp_notes/) to go back to the CRISP R notes homepage.*
+
+

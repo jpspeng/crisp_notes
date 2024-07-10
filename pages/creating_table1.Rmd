@@ -1,0 +1,47 @@
+---
+title: "Creating a Table 1"
+output: html_document
+---
+
+<style type="text/css">
+  body{
+  font-size: 12pt;
+}
+</style>
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(knitr)
+library(dplyr)
+```
+
+For assignment 3, your goal is to create a "Table 1" with descriptive statistics 
+for relevant variables using R. 
+
+The goal is to create a table which describes baseline characteristics stratified 
+by treatment arm. Your table should look something like this:
+
+```{r, echo = FALSE}
+# create Table 1 table structure
+data.frame(
+  Variable = c("", "Age", "Female", "etc"),
+  `BUP-NX Treatment` = c("Mean (sd) or n (%)", "", "", ""),
+  `XR_NTX Treatment` = c("Mean (sd) or n (%)", "", "", "")
+) %>% 
+  kable()
+```
+
+You should be able to do this based on what we have learned in R so far. An alternative
+option - look into the `table1` package online. This will make things much faster. 
+But make sure to convert all categorical variables into factor variables before
+using this package. 
+
+Good luck!
+
+&nbsp; &nbsp; &nbsp;
+
+*[Click here](https://jpspeng.github.io/crisp_notes/) to go back to the CRISP R notes homepage.*
+
+
+

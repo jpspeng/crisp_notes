@@ -1,0 +1,186 @@
+---
+title: "Factor variables"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+<style type="text/css">
+  body{
+  font-size: 12pt;
+}
+</style>
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+## Comparing means 
+
+One common statistical task is to examine two groups of values and determine if
+the means are equal.
+
+Here's an example using the crisp-2024-sample100.csv dataset. Suppose we would like 
+to know if the age is different between the two treatment groups. 
+
+We can start by taking a look at what these means are: 
+
+```{r, warning = F, message = F}
+# read dplyr library 
+library(dplyr)
+
+# read crisp-2024-sample100.csv dataset 
+df <- read.csv("crisp-2024-sample100.csv")
+
+# create dataframe with just tx == 0 participants
+df_tx0 <- df %>% 
+  filter(tx == 0)
+
+# create dataframe with just tx == 1 participants
+df_tx1 <- df %>% 
+  filter(tx == 1)
+
+# find mean age for tx == 0 participants
+mean(df_tx0$age)
+
+# find mean age for tx == 1 participants
+mean(df_tx1$age)
+```
+
+So the mean age of the `tx == 0` is slightly lower than the `tx == 1` group 
+(32.39 versus 33.09). Is this difference significantly different? 
+
+### Hypothesis testing
+
+To determine if this is a statistically significant difference, we can perform a
+hypothesis test. For hypothesis testing, we start off by specifying a null hypothesis, 
+which is the statement that we want to disprove. So if our question is: "Are the 
+mean ages in the two treatment groups different?" then our null hypothesis ($H_0$) would be that the mean ages in the two treatment groups are the same: 
+
+$H_0$: Mean age in `tx == 0` group EQUALS mean age in the `tx == 1` group
+
+The alternative hypothesis ($H_a$) is the opposite, which is: 
+
+$H_a$: Mean age in tx == 0 group does NOT equal the mean age in the tx == 1 group
+
+There are several hypothesis tests to test this hypothesis. One very popular one is called the t-test. To implement the t-test in R, we can use the function `t.test()`. Within `t.test()`, we 
+include two arguments for the two vectors of numeric data that we want to test.
+
+```{r}
+# perform t-test, which tests the null hypothesis that the
+# mean ages are the same between the tx = 0 and tx = 1 groups
+t.test(df_tx0$age, df_tx1$age)
+```
+The output of `t.test` gives us a lot of information. We'll focus on a few aspects of the output: 
+
+* **p-value**: This is the p-value for the hypothesis test. The p-value is the probability of obtaining a test statistic at least as extreme as what we get with our data, given that the null hypothesis is true. So with a p-value of 0.702, we have approximately a 70% probability of obtaining a test statistic at least as extreme as what we get in our data, given the null hypothesis is true. Typically, we set the p-value threshold (or alpha) to 0.05 in our hypothesis test. This means we reject the null hypothesis if our p-value is less than 0.05. Intuitively, we want to reject the null hypothesis if our data is extreme compared to what our null hypothesis says.
+* **95 percent confidence interval**: This is a confidence interval for the difference in mean age between the `tx == 0` and `tx == 1` groups. So we estimate that a 95% CI for the difference in age between the `tx == 0` and `tx == 1` groups is (-4.31, 2.91).
+
+In this output, we fail the reject the null hypothesis ($p = 0.702$), meaning that we fail to find evidence that the two groups have a significantly different mean age. 
+
+There are several other hypothesis tests comparing the mean or median of two samples: paired t-test (for paired data), Wilcoxon rank-sum test (to test for equal medians), etc.
+
+## Comparing proportions
+
+Another common statistical task is to examine two proportions and determine if they are equal. 
+
+For example, suppose that we want to know the proportion of people with insurance is the same between the treatment arms. 
+
+The first step to doing this might be to calculate the raw numbers of those with insurance in each treatment arm. 
+
+We can do this by hand using the code below:
+
+```{r}
+# number of tx = 0, no insurance
+df %>% 
+  filter(tx == 0 & insure == 0) %>% 
+  nrow()
+
+# number of tx = 0, has insurance
+df %>% 
+  filter(tx == 0 & insure == 1) %>% 
+  nrow()
+
+# number of tx = 1, no insurance
+df %>% 
+  filter(tx == 1 & insure == 0) %>% 
+  nrow()
+
+# number of tx = 1, has insurance
+df %>% 
+  filter(tx == 1 & insure == 1) %>% 
+  nrow()
+
+```
+
+Alternatively, we can create a 2x2 table using the the 
+`table()` function, where we include as an input a two-column
+dataframe with the columns of interest. 
+
+```{r}
+# create 2x2 table from two column, binary variable dataframe
+tx_insure_tab <- table(df %>% select(tx, insure))
+
+tx_insure_tab
+```
+
+We observe that 41/66 (73%) of those in the `tx == 0` arm have insurance, compared to 36/44 (82%) of those in the `tx == 1` arm. 
+
+```{r}
+# proportion in tx == 0 arm 
+41/(41 + 15)
+
+# proportion in tx == 1 arm
+36/(36 + 8)
+```
+
+### Hypothesis testing
+
+The next question to ask is are these proportions significantly different. 
+We will use a hypothesis test to test this. The null hypothesis is that the 
+proportions are the same. The alternative hypothesis is that the proportions 
+are different. 
+
+One option is Fisher's exact time. One option is the two-sample z-test for 
+proportions. We can implement this in `R` using `prop.test()`. 
+
+```{r}
+prop.test(tx_insure_tab)
+```
+Another option (better for smaller samples) is the Fisher exact test. We can 
+implement this in R using `fisher.test()`: 
+
+```{r}
+fisher.test(tx_insure_tab)
+```
+A third option is the chi-squared test. We can implement this in R using 
+`chisq.test()`: 
+
+```{r}
+chisq.test(tx_insure_tab)
+```
+Note that the chi-squared test gives the same p-value result (p = 0.438)  as the 
+two-sample z-test for proportion. This is because the two tests are the same! 
+The only difference is that the chi-squared test can be used for bigger tables 
+(e.g. 3x2, 3x3 tables, etc.). 
+
+In all three tests, we see a p-value greater than 0.05, so we fail to find 
+evidence that there is a significant difference in the proportion with insurance 
+in each treatment arm.
+
+## Exercises 
+
+1. What is the mean bmi for each sex (males and females)? Perform a hypothesis 
+test to see whether the mean bmi is significantly different between sexes.
+
+2. What proportion in each treatment arm have a history of psychotic diagnosis 
+or episodes? Are the proportions significantly different? 
+
+&nbsp; &nbsp; &nbsp;
+
+*[Click here](https://jpspeng.github.io/crisp_notes/) to go back to the CRISP R notes homepage.*
+
+
