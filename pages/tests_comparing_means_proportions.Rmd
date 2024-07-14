@@ -1,5 +1,5 @@
 ---
-title: "Factor variables"
+title: "Comparing means and proportions"
 output:
   html_document:
     toc: true
