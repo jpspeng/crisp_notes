@@ -24,7 +24,11 @@ Here is the [data documentation](https://jpspeng.github.io/crisp_notes/pages/Cri
 6. [Dataframe operations and subsetting data (using the `dplyr` package)](https://jpspeng.github.io/crisp_notes/pages/subsetting_data.html) ([Download RMD](https://jpspeng.github.io/crisp_notes/pages/subsetting_data.Rmd))
 7. [Factor variables](https://jpspeng.github.io/crisp_notes/pages/factor_variables.html) ([Download RMD](https://jpspeng.github.io/crisp_notes/pages/factor_variables.Rmd))
 8. [Simple comparison of means / proportions hypothesis tests](https://jpspeng.github.io/crisp_notes/pages/tests_comparing_means_proportions.html) ([Download RMD](https://jpspeng.github.io/crisp_notes/pages/tests_comparing_means_proportions.Rmd))
-9. [Exercise: Create a Table 1](https://jpspeng.github.io/crisp_notes/pages/creating_table1.html) 
+9. [Exercise: Create a Table 1](https://jpspeng.github.io/crisp_notes/pages/creating_table1.html)
+10. Using the table1 package
+11. Risk differences, risk ratios, odds ratios
+12. Graphing with ggplot2
+13. Simple linear regression 
 
 ## More advanced coding (optional)
 
