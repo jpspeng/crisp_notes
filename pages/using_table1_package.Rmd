@@ -1,0 +1,117 @@
+---
+title: "Using the table1 package"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+<style type="text/css">
+  body{
+  font-size: 12pt;
+}
+</style>
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(knitr)
+```
+
+## The hard way
+
+For assignment 3, you were asked to create a "Table 1" from a dataset. You may
+have done this by hand. It may have looked something like this:
+
+```{r, message = F, warning = F}
+# read in dplyr package
+library(dplyr)
+
+# read in dataset 
+df <- read.csv("crisp-2024-sample100.csv")
+
+# split into BUP-NX and XR-NTX datasets
+df_bup <- df %>% filter(tx == 0)
+df_xr <- df %>% filter(tx == 1)
+
+# mean age for BUP-NX group 
+mean(df_bup$age)
+
+# sd of age for BUP-NX group 
+sd(df_bup$age)
+
+# mean age for XR-NTX group
+mean(df_xr$age)
+
+# sd of age for XR-NTX group
+sd(df_xr$age)
+
+# etc... 
+```
+
+The problem with this is that this is a very manual, time-intensive process. 
+Alternatively, we can use the `table1` package to help us do this. 
+
+## The easier way
+
+First, let's install the `table1` package if we haven't yet done so. 
+
+```{r, eval = F}
+install.packages("table1")
+```
+Now let's read in the package: 
+
+```{r, message = F}
+library(table1)
+```
+Take some time and read the [documentation](https://cran.r-project.org/web/packages/table1/vignettes/table1-examples.html) for the `table1` package. This package allows us to summarize multiple variables and output
+the summary in a publication-ready table. 
+
+Before we use this package, we will convert our categorical variables 
+into factors. We'll start off by doing this for the variables `tx` and `sex`:
+
+```{r}
+# convert categorical columns into factors
+df$tx <- factor(df$tx, 
+                labels = c("BUP-NX", "XR-NTX"))
+
+df$sex <- factor(df$sex, 
+                 labels = c("Male", "Female"))
+
+```
+
+This is a necessary first step, or else the `table1` package will this that 
+these columns are numeric!
+
+After this, we can run the `table1()` function: 
+
+```{r}
+table1(~ age | tx, data = df)
+```
+
+The `table1()` function includes two arguments. First, we specify the formula for
+how we want the table to look. This formula takes the form `~ var1 | var2`, where
+`var1` are the columns that we want to summarize, followed by a `|`, and then `var2`, 
+which is the column that we want to stratify by. So `~ age | tx` means that we want to 
+summarize the age column, stratified across the two treatment arms. Next, we specify the dataframe, 
+which is why we include a `data = df` additional argument. 
+
+We can add variables to summarize by using `+`. The following line of code summarizes 
+both the age and sex variable across treatment arms: 
+
+```{r}
+table1(~ age + sex | tx, data = df)
+```
+
+
+Note that by default, `table1` will provide the mean, median, min, max, and standard 
+deviation for continuous numeric variables and proportions for categorical factor variables.
+
+## Exercise
+
+Show descriptive statistics for age, number of years of education, and smoking status 
+stratified by sex using the `table1` package. 
+
+&nbsp; &nbsp; &nbsp;
+
+*[Click here](https://jpspeng.github.io/crisp_notes/) to go back to the CRISP R notes homepage.*

@@ -1,0 +1,219 @@
+---
+title: "Risk difference, risk ratios, and odds ratios"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+<style type="text/css">
+  body{
+  font-size: 12pt;
+}
+</style>
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(knitr)
+```
+
+The purpose of this tutorial is to understand the difference between risk differences, 
+risk ratios, and odds ratios. We will calculate these by hand using R. 
+
+For this tutorial, we will use the dataset that we have been using: 
+
+```{r, warning = F, message = F}
+library(dplyr)
+
+df <- read.csv("crisp-2024-sample100.csv")
+```
+
+Suppose our research question is the following: 
+*What is the difference in the proportion of lifetime use of cocaine between males and females?*
+
+## Risk difference
+
+The first way to quantify this difference is by calculating the risk difference. 
+The risk difference is the difference in the proportion who had lifetime cocaine usage between 
+males and females. 
+
+$$
+RD = p_{females} - p_{males}
+$$
+
+where $p_{males}$ is the proportion of cocaine usage among males, and $p_{females}$ is 
+the proportion among females. 
+
+To calculate this in R, we first create a 2x2 table: 
+
+```{r}
+sex_coc_tbl <- table(df %>% select(sex, coclft))
+
+sex_coc_tbl
+```
+
+The proportion of males who used cocaine is $\frac{38}{33 + 38} = 0.535$.
+
+```{r}
+38 / (33 + 38)
+```
+
+The proportion of females who used cocaine is $\frac{15}{15 + 14} = 0.517$.
+
+```{r}
+15 / (15 + 14)
+```
+
+So the risk difference is the difference between these two quantities: 
+
+```{r}
+0.517 - 0.535
+```
+
+This tells us that estimated *raw difference* in the percentage of cocaine usage between 
+the two groups is 1.8%, with females having the lower percentage of usage. 
+
+## Risk ratio 
+
+Another way of quantifying the difference is by using the risk ratio. This equals: 
+
+$$
+RR = \frac{p_{females}}{p_{males}}
+$$ 
+
+In our example, we obtain: 
+
+```{r}
+0.517 / 0.535 
+```
+
+This tells us the *relative difference* in cocaine usage between the groups. 
+That is, females have an estimated 3.4% lower risk cocaine usage compared
+to males. 
+
+## Odds ratio
+
+The last way of quantifying the the difference is with the odds ratio. The 
+odds ratio equals the following: 
+
+$$
+OR = \frac{odds_{female}}{odds_{male}}
+$$
+
+where $odds_{male}$ is the *odds* of cocaine usage among males, and $odds_{female}$ is 
+the *odds* among females. 
+
+Odds is not the same as probability! Let's take a look at one example of the difference. 
+Here again is our 2x2 table: 
+
+```{r}
+sex_coc_tbl
+```
+
+Among males (`sex == 0`), the proportion who used cocaine is $38/(33+38)$ whereas
+the odds of cocaine usage is $38/33$. 
+
+```{r}
+# proportion of cocaine usage among males
+38 / (33 + 38)
+
+# odds of cocaine usage among males
+38 / 33
+```
+
+The odds of females who used cocaine in our dataset is: 
+
+```{r}
+15 / 14
+```
+
+Therefore, we calculate the odds ratio to be: 
+
+```{r}
+1.071 / 1.152 
+```
+
+Therefore, we estimate a 7% lower odds of cocaine usage among females compared 
+to males.
+
+## Confidence intervals
+
+We can calculate these estimates by hand, but we may want confidence intervals to 
+obtain some measure of uncertainty around our estimate. We can use the `epitools` 
+package to calculate confidence intervals for the risk ratio and the odds ratio.
+
+```{r}
+# install.packages("epitools")
+
+library(epitools)
+```
+
+To find the confidence interval for the *risk ratio*, we can use the function 
+`riskratio.wald()`, with the 2x2 table as our argument
+
+```{r}
+riskratio.wald(sex_coc_tbl)
+```
+
+We look at the `$measure` portion of the output. We see that the risk ratio is 
+0.966 (same as what we calculated by hand), with 95% CI of 0.639 - 1.461. 
+
+To find the confidence interval for the *odds ratio*, we can use the function 
+`oddsratio.wald()`, with the 2x2 table as our argument: 
+
+```{r}
+oddsratio.wald(sex_coc_tbl)
+```
+
+Again, we look at the `$measure` portion of the output. We see that the odds ratio is 
+0.930 (same as what we calculated by hand), with 95% CI of 0.392 - 2.210.
+
+We can also calculate a confidence interval on the risk difference. There are several 
+packages/functions to do this (e.g. take a look at the`riskdifference()` function 
+from the `fmsb` package).
+
+
+## By subgroups
+
+You may want to calculate each of these measures for different subgroups, in order
+to check for confounding. Doing this is straightforward using what we have learned so
+far. For example, suppose that we want to calculate the risk ratios for each treatment
+arm.  
+
+We first create dataframes that filter for each treatment arm: 
+
+```{r}
+df_tx0 <- df %>% filter(tx == 0)
+df_tx1 <- df %>% filter(tx == 1)
+```
+
+We then create 2x2 tables of sex and cocaine usage for each treatment arm. 
+
+```{r}
+table_tx0 <- table(df_tx0 %>% select(sex, coclft))
+table_tx1<- table(df_tx1 %>% select(sex, coclft))
+```
+
+Finally, we can use the `riskratio.wald()` function to calculate estimates and 
+confidence intervals for the risk ratios for each group: 
+
+```{r}
+riskratio.wald(table_tx0) 
+```
+
+```{r}
+riskratio.wald(table_tx1)
+```
+
+
+## Exercise
+
+Calculate the risk difference, risk ratio, and odds ratio of lifetime marijuana
+usage comparing males and females in the dataset. 
+
+Calculate the odds ratio for each treatment group. 
+
+&nbsp; &nbsp; &nbsp;
+
+*[Click here](https://jpspeng.github.io/crisp_notes/) to go back to the CRISP R notes homepage.*

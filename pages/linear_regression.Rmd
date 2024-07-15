@@ -1,0 +1,143 @@
+---
+title: "Linear regression"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+<style type="text/css">
+  body{
+  font-size: 12pt;
+}
+</style>
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(knitr)
+```
+
+In this tutorial, we will learn how to perform linear regression using the `lm()` 
+function. Again, we will use the sample dataset that we have used for previous 
+tutorials: 
+
+```{r}
+df <- read.csv("crisp-2024-sample100.csv")
+```
+
+## Linear regression with one predictor 
+
+The goal of linear regression is to relate an outcome to one (or more) predictors. 
+For example, **how does number of years of education associate with age, on average?**
+
+The first step in running a linear regression is to write out the model that we
+are trying to fit. In this example, here is our working model:
+
+$$
+YrsEduc = \beta_0 + \beta_1age 
+$$
+
+Where $YrsEduc$ is the participant's number of years of education, 
+$age$ is the participant's age, $\beta_0$ is the intercept coefficient, and $\beta_1$ is
+the coefficient of interest. 
+
+With linear regression, our goal is to to find the values of $\beta_0$ 
+and $\beta_1$ which best fit the data. Behind the scenes, the software will find the 
+values of $\beta_0$ and $\beta_1$ which minimize the the squared error between the 
+fitted line's values and the true data's values. 
+
+Running this in R is relatively straightforward. We can use the `lm()` function, which 
+is a pre-built function in R (no packages needed). The `lm()` function takes in two 
+arguments: (1) the formula, which looks like `outcome ~ predictor`, and (2) the data. 
+In the code below, we run a linear regression with `educyrs` as our outcome and `age` 
+as our predictor, and then save it in the variable `fitted_mod`. 
+
+```{r}
+fitted_mod <- lm(educyrs ~ age, data = df)
+```
+
+To see the fitted coefficient of this model, we can apply the `summary()` function
+on `fitted_mod`. 
+
+```{r}
+summary(fitted_mod)
+```
+We focus in on the Coefficients section of the summary. 
+
+1. The Estimate column tells us the fitted values for the intercept ($\beta_0$) and the 
+coefficient on age ($\beta_1$). We estimate the intercept of the best fit line to be
+14.30 and the coefficient on age to be -0.064.
+
+2. The Std. Error gives us the standard error on the estimate. Essentially, this is a measure
+of how much uncertainty we have in our estimate. Larger standard errors indicate that 
+we have less certainty in the estimate. 
+
+3. The last column Pr(>|t|) gives us a p-value for a hypothesis test. Specifically, 
+it tests the hypothesis that the coefficient is equal to 0. For example, the p-value 
+on the age coefficient is 0.00573, so if we use 0.05 as our testing threshold, then we
+reject the null hypothesis that the coefficient on age is 0. 
+
+Next, we can obtain confidence intervals using the `confint()` function: 
+
+```{r}
+confint(fitted_mod)
+```
+
+This will give us 95% confidence intervals on the coefficients. For example, 
+this tells us that a 95% confidence interval for the coefficient on age is 
+(-0.109, -0.019).
+
+How can we interpret this in plain language? 
+
+*We estimate that for two groups differing in age by one year, the older group has 
+on average 0.064 years fewer education (95% CI: 0.019, 0.109). At the 5% level,
+we reject the null hypothesis that the coefficient on age is 0. That is, we find 
+evidence of an association between age and years of education.* 
+
+## Linear regression with more than one predictor
+
+Suppose that we want to fit a linear regression with more than one predictor. 
+For example, suppose that we wanted to include insurance as a predictor. That is, 
+we are interested in fitting the following model: 
+
+$$
+YrsEduc = \beta_0 + \beta_1age + \beta_2insure
+$$
+
+where $insure$ is a binary variable taking the value of 1 if the participant 
+has insurance and 0 otherwise, and $\beta_2$ is the coefficient on $insure$. 
+
+To fit a linear regression with this model, we can make a slight adjustment to 
+our `lm()` function call from before: 
+
+```{r}
+fitted_mod2 <- lm(educyrs ~ age + insure, data = df)
+```
+
+We simply add `insure` as a second variable to the right side of the `~`. Not that it does 
+not matter which variable goes first; we can also write the formula as `educyrs ~ insure + age`. 
+
+As with before, we can take a look at the fitted coefficients on the model
+($\beta_0, \beta_1, \beta_2$) and the results from the hypothesis test that these
+coefficients are 0. 
+
+```{r}
+summary(fitted_mod2)
+```
+We can also pull out the confidence intervals on these estimates. 
+
+```{r}
+confint(fitted_mod2)
+```
+
+## Exercise
+
+Perform a linear regression, regressing BMI (outcome) on number of years of 
+education (predictor). Obtain estimates and confidence intervals for each model coefficient. 
+Write an interpretation on the coefficient on number of years of education. 
+
+&nbsp; &nbsp; &nbsp;
+
+*[Click here](https://jpspeng.github.io/crisp_notes/) to go back to the CRISP R notes homepage.*
+
