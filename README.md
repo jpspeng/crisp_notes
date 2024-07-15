@@ -33,8 +33,9 @@ Here is the [data documentation](https://jpspeng.github.io/crisp_notes/pages/Cri
 
 ## More advanced coding (optional)
 
-1.  Loops 
-2.  Functions
+1.  Lists
+2.  Loops 
+3.  Functions
 
 
 If you have any questions, you can email James at jpspeng@uw.edu. 
