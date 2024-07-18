@@ -13,6 +13,7 @@ Here is the [data documentation](https://jpspeng.github.io/crisp_notes/pages/Cri
 
 1. **By Thursday, July 11**: Complete mini-lessons 1-6 (including the exercises).
 2. **By Sunday, July 14**: Complete mini-lessons 7-9.
+3. **By Thursday, July 18**: Complete mini-lessons 10-13. 
 
 ## Mini-Lessons 
 
@@ -25,15 +26,19 @@ Here is the [data documentation](https://jpspeng.github.io/crisp_notes/pages/Cri
 7. [Factor variables](https://jpspeng.github.io/crisp_notes/pages/factor_variables.html) ([Download RMD](https://jpspeng.github.io/crisp_notes/pages/factor_variables.Rmd))
 8. [Simple comparison of means / proportions hypothesis tests](https://jpspeng.github.io/crisp_notes/pages/tests_comparing_means_proportions.html) ([Download RMD](https://jpspeng.github.io/crisp_notes/pages/tests_comparing_means_proportions.Rmd))
 9. [Exercise: Create a Table 1](https://jpspeng.github.io/crisp_notes/pages/creating_table1.html)
-10. Using the table1 package
-11. Risk differences, risk ratios, odds ratios
-12. Graphing with ggplot2
-13. Simple linear regression 
+10. [Using the table1 package](https://jpspeng.github.io/crisp_notes/pages/using_table1_package.html) ([Download RMD](https://jpspeng.github.io/crisp_notes/pages/using_table1_package.Rmd))
+11. [Risk differences, risk ratios, odds ratios](https://jpspeng.github.io/crisp_notes/pages/risk_differences.html) ([Download RMD](https://jpspeng.github.io/crisp_notes/pages/risk_differences.Rmd))
+12. [Graphing with ggplot2](https://jpspeng.github.io/crisp_notes/pages/graphing_with_ggplot2.html) ([Download RMD](https://jpspeng.github.io/crisp_notes/pages/graphing_with_ggplot2.Rmd))
+13. [Linear regression](https://jpspeng.github.io/crisp_notes/pages/linear_regression.html) ([Download RMD](https://jpspeng.github.io/crisp_notes/pages/linear_regression.Rmd))
+14. More linear regression
+15. Normal adjustment versus interaction 
+16. Logistic regression
 
 ## More advanced coding (optional)
 
-1.  Loops 
-2.  Functions
+1.  Lists
+2.  Loops 
+3.  Functions
 
 
 If you have any questions, you can email James at jpspeng@uw.edu. 
