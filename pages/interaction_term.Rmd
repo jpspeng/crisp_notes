@@ -1,0 +1,88 @@
+---
+title: "Linear regression with an interaction term"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+<style type="text/css">
+  body{
+  font-size: 12pt;
+}
+</style>
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(knitr)
+```
+
+In this tutorial, we will do one full example of a linear regression with an 
+**interaction term**. We will practice interpreting the output from running this
+linear regression in R. 
+
+```{r}
+df <- read.csv("crisp-2024-sample100.csv")
+```
+
+## Example 
+
+Suppose that wish to fit a linear regression, regressing BMI on age, sex, and we 
+want to include an interaction term between age and sex. We may wish to do this if we
+believe that the association between age and BMI differ for males and females. 
+
+The model we are trying to fit looks like: 
+
+$$
+bmi = \beta_0 + \beta_1 age + \beta_2 sex + \beta_3 age * sex
+$$
+
+Note that within this linear regression, we include *main effect* terms for each 
+age and sex ($\beta_1 age$ and $\beta_2 sex$), as well as an *interaction term* 
+($\beta_3 age*sex$). 
+
+To find the values of $\beta_0, \beta_1, \beta_2, \beta_3$ that best fit the data, 
+we can again use the `lm()` function in R. To code an interaction term, you can 
+use the syntax `outcome ~ pred1 * pred2` in the formula. This will automatically 
+create main effect terms for `pred1` and `pred2`. In this example, we can code
+the formula as `bmi ~ age * sex`. 
+
+```{r}
+mod <- lm(bmi ~ age * sex, data = df)
+
+summary(mod)
+```
+As you can see, we now have the estimates for the intercept, 
+the coefficient on age, the coefficient on sex, and the coefficient on the interaction 
+between age and sex. 
+
+How can we interpret this output? 
+
+* *Intercept*: The predicted BMI for males with age = 0. Note that this is not 
+meaningful, since we don't have age = 0 in our population of interest.
+* *Coefficient on age*: The estimated difference in BMI comparing two groups **of males** 
+differing in one year of age. Note that this interpretation is different that of a 
+normal adjustment model. 
+* *Coefficient on sex*: The estimated difference in BMI comparing groups of females versus 
+males **with age = 0**. Note that again this interpretation is different that of a 
+normal adjustment model. 
+* *Coefficient on age:sex*: The estimated difference in the mean difference in 
+BMI for every 1-year difference in age in females versus that in males. This is 
+a tricky interpretation ("a difference of differences")! Essentially, this 
+coefficient tells us how different the association between BMI and age is 
+between males and females. 
+  * *p-value*: The result from testing the null hypothesis that the coefficient on 
+  the interaction coefficient is 0. With $p = 0.33$, we fail to find evidence of an 
+  interaction effect between age and sex in their association with BMI. 
+
+
+## Exercise
+
+Perform a linear regression, with *BMI as the outcome* and *cannabis use history and cocaine use history as predictors*. 
+Include an interaction term between the two predictors. Provide an interpretation of the output. 
+
+&nbsp; &nbsp; &nbsp;
+
+*[Click here](https://jpspeng.github.io/crisp_notes/) to go back to the CRISP R notes homepage.*
+

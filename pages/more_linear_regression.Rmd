@@ -1,0 +1,177 @@
+---
+title: "More linear regression"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+<style type="text/css">
+  body{
+  font-size: 12pt;
+}
+</style>
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(knitr)
+```
+
+In this tutorial, we will practice interpreting the output of 
+different types of linear regression. Again, we will use the same XBOT dataset
+as in previous tutorials.
+
+```{r}
+df <- read.csv("crisp-2024-sample100.csv")
+```
+
+We will also learn how to graph linear regression lines using `ggplot2`. 
+
+## Binary predictor 
+
+Suppose that we are examining number of years of education (`educyrs`) as our outcome, 
+and binarized sex (`sex`) as our single predictor. 
+
+Note that `sex` takes the value of 0 or 1 in our dataset, with 0 representing males
+and 1 representing females. 
+
+Our data looks like the following: 
+
+```{r, warning = F}
+library(ggplot2)
+
+ggplot(data = df, aes(x = sex, y = educyrs)) + 
+  geom_point()
+```
+
+We aim to find the best linear fit considering these data points. That is, we aim 
+to fit the model: 
+
+$$
+educyrs = \beta_0 + \beta_1 sex
+$$
+
+We perform a linear regression,
+regressing `educyrs` on `sex` using the `lm()` function. 
+
+```{r}
+mod1 <- lm(educyrs ~ sex, data = df)
+
+summary(mod1)
+```
+How can we interpret this output?
+
+* *Intercept*: The mean number of years of education for males (or those with 
+sex = 0). That is, males have on average 12.21 years of education. 
+* *Coefficient on sex*: The difference in the mean number of years of education 
+between females and males. That is, we estimate that females have on average 0.039 
+fewer years of education than males. 
+  * *p-value*: The result from testing the null hypothesis that the coefficient on 
+  sex is equal to 0. Equivalently, we are testing the null hypothesis that there is 
+  no difference in number of years of education between males and females. With
+  $p = 0.93$, we fail to find evidence of a difference in the number of years of 
+  education comparing males and females. 
+
+We can also obtain confidence intervals on these estimates using `confint()`. 
+
+```{r}
+confint(mod1)
+```
+
+
+We can look at what this line looks like on top of the data. To do this, we add 
+a smoothed linear regression line using `+ geom_smooth(method = "lm")`. 
+
+```{r, warning = F, message = F}
+ggplot(data = df, aes(x = sex, y = educyrs)) + 
+  geom_point() + 
+  geom_smooth(method = "lm")
+```
+
+
+## Continuous predictor 
+
+Suppose that we are examining BMI (`bmi`) as our outcome and number of years of education
+(`educyrs`) as our single predictor. Note that both variables here are continuous. 
+
+```{r, warning = F}
+ggplot(data = df, aes(x = educyrs, y = bmi)) + 
+  geom_point()
+```
+
+We are trying to find a best fit line to fit this data. That is, we are trying 
+find the best estimates of $\beta_0$ and $\beta_1$ in the equation below: 
+
+$$
+bmi = \beta_0 + \beta_1 educyrs
+$$ 
+
+We perform a linear regression,
+regressing `bmi` on `educyrs` using the `lm()` function. 
+
+```{r}
+mod2 <- lm(bmi ~ educyrs, data = df)
+
+summary(mod2)
+```
+
+How can we interpret this output?
+
+* *Intercept*: The predicted BMI for those with 0 years of education. That is, 
+we predict that those with 0 years of education have a BMI of 24.37 using this model. 
+* *Coefficient on educyrs*: The difference in the mean BMI comparing two groups with a 
+one year difference in education. That is, we estimate that, 
+comparing two groups with a one year difference in education, the older 
+group has on average 0.05 higher BMI. 
+  * *p-value*: The result from testing the null hypothesis that the coefficient on 
+  `educyrs` is equal to 0. With $p = 0.83$, we fail to find evidence of a significant
+  association of BMI and number of years of education.  
+  
+We can again obtain confidence intervals and graph the best fit line on top of the data: 
+
+```{r}
+confint(mod2)
+```
+
+
+```{r, warning = F, message = F}
+ggplot(data = df, aes(x = educyrs, y = bmi)) + 
+  geom_point() + 
+  geom_smooth(method = "lm")
+```
+
+## Binary and continuous predictors
+
+Suppose that we run a linear regression, with number of years of education `educyrs` 
+as the outcome, and `age` and `sex` as the predictors. That is, we are trying 
+find the best estimates of $\beta_0$, $\beta_1$, and $\beta_2$ in the equation below: 
+
+$$
+educyrs = \beta_0 + \beta_1 age + \beta_2 sex
+$$
+
+To do this in R, we can use `lm()` with `age + sex` as our predictors in the formula: 
+
+```{r}
+mod3 <- lm(educyrs ~ age + sex, data = df)
+
+summary(mod3)
+
+```
+
+How can we interpret the output? 
+
+* *Intercept*: The predicted number of years of education for males (sex = 0) with
+age = 0. Note that this is not meaningful, since we don't have age = 0 in our
+population of interest. 
+* *Coefficient on age*: The estimated difference in number of years of education comparing 
+two groups *of the same sex* differing by one year of age. 
+* *Coefficient on sex*: The estimated difference in the number of years of education 
+comparing females versus males *of the same age*. 
+
+
+&nbsp; &nbsp; &nbsp;
+
+*[Click here](https://jpspeng.github.io/crisp_notes/) to go back to the CRISP R notes homepage.*
+
