@@ -30,9 +30,9 @@ Here is the [data documentation](https://jpspeng.github.io/crisp_notes/pages/Cri
 11. [Risk differences, risk ratios, odds ratios](https://jpspeng.github.io/crisp_notes/pages/risk_differences.html) ([Download RMD](https://jpspeng.github.io/crisp_notes/pages/risk_differences.Rmd))
 12. [Graphing with ggplot2](https://jpspeng.github.io/crisp_notes/pages/graphing_with_ggplot2.html) ([Download RMD](https://jpspeng.github.io/crisp_notes/pages/graphing_with_ggplot2.Rmd))
 13. [Linear regression](https://jpspeng.github.io/crisp_notes/pages/linear_regression.html) ([Download RMD](https://jpspeng.github.io/crisp_notes/pages/linear_regression.Rmd))
-14. More linear regression
-15. Normal adjustment versus interaction 
-16. Logistic regression
+14. [More linear regression](https://jpspeng.github.io/crisp_notes/pages/more_linear_regression.html) ([Download RMD](https://jpspeng.github.io/crisp_notes/pages/more_linear_regression.Rmd))
+15. [Interaction models](https://jpspeng.github.io/crisp_notes/pages/interaction_term.html) ([Download RMD](https://jpspeng.github.io/crisp_notes/pages/interaction_term.Rmd))
+16. [Logistic regression](https://jpspeng.github.io/crisp_notes/pages/logistic_regression.html) ([Download RMD](https://jpspeng.github.io/crisp_notes/pages/logistic_regression.Rmd))
 
 ## More advanced coding (optional)
 
