@@ -13,7 +13,8 @@ Here is the [data documentation](https://jpspeng.github.io/crisp_notes/pages/Cri
 
 1. **By Thursday, July 11**: Complete mini-lessons 1-6 (including the exercises).
 2. **By Sunday, July 14**: Complete mini-lessons 7-9.
-3. **By Thursday, July 18**: Complete mini-lessons 10-13. 
+3. **By Thursday, July 18**: Complete mini-lessons 10-13.
+4. **By Monday, July 22**: Complete mini-lessons 14-16. 
 
 ## Mini-Lessons 
 
