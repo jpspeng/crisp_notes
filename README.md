@@ -14,7 +14,8 @@ Here is the [data documentation](https://jpspeng.github.io/crisp_notes/pages/Cri
 1. **By Thursday, July 11**: Complete mini-lessons 1-6 (including the exercises).
 2. **By Sunday, July 14**: Complete mini-lessons 7-9.
 3. **By Thursday, July 18**: Complete mini-lessons 10-13.
-4. **By Monday, July 22**: Complete mini-lessons 14-16. 
+4. **By Monday, July 22**: Complete mini-lessons 14-16.
+5. **By Thursday, July 25**: 
 
 ## Mini-Lessons 
 
@@ -34,6 +35,8 @@ Here is the [data documentation](https://jpspeng.github.io/crisp_notes/pages/Cri
 14. [More linear regression](https://jpspeng.github.io/crisp_notes/pages/more_linear_regression.html) ([Download RMD](https://jpspeng.github.io/crisp_notes/pages/more_linear_regression.Rmd))
 15. [Interaction models](https://jpspeng.github.io/crisp_notes/pages/interaction_term.html) ([Download RMD](https://jpspeng.github.io/crisp_notes/pages/interaction_term.Rmd))
 16. [Logistic regression](https://jpspeng.github.io/crisp_notes/pages/logistic_regression.html) ([Download RMD](https://jpspeng.github.io/crisp_notes/pages/logistic_regression.Rmd))
+17. [Survival analysis basics]()
+18. [Cox regression basics]()
 
 ## More advanced coding (optional)
 
