@@ -40,6 +40,8 @@ Here is the [data documentation](https://jpspeng.github.io/crisp_notes/pages/Cri
 
 ## More advanced coding (optional)
 
+Will be posted by morning of Tuesday, July 22. 
+
 1.  Lists
 2.  Loops 
 3.  Functions
