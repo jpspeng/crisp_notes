@@ -1,0 +1,113 @@
+---
+title: "Functions"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+<style type="text/css">
+  body{
+  font-size: 12pt;
+}
+</style>
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(knitr)
+```
+
+## Walkthrough
+
+In this tutorial, we will learn how to write our own functions. We've used many 
+pre-built functions before - for example, `mean()`, `sd()`, `summary()`, 
+`table()`, etc. But you may want to write your own function if it's a task 
+that you want to perform repeatedly. This can save you time writing code, and can 
+also make the code more readable and reproducible! 
+
+To write a function, we take the following steps: 
+
+1. Specify the function name. In the code below, we call our function `divide_by_two`. 
+2. Next, assign it to a `function()` object, where the **arguments** (i.e. inputs) go 
+inside the parenthesis. In the example below, we take as an argument one number `my_num`. 
+3. After that, we write out what we want the function to do inside the brackets
+\{ \}. *The last line of the function will be the output of the function.* For example, 
+the function below takes the input my_num and divides it by 2. 
+
+```{r}
+divide_by_two <- function(my_num){
+  my_num / 2
+}
+```
+
+We can apply this function on different inputs: 
+
+```{r}
+divide_by_two(1)
+
+divide_by_two(100)
+```
+
+Optionally, we can also include the argument name `my_num = ` when calling the 
+function. 
+
+```{r}
+divide_by_two(my_num = 1)
+
+divide_by_two(my_num = 100)
+```
+
+Let's write a more complicated function that might be more relevant for data 
+analysis. Suppose that we want a function that takes in as input a dataframe, and 
+outputs a **list**, which has stored the standard deviation of each column. We can do that
+using the code below: 
+
+```{r}
+find_sds <- function(df_input){
+  
+  # pull the column names as a vector
+  cols <- names(df_input)
+  
+  # initialize and empty list 
+  output <- list()
+  
+  # for each column, find the standard deviation of each column 
+  for (col in cols){
+    output[[col]] <- sd(df_input[,col], na.rm = T)
+  }
+  
+  # return the output 
+  output
+}
+```
+
+This code is a bit complicated, so let's walk through it. First, our function 
+name is `find_sds`, and it takes in one argument `df_input`. Inside our function, 
+we do the following: 
+
+1. Pull out the column names and save it as the `cols` variable. 
+2. Create an empty list called `output`. 
+3. Loop through all of the columns in the `cols` variable: 
+  * For each column, save the standard deviation of the column with their corresponding
+  label inside the `output` list. 
+4. Output the `output` variable. 
+
+Let's apply this function to the X:BOT data. 
+
+```{r}
+df <- read.csv("crisp-2024-sample100.csv")
+```
+
+```{r}
+find_sds(df)
+```
+
+## Exercise 
+
+Write a function which takes as an input a dataframe and outputs a list which includes the number of cells with `NA` for each column.
+
+&nbsp; &nbsp; &nbsp;
+
+*[Click here](https://jpspeng.github.io/crisp_notes/) to go back to the CRISP R notes homepage.*
+

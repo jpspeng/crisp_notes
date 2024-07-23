@@ -1,0 +1,85 @@
+---
+title: "Lists"
+output: html_document
+---
+
+<style type="text/css">
+  body{
+  font-size: 12pt;
+}
+</style>
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(knitr)
+```
+
+There are several different types of **data structures** in R. We've learned 
+about a few of them: 
+
+* **Numeric**: a number
+* **String**: a text snippet
+* **Factor**: a categorical variable
+* **Vector**: a ordered sequence of multiple numbers or strings
+* **Dataframe**: a data table with rows and columns 
+
+```{r}
+# numeric
+my_num <- 1
+
+# string 
+my_str <- "This is my string"
+
+# vector
+my_vec <- c(1,2,3,4)
+my_vec2 <- c("yes", "no")
+
+# the cars object (included in R) is a dataframe
+head(cars)
+```
+
+
+Another data structure that is often useful is a **list**. A list is a *labeled* object 
+that can consist of elements of different types. To create a list, you can use the 
+syntax `list(label1 = obj1, label2 = obj2, ...)` where the label1, label2, etc.
+represent the labels for each object. 
+
+For example: 
+
+```{r}
+my_list <- list(
+  name = "John Doe",
+  age = 30,
+  scores = c(90, 85, 88)
+)
+```
+
+
+In this list, we have three objects: 
+
+1. A string "John Doe" with the label "name"
+2. A numeric 30 with the label "age" 
+3. A vector `c(90, 85, 88)` with the label "scores"
+
+We can pull out different objects by calling the list with a $, along with the label 
+for the object of interest. For example, if 
+we want to pull out the name and age from `my_list`, we can do the following: 
+
+```{r}
+# pull out name
+my_list$name
+
+# pull out age 
+my_list$age
+```
+
+
+A list is a very flexible and versatile object to store different types of data, 
+along with clear labels. They are commonly used in the output of functions, 
+which we will talk about in a future tutorial. 
+
+&nbsp; &nbsp; &nbsp;
+
+*[Click here](https://jpspeng.github.io/crisp_notes/) to go back to the CRISP R notes homepage.*
+

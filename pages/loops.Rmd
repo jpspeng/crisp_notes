@@ -1,0 +1,98 @@
+---
+title: "Loops"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+<style type="text/css">
+  body{
+  font-size: 12pt;
+}
+</style>
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(knitr)
+```
+
+## Walkthrough
+
+In this tutorial, we will learn about how to run a loop in R. This is useful if
+we want to perform the same operation multiple times. 
+
+For example, suppose that we want to add 2 to each number in a vector which 
+consists of c(1,2,3,4,5). We can create a loop to help do this. 
+
+1. The loop starts with a `for` statement. 
+2. After the `for` statement, we include inside the parenthesis () the instructions 
+for the loop. The instructions consist of "___ in ___". In the first blank, 
+we provide a temporary label for the object in the loop, so that we can reference it later on. In the 
+second blank, we put the name of the vector we want to loop through. 
+3. Finally, we include instructions for each iteration of the loop inside the brackets 
+\{ \}. 
+
+Here is a toy example: 
+
+```{r}
+my_vec <- c(1,2,3,4,5)
+
+for (num in my_vec){
+  print(num + 2)
+}
+```
+
+In this example, we are looping through `my_vec`. We temporarily name objects that 
+we loop through as `num`. And for each iteration of the loop, as we go through 
+1,2,3,4,5 in `my_vec`, we print out each number `num` PLUS 2. 
+
+Here is another example, which may be more relevant in data analysis. Suppose 
+that we wanted to create a loop to print out the *mean* for each column in a dataframe. 
+
+Let's use the X:BOT dataset, which we have used for previous tutorials. 
+
+```{r}
+df <- read.csv("crisp-2024-sample100.csv")
+
+head(df)
+```
+
+Let's create a loop to find the mean for each column. We want to loop through all 
+the columns of `df`. To pull out all the columns as a vector, you can use the 
+`names()` function. 
+
+```{r}
+# pull out the column names of the dataframe
+cols <- names(df)
+
+cols
+```
+
+Now let's write our loop. We start with `for ()`, and inside the parenthesis 
+we include `col in cols`. This says that we want to loop through the columns (which 
+we saved as the variable `cols`), and as we do that, we temporarily label each column as `col`. 
+
+Finally, within the brackets \{ \}, we print out the name of the column and the 
+mean for the column in the dataframe.
+
+
+```{r}
+for (col in cols){
+  print(col)
+  print(mean(df[,col], na.rm = T))
+}
+```
+Loops are very powerful, so that you don't have to rewrite the same code over and over 
+again!
+
+## Exercise 
+
+Loop through all the binary variables in the X:BOT dataset and print out a tabulation of 
+the number in each category. 
+
+&nbsp; &nbsp; &nbsp;
+
+*[Click here](https://jpspeng.github.io/crisp_notes/) to go back to the CRISP R notes homepage.*
+
