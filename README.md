@@ -36,7 +36,7 @@ Here is the [data documentation](https://jpspeng.github.io/crisp_notes/pages/Cri
 15. [Interaction models](https://jpspeng.github.io/crisp_notes/pages/interaction_term.html) ([Download RMD](https://jpspeng.github.io/crisp_notes/pages/interaction_term.Rmd))
 16. [Logistic regression](https://jpspeng.github.io/crisp_notes/pages/logistic_regression.html) ([Download RMD](https://jpspeng.github.io/crisp_notes/pages/logistic_regression.Rmd))
 17. [Survival analysis basics](https://jpspeng.github.io/crisp_notes/pages/survival_analysis.html) ([Download RMD](https://jpspeng.github.io/crisp_notes/pages/survival_analysis.Rmd))
-18. [Cox regression example](https://jpspeng.github.io/crisp_notes/pages/cox_regression.html) ([Download RMD])(https://jpspeng.github.io/crisp_notes/pages/cox_regression.Rmd)
+18. [Cox regression example](https://jpspeng.github.io/crisp_notes/pages/cox_regression.html) ([Download RMD](https://jpspeng.github.io/crisp_notes/pages/cox_regression.Rmd))
 
 ## More advanced coding (optional)
 
