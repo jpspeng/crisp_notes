@@ -1,0 +1,192 @@
+---
+title: "Basic survival analysis"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+<style type="text/css">
+  body{
+  font-size: 12pt;
+}
+</style>
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(knitr)
+```
+
+## Introduction 
+
+In survival data, we not only know if whether someone had the event, we also 
+have the **time to the event**. With survival data, we often deal with **censoring**. 
+Censoring means that we don't know *when* the event occurred. For some events, 
+we only know that it occurred *after* a certain time (this is called **right censoring**). 
+
+With this type of data, we may want to answer the following questions: 
+
+* What is the median survival time? 
+* What proportion survived after 1 year? After 2 years? 
+* Is the survival different between different groups? 
+
+In this tutorial, we will learn the basics of analyzing survival data in R. This 
+will not be comprehensive! The goal is to get a taste of implementing some common 
+survival analysis tasks in R. 
+
+## Creating a time to event variable
+
+To analyze survival data in R, we can use the `survival` package. We will also 
+use the `dplyr` package in some of the code.
+
+```{r, warning = F, message = F}
+# install.packages("survival")
+
+library(survival)
+library(dplyr)
+```
+
+For this tutorial, we will use the `lung` dataset, which is automatically loaded through 
+the survival package. The data contain subjects with advanced lung cancer from the North Central
+Cancer Treatment Group. The *event* of interest is death. 
+
+```{r}
+head(lung)
+```
+This dataset has several columns, but we will focus only on time, status, and 
+sex for this tutorial: 
+
+```{r}
+lung %>% 
+  select(time, status, sex) %>% 
+  head()
+```
+
+Here is the definition of these variables: 
+
+* **Status**: 1-censored (e.g. did not have the event) or 2-dead 
+* **Time**: Time to event or censoring 
+* **Sex**: 1-male or 2-female 
+
+For those that are censored, we assume that either the study ended or they were no 
+longer observed after the censoring date. We know that they had the event (e.g. died)
+at some point, but we don't know when. We only know it happened after a specific time. 
+
+To analyze survival data using the `survival` package, we want to make sure there
+are two key columns: (1) a time column, and (2) a status column. The status
+column must be coded as 0s or 1s, where 0 is for those that are censored and 1 
+is for those that were not (e.g. had the event). As a first step, we convert 
+the status column in our dataset (which consists of 1s and 2s) to 0s and 1s. 
+
+```{r}
+# use the mutate function to change a column of the datset 
+lung_new <- lung %>% 
+  mutate(status = ifelse(status == 2, 1, 0))
+```
+
+Our next step is to create a time-to-event column. This column will encode the information 
+in both the time and status columns. We can use the `Surv()` function from the 
+`survival` package to create this column. The first argument of this function is the 
+time variable, and the second argument is the status variable. 
+
+```{r}
+# use mutate function to create time-to-event column
+lung_new <- lung_new %>% 
+  mutate(tte = Surv(time, status))
+```
+
+Let's take a peak at what this new variable looks like: 
+
+```{r}
+lung_new %>% 
+  select(time, status, tte) %>% 
+  head()
+```
+For those that had the event (status = 1), we can see the tte column shows of 
+the time of the event. For those that were censored, we can see that the tte column 
+shows the last observation time with a + symbol, indicating that the had the event 
+*after* that timepoint. 
+
+## Creating survival plots 
+
+After creating the survival variable, we may want to create a Kaplan-Meier survival
+plot. This plot shows the estimated proportion who are still alive at 
+different timepoints. To create this plot, we first can use the `survfit()` function. 
+The function takes in two arguments The first is the formula which looks like `tte ~ -1`. 
+Before the tilde (~), we have tte, which is the time-to-event variable that we 
+created. The -1 after the tilde here indicates that we want an overall Kaplan-Meier 
+curve, not a stratified one. The second argument is the data. 
+
+```{r}
+# first argument is the formula tte ~ -1 
+# second argument is the data 
+km <- survfit(tte ~ -1, data = lung_new)
+```
+
+Next, we can graph this plot using the `ggsurvplot()` function from the `survminer`
+package. We put in the survfit object as the argument. 
+
+```{r, warning = F, message = F}
+# install.packages("survminer")
+
+library(survminer)
+ggsurvplot(km)
+```
+
+From this curve, here are some observations: 
+
+* The median survival time (50th percentile) is around 275 days. 
+* After 500 days, we estimate the survival probability to be around 30 percent. 
+
+Now suppose that we want to graph the curve, stratified by sex. Within the `survfit()` 
+function, we specify the formula `tte ~ sex`. Including sex after the tilde 
+creates curves stratified by sex. 
+
+```{r}
+# stratified Kaplan-Meier curve 
+km_sex <- survfit(tte ~ sex, data = lung_new)
+
+# graph stratified curves 
+ggsurvplot(km_sex)
+```
+
+This shows the curves separated by males and females. The curves show that females
+generally have better survival than males throughout the study. 
+
+## Log rank test
+
+In the previous section, we saw that the females had a noticeably different 
+Kaplan-Meier survival curve compared to males. We can perform a hypothesis 
+test to check these curves are *significantly* different. The hypothesis test 
+to do this is called the **log rank test**. 
+
+The null hypothesis of the log rank test is that the survival curves are the same. 
+Setting a significance threshold of 0.05, if we observe a p-value less than that, 
+then we reject the null hypothesis (i.e. find evidence of significant differences 
+between the two curves).
+
+To perform the log rank test in R, we can use the `survdiff()` function. The 
+structure of this function is similar to `survfit()` function. We first 
+specify the formula, in this case `tte ~ sex`. This tells the function to test 
+if the time-to-event survival variable is significantly different by sex. The
+second argument is the data. 
+
+```{r}
+survdiff(tte ~ sex, data = lung_new)
+```
+
+With $p=0.001$, we find evidence that the two curves are significantly different. 
+
+## Exercise
+
+Using the lung dataset, graph separate Kaplan-Meier curves for participants 
+with different values of ph.ecog. (Note: ph.ecog is the ECOG performance score as 
+rated by the physician. Ranked 0-3, with increasing severity.) 
+
+Perform a test to see if the survival curves are significantly different.  
+
+&nbsp; &nbsp; &nbsp;
+
+*[Click here](https://jpspeng.github.io/crisp_notes/) to go back to the CRISP R notes homepage.*
+

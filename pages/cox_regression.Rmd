@@ -1,0 +1,93 @@
+---
+title: "Cox regression"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+<style type="text/css">
+  body{
+  font-size: 12pt;
+}
+</style>
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(knitr)
+```
+
+In this tutorial, we will do a basic demonstration of how to run a Cox regression 
+in R. 
+
+Remember from lecture that Cox regression models the hazard curve, which is 
+defined as the instantaneous risk of death (or having the event) given that one 
+hasn't had the event up that point. This is a bit abstract! But a couple things 
+to note: 
+
+* Like the survival curve, the hazard curve is a function over time. 
+* Higher hazards at a certain time mean higher risk of death at that timepoint; 
+lower hazards mean lower risk of death. 
+
+In Cox regression, the output is a **hazard ratio.** The hazard ratio describes 
+how much hazard curves differ between different groups. For example, a hazard ratio
+of 5 signifies that the hazard of death of one group is 5 times higher than that 
+of another group. 
+
+## Example
+
+We will run an Cox example regression in R. Again, we will use the `survival` package 
+and the lung dataset. We start off with some basic data processing and creating a
+time to event variable with the `Surv()` function: 
+
+```{r, warning = F, message = F}
+library(survival)
+library(dplyr)
+
+# convert status variable to 0s and 1s 
+# convert sex into factor
+lung_new <- lung %>% 
+  mutate(status = ifelse(status == 2, 1, 0), 
+         sex = factor(sex))
+
+# create time to event variable with Surv() function
+lung_new <- lung_new %>% 
+  mutate(tte = Surv(time, status))
+
+```
+
+Suppose that we want to perform a Cox regression to compare the hazard of death
+between females and males. 
+
+To run the regression, we use the `coxph()` function from the `survival` package. 
+The first argument of this function is the formula, which is similar to 
+linear/logistic regression: `outcome ~ predictor`. In this case, the outcome is
+the time to event (`tte`) and the predictor is sex (`sex`). The second 
+argument is the dataframe. 
+
+```{r}
+cox_mod <- coxph(tte ~ sex, data = lung_new)
+
+summary(cox_mod)
+```
+In this output, we will focus on the exponentiated output, specifically exp(coef), 
+lower .95, and upper .95, as well as the p-value (Pr (|z|))
+
+* The exponentiated outputs give us an estimate and confidence interval of the 
+hazard ratio comparing sex = 2 (females) to sex = 1 (males). We see a hazard 
+ratio of 0.588, so the hazard of death for females is 0.588 times that of males. 
+In other words, the hazard of death for females is 41% lower than that of males. 
+* The p-value tests the hypothesis that the hazard curves are the same. In this case, 
+we see a p-value of 0.001, so we reject the null hypothesis that the two 
+hazard curves are the same. 
+
+## Exercise
+
+Run a Cox proportional hazards model, regressing the time-to-event on the age. 
+Provide an interpretation on the coefficient of age. 
+
+&nbsp; &nbsp; &nbsp;
+
+*[Click here](https://jpspeng.github.io/crisp_notes/) to go back to the CRISP R notes homepage.*
+
