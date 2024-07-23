@@ -15,7 +15,7 @@ Here is the [data documentation](https://jpspeng.github.io/crisp_notes/pages/Cri
 2. **By Sunday, July 14**: Complete mini-lessons 7-9.
 3. **By Thursday, July 18**: Complete mini-lessons 10-13.
 4. **By Monday, July 22**: Complete mini-lessons 14-16.
-5. **By Thursday, July 25**: Complete mini-lessons 17-18. (Will be posted by morning of Tuesday, July 23)
+5. **By Thursday, July 25**: Complete mini-lessons 17-18.
 
 ## Mini-Lessons 
 
@@ -40,11 +40,9 @@ Here is the [data documentation](https://jpspeng.github.io/crisp_notes/pages/Cri
 
 ## More advanced coding (optional)
 
-Will be posted by morning of Tuesday, July 22. 
-
-1.  [Lists](https://jpspeng.github.io/crisp_notes/pages/lists.html) 
-2.  [Loops](https://jpspeng.github.io/crisp_notes/pages/loops.html)
-3.  [Functions](https://jpspeng.github.io/crisp_notes/pages/functions.html)
+1.  [Lists](https://jpspeng.github.io/crisp_notes/pages/lists.html) ([Download RMD](https://jpspeng.github.io/crisp_notes/pages/lists.Rmd))
+2.  [Loops](https://jpspeng.github.io/crisp_notes/pages/loops.html) ([Download RMD](https://jpspeng.github.io/crisp_notes/pages/loops.Rmd))
+3.  [Functions](https://jpspeng.github.io/crisp_notes/pages/functions.html) ([Download RMD](https://jpspeng.github.io/crisp_notes/pages/functions.Rmd))
 
 
 If you have any questions, you can email James at jpspeng@uw.edu. 
