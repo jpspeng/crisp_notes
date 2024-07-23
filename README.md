@@ -42,9 +42,9 @@ Here is the [data documentation](https://jpspeng.github.io/crisp_notes/pages/Cri
 
 Will be posted by morning of Tuesday, July 22. 
 
-1.  Lists
-2.  Loops 
-3.  Functions
+1.  [Lists](https://jpspeng.github.io/crisp_notes/pages/lists.html) 
+2.  [Loops](https://jpspeng.github.io/crisp_notes/pages/loops.html)
+3.  [Functions](https://jpspeng.github.io/crisp_notes/pages/functions.html)
 
 
 If you have any questions, you can email James at jpspeng@uw.edu. 
