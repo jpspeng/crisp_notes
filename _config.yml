@@ -1,3 +1,8 @@
 title: CRISP R notes
 google_analytics:
 theme: jekyll-theme-minimal
+kramdown:
+  input: GFM
+  hard_wrap: false
+  html_to_native: true
+  parse_block_html: true
