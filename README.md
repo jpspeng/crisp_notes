@@ -3,6 +3,9 @@
 These are basic R tutorials and exercises for getting started with R programming, created for [Clinical Research Intensive Summer Program](https://www.iths.org/education/professional-development/crisp/) (CRISP) through UW ITHS.
 
 
+<details>
+  <summary>#Files from 2024</summary>
+
 # Files from 2024 
 
 ## Data 
@@ -47,5 +50,7 @@ Here is the [data documentation](https://jpspeng.github.io/crisp_notes/pages/Cri
 2.  [Loops](https://jpspeng.github.io/crisp_notes/pages/loops.html) ([Download RMD](https://jpspeng.github.io/crisp_notes/pages/loops.Rmd))
 3.  [Functions](https://jpspeng.github.io/crisp_notes/pages/functions.html) ([Download RMD](https://jpspeng.github.io/crisp_notes/pages/functions.Rmd))
 
+
+</details>
 
 If you have any questions, you can email James at jpspeng@uw.edu. 
