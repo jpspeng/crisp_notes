@@ -4,7 +4,7 @@ These are basic R tutorials and exercises for getting started with R programming
 
 
 <details>
-  <summary>#Files from 2024</summary>
+  <summary>Click here for files from 2024.</summary>
 
 # Files from 2024 
 
