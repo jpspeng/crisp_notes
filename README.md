@@ -2,6 +2,16 @@
 
 These are basic R tutorials and exercises for getting started with R programming, created for [Clinical Research Intensive Summer Program](https://www.iths.org/education/professional-development/crisp/) (CRISP) through UW ITHS.
 
+## Data 
+
+We will be using the following sample data in our tutorials: 
+[CSV file](https://jpspeng.github.io/crisp_notes/pages/crisp-2024-sample100.csv) 
+
+Here is the [data documentation](https://jpspeng.github.io/crisp_notes/pages/Crisp-2024-sample100-dictionary.pdf). 
+
+## Mini-Lessons 
+
+1. [Installing R and R Studio](https://jpspeng.github.io/crisp_notes/pages/installing_R.html) ([Download RMD](https://jpspeng.github.io/crisp_notes/pages/installing_R.Rmd))
 
 <details>
   <summary>Click here for files from 2024.</summary>
