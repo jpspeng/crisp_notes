@@ -15,6 +15,8 @@ Here is the [data documentation](https://jpspeng.github.io/crisp_notes/pages/Cri
 
 If you have any questions, you can email James at jpspeng@uw.edu. 
 
+--- 
+
 ## Old Courses 
 
 ### 2024 
