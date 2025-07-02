@@ -13,10 +13,10 @@ Here is the [data documentation](https://jpspeng.github.io/crisp_notes/pages/Cri
 
 1. [Installing R and R Studio](https://jpspeng.github.io/crisp_notes/pages/installing_R.html) ([Download RMD](https://jpspeng.github.io/crisp_notes/pages/installing_R.Rmd))
 
+# Files from 2024 
+
 <details>
   <summary>Click here for files from 2024.</summary>
-
-# Files from 2024 
 
 ## Data 
 
