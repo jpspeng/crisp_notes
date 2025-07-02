@@ -13,27 +13,22 @@ Here is the [data documentation](https://jpspeng.github.io/crisp_notes/pages/Cri
 
 1. [Installing R and R Studio](https://jpspeng.github.io/crisp_notes/pages/installing_R.html) ([Download RMD](https://jpspeng.github.io/crisp_notes/pages/installing_R.Rmd))
 
-# Files from 2024 
+If you have any questions, you can email James at jpspeng@uw.edu. 
 
-<details>
-  <summary>Click here for files from 2024.</summary>
+## Old Courses 
 
-## Data 
+### 2024 
+
+Here are the files from the CRISP 2024 course 
+
+#### Data 
 
 We will be using the following sample data in our tutorials: 
 [CSV file](https://jpspeng.github.io/crisp_notes/pages/crisp-2024-sample100.csv) 
 
 Here is the [data documentation](https://jpspeng.github.io/crisp_notes/pages/Crisp-2024-sample100-dictionary.pdf). 
 
-## Suggested schedule 
-
-1. **By Thursday, July 11**: Complete mini-lessons 1-6 (including the exercises).
-2. **By Sunday, July 14**: Complete mini-lessons 7-9.
-3. **By Thursday, July 18**: Complete mini-lessons 10-13.
-4. **By Monday, July 22**: Complete mini-lessons 14-16.
-5. **By Thursday, July 25**: Complete mini-lessons 17-18.
-
-## Mini-Lessons 
+#### Mini-Lessons 
 
 1. [Installing R and R Studio](https://jpspeng.github.io/crisp_notes/pages/installing_R.html) ([Download RMD](https://jpspeng.github.io/crisp_notes/pages/installing_R.Rmd))
 2. [Using R Studio](https://jpspeng.github.io/crisp_notes/pages/r_studio_r_markdown.html) ([Download RMD](https://jpspeng.github.io/crisp_notes/pages/r_studio_r_markdown.Rmd))
@@ -54,13 +49,8 @@ Here is the [data documentation](https://jpspeng.github.io/crisp_notes/pages/Cri
 17. [Survival analysis basics](https://jpspeng.github.io/crisp_notes/pages/survival_analysis.html) ([Download RMD](https://jpspeng.github.io/crisp_notes/pages/survival_analysis.Rmd))
 18. [Cox regression example](https://jpspeng.github.io/crisp_notes/pages/cox_regression.html) ([Download RMD](https://jpspeng.github.io/crisp_notes/pages/cox_regression.Rmd))
 
-## More advanced coding (optional)
+### More advanced coding (optional)
 
 1.  [Lists](https://jpspeng.github.io/crisp_notes/pages/lists.html) ([Download RMD](https://jpspeng.github.io/crisp_notes/pages/lists.Rmd))
 2.  [Loops](https://jpspeng.github.io/crisp_notes/pages/loops.html) ([Download RMD](https://jpspeng.github.io/crisp_notes/pages/loops.Rmd))
 3.  [Functions](https://jpspeng.github.io/crisp_notes/pages/functions.html) ([Download RMD](https://jpspeng.github.io/crisp_notes/pages/functions.Rmd))
-
-
-</details>
-
-If you have any questions, you can email James at jpspeng@uw.edu. 
