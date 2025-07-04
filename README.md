@@ -13,9 +13,9 @@ Here is the [data documentation](https://jpspeng.github.io/crisp_notes/pages/Cri
 
 | Day | Topic | Powerpoint | Exercise | R Markdown |
 |----------|----------|----------| ----------| ----------|
-| Day 1 (July 7) | Getting started with R     | More     | More     | More     |
-| Day 2 (July 9)    | Data     | More     | More     | More     |
-| Day 2 (July 11)    | Data     | More     | More     | More     |
+| Day 1 (July 7) | Getting started with R     | Powerpoint     | Exercise     | R notebook     |
+| Day 2 (July 9)    | Basic syntax     | Powerpoint     | Exercise     | R notebook     |
+| Day 2 (July 11)    | Data processing and manipulation    | Powerpoint     | Exercise     | R notebook     |
 
 --- 
 
