@@ -9,11 +9,13 @@ We will be using the following sample data in our tutorials:
 
 Here is the [data documentation](https://jpspeng.github.io/crisp_notes/pages/Crisp-2024-sample100-dictionary.pdf). 
 
-## Mini-Lessons 
+## Lessons 
 
-1. [Installing R and R Studio](https://jpspeng.github.io/crisp_notes/pages/installing_R.html) ([Download RMD](https://jpspeng.github.io/crisp_notes/pages/installing_R.Rmd))
-
-If you have any questions, you can email James at jpspeng@uw.edu. 
+| Day | Topic | Powerpoint | Exercise | R Markdown |
+|----------|----------|----------| ----------| ----------|
+| Day 1 (July 7) | Getting started with R     | More     | More     | More     |
+| Day 2 (July 9)    | Data     | More     | More     | More     |
+| Day 2 (July 11)    | Data     | More     | More     | More     |
 
 --- 
 
