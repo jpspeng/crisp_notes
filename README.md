@@ -11,11 +11,11 @@ Here is the [data documentation](https://jpspeng.github.io/crisp_notes/pages/Cri
 
 ## Lessons 
 
-| Day | Topic | Powerpoint | Exercise | R Markdown |
+| Day | Topic | Powerpoint | Code and Exercises | R Markdown |
 |----------|----------|----------| ----------| ----------|
-| Day 1 (July 7) | Getting started with R     | Powerpoint     | Code/exercise     | R notebook     |
-| Day 2 (July 9)    | Basic syntax     | Powerpoint     | Code/exercise   | R notebook     |
-| Day 3 (July 11)    | Data processing and manipulation    | Powerpoint     | Code/exercise     | R notebook     |
+| Day 1 (July 7) | Getting started with R     | Powerpoint     | Code and exercises     | R notebook     |
+| Day 2 (July 9)    | Basic syntax     | Powerpoint     | Code and exercises   | R notebook     |
+| Day 3 (July 11)    | Data processing and manipulation    | Powerpoint     | Code and exercises     | R notebook     |
 
 --- 
 
