@@ -22,7 +22,16 @@ If you have not yet, please start by downloading and installing R and R Studio.
 [course website](https://jpspeng.github.io/crisp_notes/).
 3. Within this folder, please download and save the R Markdown notebook (.Rmd) for today 
 (July 7). For future lessons, please put all notebooks within this folder. 
-4. Open today's R Markdown file and continue this tutorial within R Studio. 
+
+# Creating, saving, and opening R files  
+
+1. Open R Studio. Click on File -> New File -> R Script. Then, press File -> Save As, 
+and save the file as *test.R* in your crisp_R_notes folder. 
+2. Click on File -> New File -> R Notebook. Then, press File -> Save As, 
+and save the file as *test.Rmd* in your crisp_R_notes folder. 
+3. Open today's R Markdown file (*crisp_2025_day1.Rmd*) and continue this 
+tutorial within R Studio. 
+
 
 # Code chunks and comments 
 
