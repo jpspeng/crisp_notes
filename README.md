@@ -13,7 +13,7 @@ Here is the [data documentation](https://jpspeng.github.io/crisp_notes/pages/Cri
 
 | Day | Topic | Powerpoint | Code and Exercises | R Markdown |
 |----------|----------|----------| ----------| ----------|
-| Day 1 (7/7) | Getting started with R     | [PPTX](https://jpspeng.github.io/crisp_notes/pages/powerpoints_2025/crisp_2025_R_day1.pptx)     | [Code and exercises](https://jpspeng.github.io/crisp_notes/pages/notebooks_2025/crisp_2025_day1.html)     | [RMD](https://jpspeng.github.io/crisp_notes/pages/notebooks_2025/crisp_2025_day1.Rmd)     |
+| Day 1 (7/7) | Getting started with R     | [PPTX](https://jpspeng.github.io/crisp_notes/powerpoints_2025/crisp_2025_R_day1.pptx)     | [Code and exercises](https://jpspeng.github.io/crisp_notes/notebooks_2025/crisp_2025_day1.html)     | [RMD](https://jpspeng.github.io/crisp_notes/notebooks_2025/crisp_2025_day1.Rmd)     |
 | Day 2 (7/9)    | Basic syntax     | PPTX     | Code and exercises   | R notebook     |
 | Day 3 (7/11)    | Data processing and manipulation    | PPTX     | Code and exercises     | R notebook     |
 
