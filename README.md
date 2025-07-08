@@ -2,6 +2,18 @@
 
 These are basic R tutorials and exercises for getting started with R programming, created for [Clinical Research Intensive Summer Program](https://www.iths.org/education/professional-development/crisp/) (CRISP) through UW ITHS.
 
+## Course goals 
+
+By the end of the course, you will be able to: 
+* Read in a dataset into R 
+* Learn about basic syntax in R (objects, functions, etc.) 
+* Perform basic data processing and manipulation
+* Create basic data summaries and create a “Table 1”
+* Perform linear and logistic regression 
+* Other potential topics: more syntax (lists, loops, functions), plotting using ggplot2, survival analysis using Cox regression, using ChatGPT for coding
+
+The goal of this course is to get a taste for how to code in R; it is not meant to be comprehensive! 
+
 ## Data 
 
 We will be using the following sample data in our tutorials: 
