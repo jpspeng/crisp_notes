@@ -2,6 +2,18 @@
 
 These are basic R tutorials and exercises for getting started with R programming, created for [Clinical Research Intensive Summer Program](https://www.iths.org/education/professional-development/crisp/) (CRISP) through UW ITHS.
 
+## Course goals 
+
+By the end of the course, you will be able to: 
+* Read in a dataset into R 
+* Learn about basic syntax in R (objects, functions, etc.) 
+* Perform basic data processing and manipulation
+* Create basic data summaries and create a “Table 1”
+* Perform linear and logistic regression 
+* Other potential topics: more syntax (lists, loops, functions), plotting using ggplot2, survival analysis using Cox regression, using ChatGPT for coding
+
+The goal of this course is to get a taste for how to code in R; it is not meant to be comprehensive! 
+
 ## Data 
 
 We will be using the following sample data in our tutorials: 
@@ -13,7 +25,7 @@ Here is the [data documentation](https://jpspeng.github.io/crisp_notes/pages/Cri
 
 | Day | Topic | Powerpoint | Code and Exercises | R Markdown |
 |----------|----------|----------| ----------| ----------|
-| Day 1 (7/7) | Getting started with R     | [PPTX](https://jpspeng.github.io/crisp_notes/powerpoints_2025/crisp_2025_R_day1.pptx)     | [Code and exercises](https://jpspeng.github.io/crisp_notes/notebooks_2025/crisp_2025_day1.html)     | [RMD](https://jpspeng.github.io/crisp_notes/notebooks_2025/crisp_2025_day1.Rmd)     |
+| Day 1 (7/7) | Getting started with R [(Recording)](https://washington.zoom.us/rec/share/xS-0EjKlYLbrXihW4LUw2dfitoVJZC6hYPbovslDAdrZYxuVbMr-ei9P-UIbXXcT._mrf8OTTY1USV9k-?startTime=1751949750000)   | [PPTX](https://jpspeng.github.io/crisp_notes/powerpoints_2025/crisp_2025_R_day1.pptx)     | [Code and exercises](https://jpspeng.github.io/crisp_notes/notebooks_2025/crisp_2025_day1.html)     | [RMD](https://jpspeng.github.io/crisp_notes/notebooks_2025/crisp_2025_day1.Rmd)     |
 | Day 2 (7/9)    | Basic syntax     | PPTX     | Code and exercises   | R notebook     |
 | Day 3 (7/11)    | Data processing and manipulation    | PPTX     | Code and exercises     | R notebook     |
 
