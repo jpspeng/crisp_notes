@@ -26,7 +26,7 @@ Here is the [data documentation](https://jpspeng.github.io/crisp_notes/pages/Cri
 | Day | Topic | Powerpoint | Code and Exercises | R Markdown |
 |----------|----------|----------| ----------| ----------|
 | Day 1 (7/7) | Getting started with R [(Recording)](https://washington.zoom.us/rec/share/xS-0EjKlYLbrXihW4LUw2dfitoVJZC6hYPbovslDAdrZYxuVbMr-ei9P-UIbXXcT._mrf8OTTY1USV9k-?startTime=1751949750000)   | [PPTX](https://jpspeng.github.io/crisp_notes/powerpoints_2025/crisp_2025_R_day1.pptx)     | [Code and exercises](https://jpspeng.github.io/crisp_notes/notebooks_2025/crisp_2025_day1.html)     | [RMD](https://jpspeng.github.io/crisp_notes/notebooks_2025/crisp_2025_day1.Rmd)     |
-| Day 2 (7/9)    | Basic syntax     | [PPTX](https://jpspeng.github.io/crisp_notes/powerpoints_2025/crisp_2025_R_day2.pptx)     | [Code and exercises](https://jpspeng.github.io/crisp_notes/notebooks_2025/crisp_2025_day2.html)   | [RMD](https://jpspeng.github.io/crisp_notes/notebooks_2025/crisp_2025_day2.Rmd)     |
+| Day 2 (7/9)    | Basic syntax [(Recording)](https://washington.zoom.us/rec/share/3TGMegNu_lK2Dd5tyS-Rz42N5xwQ95UHwrj-BAjpd7EHx6OMhGSh-9sAVuHDVJjH.j8ANygOalg7KPjnn)     | [PPTX](https://jpspeng.github.io/crisp_notes/powerpoints_2025/crisp_2025_R_day2.pptx)     | [Code and exercises](https://jpspeng.github.io/crisp_notes/notebooks_2025/crisp_2025_day2.html)   | [RMD](https://jpspeng.github.io/crisp_notes/notebooks_2025/crisp_2025_day2.Rmd)     |
 | Day 3 (7/11)    | Data processing and manipulation    | PPTX     | Code and exercises     | R notebook     |
 
 --- 
