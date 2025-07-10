@@ -1,0 +1,204 @@
+---
+title: 'CRISP Day 1 2025: Getting starting with R'
+output:
+  html_document:
+    df_print: paged
+---
+
+In today's lesson, we will get our computer set up with R. 
+
+# Installing R 
+
+If you have not yet, please start by downloading and installing R and R Studio. 
+
+1. Download R ([link](https://cran.r-project.org/)) and run the installation file. 
+2. Download R Studio ([link](https://posit.co/download/rstudio-desktop/)) and run the installation file. 
+
+# Folder setup 
+
+1. Please create a folder somewhere on your computer called **crisp_R_notes**
+(or something similar). 
+2. Within this folder, please download and save the data CSV file from the 
+[course website](https://jpspeng.github.io/crisp_notes/).
+3. Within this folder, please download and save the R Markdown notebook (.Rmd) for today 
+(July 7). For future lessons, please put all notebooks within this folder. 
+
+# Creating, saving, and opening R files  
+
+1. Open R Studio. Click on File -> New File -> R Script. Then, press File -> Save As, 
+and save the file as *test.R* in your crisp_R_notes folder. 
+2. Click on File -> New File -> R Notebook. Then, press File -> Save As, 
+and save the file as *test.Rmd* in your crisp_R_notes folder. 
+3. Open today's R Markdown file (*crisp_2025_day1.Rmd*) and continue this 
+tutorial within R Studio. 
+
+
+# Code chunks and comments 
+
+Code within R notebooks run within code chunks. To add a code chunk, you can press
+the +C icon on the right hand corner of the Source window, and click on R.
+
+To run the code chunk, **press the play button** on the upper right hand corner of the
+code chunk: 
+
+```{r}
+5 + 5
+```
+
+Code that has a # before it is a comment and will not run. Comments are often 
+used for documentation - so that you remember what code does after you write it. 
+
+Try running this line of code, and see what happens: 
+
+```{r}
+# 5 + 5 
+```
+
+
+# Installing and using packages 
+
+One of the main advantages of R are its packages. 
+
+An R package is a collection of functions, data, and documentation that extends 
+the capabilities of R. They are used to share code and data with others and to 
+reuse code in different projects. They can include:
+
+1. **Functions**: Custom functions that perform specific tasks.
+2. **Data**: Datasets that can be used for analysis and examples.
+3. **Documentation**: Help files and vignettes that explain how to use the functions 
+and datasets.
+
+R packages are typically installed from CRAN (Comprehensive R Archive Network). Packages
+tend to have specific uses. For example, there are packages specifically for 
+making graphs, others for creating manuscript-ready tables, and others to simplify 
+data processing. 
+
+You can install a package in R using the `install.packages()` function, and load 
+it using `library()`.
+
+```{r}
+# Install a package from CRAN
+install.packages("dplyr")
+```
+
+```{r}
+# Load the package
+library(dplyr)
+```
+
+# Reading in data into R 
+
+Say that you have a dataset. The first step is to read in data into R. You can do
+this using the `read.csv()` function. 
+
+The easiest way to use this function is to put the data file in the **same folder** 
+as your R (or Rmd) code. You should have done this already with the folder setup 
+above. Try to run the following code: 
+
+```{r}
+read.csv("crisp-2024-sample100.csv") 
+```
+
+Did it run? Then great! That means that the data is now in our R session. We can 
+now manipulate and analyze the data, which we will do in the next few tutorials.
+
+If the data is not in the same folder as your R file, you may have to include the
+directory path to the data in the argument when calling `read.csv()`.
+
+```{r}
+# if data is in a different folder, it may look like this: 
+# df <- read.csv("C:/path/to/directory/crisp-2024-sample100.csv")
+```
+
+# Exercises 
+
+1. Install the following packages: `ggplot2`, `table1`, and `survival`. 
+
+```{r}
+# type in code here
+install.package("ggplot2")
+install.package("table1")
+install.package("survival")
+
+```
+
+2. Use the `+`, `-`, `*`, and `/` operators to:
+* Add 1048 and 890
+* Multiply the previous result by 20
+* Subtract the previous result by 50 
+* Divide the previous result by 2.5
+
+```{r}
+# type in code here 
+1048 + 890
+1938 * 20 
+38760 - 50
+38710 / 2.5
+```
+
+3. Describe what the following code is doing: 
+
+**Answer**: The code is doing the same series of operations as Q2.  
+
+```{r}
+a = 1048 
+b = a + 890
+c = b * 20 
+d = c - 50 
+e = d / 2.5 
+
+print(e)
+```
+
+4. Following the pattern in the previous code block, perform the following operations: 
+* Multiply 13 and 631
+* Divide the previous result by 25 
+* Add 10 to the previous result 
+
+```{r}
+# type in code here 
+a = 13
+b = a * 631 
+c = b / 25 
+d = c + 10 
+
+d
+```
+
+5. Describe what the code below is doing: 
+
+**Answer**: The code is adding 5 to each element of the list 1,2,3,4,5. 
+
+```{r}
+a = c(1,2,3,4,5)
+b = a + 5
+
+print(b)
+```
+
+5. Describe what the code below is doing: 
+
+**Answer**: The code is adding 5 to each element of sequence 5,6,7,8,9,10. 
+
+```{r}
+a = 5:10
+b = a + 5
+
+print(b)
+```
+
+6. Use what you learned from the previous questions to multiply all numbers 
+from 25 through 31 by 13. 
+
+```{r}
+# type in code here 
+a = 25:31 
+b = a * 13 
+
+print(b)
+```
+
+
+
+
+

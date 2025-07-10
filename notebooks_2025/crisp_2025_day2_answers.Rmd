@@ -1,0 +1,571 @@
+---
+title: 'CRISP Day 2 2025: Basic R Syntax'
+output:
+  html_document:
+    toc: yes
+    toc_float: yes
+---
+
+
+In today's lesson, we will learn basic R syntax.  
+
+# Expressions 
+
+An **expression** is a line of code that just evaluates. Nothing is saved - the output 
+is simply evaluated and printed. For example, we can perform the operation 5 + 5 and 
+print the result in R. 
+
+```{r}
+5 + 5
+```
+
+Once we complete an expression, we can write a new line of code in the next line. 
+The two lines of code will run sequentially. 
+
+```{r}
+5 + 5
+5 + 10
+```
+
+If we do not complete an expression, the next line will run as a continuation of the 
+previous line. 
+
+```{r}
+5 + 5 + 
+  10 
+```
+
+# Variables 
+
+We can save **expressions** into **variables**. We can do this using the = or 
+<- symbol. (The <- symbol is more standard in R.) 
+
+For example, the line of code below saves 5 + 5 into a new variable `my_num`: 
+
+```{r}
+my_var <- 5 + 5 
+
+my_var
+```
+
+After we save a variable, we can reference and perform operations on this variable 
+later on in our code: 
+
+```{r}
+my_var + 10
+```
+
+Note that doing this operation does not change our variable. If we take a look at 
+`my_var`, it still equals 10. 
+
+```{r}
+my_var
+```
+
+We can change our variable by assigning the result of `my_var + 10` to `my_var`. 
+
+```{r}
+my_var <- my_var + 10 
+
+my_var
+```
+
+
+A few more things about variables: 
+
+* Variable names cannot contain spaces. 
+* Try to be descriptive with your variable names!  For example, if you save an 
+variable which holds the number of participants in a study, it is better to name
+it something like `num_participants` instead of something generic, like `a` or `b`.
+* R is cap-sensitive. If we save a variable `MY_NUM <- 5`, and try to reference 
+lowercase `my_num` later on, it will cause an error. 
+
+**Example**: Create a new variable called `test_var`. Set it equal to 10. 
+Then create another variable called `new_test_var` and set it equal to `test_var` 
+multiplied by 20. Print `new_test_var`. 
+
+```{r}
+# write code here 
+test_var <- 10 
+new_test_var <- test_var * 20 
+
+new_test_var
+```
+
+# Variable types 
+
+We can save different types of objects into variables. Three of the most common 
+types of objects are **numeric** (numbers), **string** (text), and **boolean** 
+(TRUE/FALSE) variables.
+
+```{r}
+my_num <- 5 
+
+my_str <- "This is my string"
+
+# Booleans are TRUE/FALSE 
+# They can also be written as T/F 
+my_boolean <- TRUE
+```
+
+# Vector 
+
+A **vector** is an ordered collection of numeric or string objects. We can create
+a vector by using the `c()` syntax. For example, the code below creates a vector of 
+5 numbers, from 1 to 5. 
+
+```{r}
+my_vec <- c(1, 3, 5, 7, 9)
+```
+
+We can select specific elements of the vector by calling the vector, followed by 
+`[]`. For example, this line of code selects the first element:  
+
+```{r}
+my_vec[1]
+```
+
+This line of code selects the fourth element of the vector: 
+
+```{r}
+my_vec[4]
+```
+
+This line of code selects the first and fourth element of the vector: 
+
+```{r}
+my_vec[c(1,4)]
+```
+
+This line of code selects the first four elements of the vector. 
+
+```{r}
+my_vec[1:4]
+```
+
+(Note: the `a:b` syntax is a shortcut for writing a vector `c(a, a+1,...,b-1, b)`)
+
+Vectors can also consist of strings. 
+
+```{r}
+my_str_vec <- c("a", "b", "c")
+
+my_str_vec[1]
+```
+
+R operations are **vectorized**, meaning that you can apply an operation onto a 
+vector, and it will do the operation across every element of the vector. 
+
+```{r}
+my_even_vec <- my_vec * 2
+
+my_even_vec
+```
+
+**Example**: Create a new variable vector called `test_vec`. Set it equal to 
+the a vector containing the numbers 1 through 5. Multiply the vector by 10, 
+and then save the result as a new vector called `new_test_vec`. Then select 
+the 2nd through 4th element of `new_test_vec`. 
+
+```{r}
+# write code here 
+test_vec <- c(1,2,3,4,5)
+new_test_vec <- test_vec * 10 
+
+new_test_vec[2:4]
+```
+
+# Functions 
+
+A **function** is an object that does a pre-determined set of operations. A function 
+looks something like `function()`, and you put the inputs (called **arguments**) 
+inside the parenthesis. 
+
+R has a lot of pre-built functions. One example is the function `mean()`. Take a look 
+at the below code. The `mean()` function takes in as an argument a vector of numbers, 
+and returns the mean of the vector.
+
+```{r}
+my_numbers <- c(1, 2, 4, 5, 6)
+
+mean(my_numbers)
+```
+
+Another function is `median()`, which will give us the median of a vector of numbers: 
+
+```{r}
+median(my_numbers)
+```
+
+For all prebuilt functions in R, you can find the documentation online (i.e. 
+Google it) or in the Help window in the lower right hand panel of R. [Here](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/mean) 
+is the documentation for the `mean()` function.
+
+You can also include the name of the argument in the function call. 
+For example, in the the `mean()` function documentation, you can see 
+that the argument name is `x`, and we can include this in the 
+function call. 
+
+```{r}
+mean(x = my_numbers)
+```
+
+**Example:** Look up the `round()` function. Use it to round
+3.14159 to three digits. 
+
+```{r}
+# write code here 
+round(3.1459, 3)
+```
+
+# Writing your own functions (*optional*)
+
+In this class, we will use many pre-built functions. But you may want to write your 
+own function if it's a task that you want to perform repeatedly. This can save you 
+time writing code, and can also make the code more readable and reproducible! 
+
+To write a function, we take the following steps: 
+
+1. Specify the function name. In the code below, we call our function `divide_by_two`. 
+2. Next, assign it to a `function()` object, where the **arguments** (i.e. inputs) go 
+inside the parenthesis. In the example below, we take as an argument one number `my_num`. 
+3. After that, we write out what we want the function to do inside the brackets
+\{ \}. *The last line of the function will be the output of the function.* For example, 
+the function below takes the input my_num and divides it by 2. 
+
+```{r}
+divide_by_two <- function(my_num){
+  my_num / 2
+}
+```
+
+We can apply this function on different inputs: 
+
+```{r}
+divide_by_two(1)
+
+divide_by_two(100)
+```
+
+Optionally, we can also include the argument name `my_num = ` when calling the function. 
+
+```{r}
+divide_by_two(my_num = 1)
+
+divide_by_two(my_num = 100)
+```
+
+**Example**: Write a function called `divide_and_round()`. 
+
+* The function takes in three arguments: `my_num`, `divide_by`, `digits`.
+* It divides `my_num` by `divide_by` and rounds to the number of `digits` specified. 
+
+```{r}
+# write code below 
+divide_and_round <- function(my_num, divide_by, digits){
+  new_num <- my_num / divide_by 
+  round(new_num, digits)
+}
+```
+
+# Loops (*optional*)
+
+A loop is useful if want to perform the same operation multiple times. 
+
+For example, suppose that we want to add 2 to each number in a vector which 
+consists of `c(1,2,3,4,5)`. We can create a loop to help do this. 
+
+1. The loop starts with a `for` statement. 
+2. After the `for` statement, we include inside the parenthesis () the instructions 
+for the loop. The instructions consist of "___ in ___". In the first blank, 
+we provide a temporary label for the object in the loop, so that we can reference
+it later on. In the second blank, we put the name of the vector we want to loop through. 
+3. Finally, we include instructions for each iteration of the loop inside the brackets 
+\{ \}. 
+
+Here is a toy example: 
+
+```{r}
+my_vec <- c(1,2,3,4,5)
+
+for (num in my_vec){
+  print(num + 2)
+}
+```
+
+In this example, we are looping through `my_vec`. We temporarily name objects that 
+we loop through as `num`. And for each iteration of the loop, as we go through 
+1,2,3,4,5 in `my_vec`, we print out each number `num` PLUS 2. 
+
+Within a loop, we can also modify a variable repeatedly, which is saved outside
+of the loop. For example: 
+
+```{r}
+my_num_vec <- c(1,2,3,4,5)
+
+# start new_val at 0 
+new_val <- 0
+
+# iterate through my_num_vec
+for (num in my_num_vec){
+ 
+  # save new_val as the sum of the previous new_val plus num
+  new_val <- new_val + num
+}
+
+new_val
+```
+
+
+**Example**: Write a loop to find the product of the first 8 positive odd numbers. 
+Challenge: look up the `seq()` function and use it to do this.)
+
+```{r}
+# write code below
+first_8_odd_numbers <- seq(from = 1, by = 2, length.out = 8)
+
+new_val <- 1 
+
+for (num in first_8_odd_numbers){
+  new_val <- new_val * num
+}
+
+```
+
+# Basic dataframe operations 
+
+A **dataframe** is a data object in `R`. There are several dataframes included 
+when you download R. For example, the `cars` dataset is one that tabulates the 
+speed and distance of different cars' journeys. 
+
+We can use the `head()` function to look at the first few rows of the `cars` 
+dataset.
+
+```{r}
+head(cars)
+```
+
+We can also read in dataframes. If your data is in a csv format, then you can use 
+the `read.csv()` function. It looks something like this:  
+
+```{r}
+my_data <- read.csv("crisp-2024-sample100.csv")
+
+head(my_data)
+```
+
+We may want to count the number of rows and columns of our dataset.
+We can use the `nrow()` and `ncol()` function to do this: 
+
+```{r}
+nrow(my_data)
+ncol(my_data)
+```
+
+We also may want to know what columns are available in our dataset. To do this, 
+we can use the `colnames()` function: 
+
+```{r}
+colnames(my_data)
+```
+
+Next, we can pull a specific column from the dataset as a vector by using the 
+dollar sign $ operator. For example, we can pull out the ages and save as the 
+`age_vec` variable. 
+
+```{r}
+age_vec <- my_data$age
+
+age_vec
+```
+
+Next, we can get some summaries of the column. For example, we can obtain the 
+mean age by using the `mean()` function: 
+
+```{r}
+mean(age_vec)
+```
+
+Note that we combine this into a single step by just directly taking the mean 
+of `age` column in `df`: 
+
+```{r}
+mean(my_data$age)
+```
+
+What happens if the column of interest has missing data (which are coding as 
+NA in R)? Let's take a look, using the `mhdx` column as an example: 
+
+```{r}
+mean(my_data$mhdx)
+```
+
+It will give NA as the result! What should we do in this case? We could take the 
+mean of the non-missing data. To do this, we can add an extra argument `na.rm = TRUE`:
+
+```{r}
+mean(my_data$mhdx, na.rm = TRUE)
+```
+
+Similarly, we can use the `median()`, `sd()`, `min()`, and `max()` functions to 
+obtain other descriptive statistics: 
+
+```{r}
+# median 
+median(my_data$age)
+
+# standard deviation
+sd(my_data$age)
+
+# min
+min(my_data$age)
+
+# max 
+max(my_data$age)
+```
+
+**Example**: What is the mean and median number of years of education (`educyrs`) 
+for those in the dataset? What about BMI? 
+
+```{r}
+# write code below 
+mean(my_data$educyrs)
+median(my_data$educyrs)
+
+mean(my_data$bmi, na.rm = T)
+median(my_data$bmi, na.rm = T)
+```
+
+What if we want to obtain multiple summaries of the data at once? We can use
+the `summary()` function to obtain the minimum, 25th percentile, median, 
+mean, 75th percentile, and maximum of the data, with one line of code: 
+
+```{r}
+summary(my_data$age)
+```
+
+What about categorical data? For example, the treatment `tx` variable takes the value 
+of 0 or 1, corresponding to BUP-NX and XR-NTX, respectively. How can we get counts 
+of each category? We can use the `table()` function to obtain these counts: 
+
+```{r}
+table(my_data$tx)
+```
+
+If we use `table()`, it will not tabulate the missing data (NAs). To show the 
+missing data, we have to add an extra argument `useNA = "always"` to our function call: 
+
+```{r}
+# tabulating the mhdx column, don't show NAs
+table(my_data$mhdx)
+
+# tabulating the mhdx column, show NAs
+table(my_data$mhdx, useNA = "always")
+```
+
+**Example**: What is the count of those who are insured and uninsured 
+(variable: `insure`)? What about smokers and non-smokers (variable: `smoke100`)? 
+Is there any missing data in these columns? 
+
+```{r}
+# write code below
+table(my_data$insure, useNA = "always")
+table(my_data$smoke100, useNA = "always")
+```
+
+
+# Exercises
+
+1. Write code to find the mean of 1, 10, 40, 80, 120, 150. How about the median? 
+Standard deviation? Maximum? Minimum? 
+
+```{r}
+# write code below 
+my_vec <- c(1, 10, 40, 80, 120, 150)
+
+mean(my_vec)
+median(my_vec)
+sd(my_vec)
+max(my_vec)
+min(my_vec)
+```
+
+2. A collaborator tells you that all of the years of education `educyrs` in your 
+`my_data` dataset are off by two. Write code to pull the number of years of education
+in the dataset and subtract 2, and then save it as a vector with variable name 
+`educyrs_new`. Find the mean, median, standard deviation, max, and min of this vector. 
+
+```{r}
+# write code below 
+educyrs_new <- my_data$educyrs - 2 
+
+mean(educyrs_new)
+median(educyrs_new)
+sd(educyrs_new)
+max(educyrs_new)
+min(educyrs_new)
+```
+
+3. Instead of the age in years, we are interested in the age in months. Pull the `age` 
+column, convert it into months, and save it as a new vector with variable name `age_new`. 
+Perform a quick summary of this vector using the `summary()` function. 
+
+```{r}
+# write code below 
+age_new <- my_data$age * 12
+
+summary(age_new)
+```
+
+4. Write a loop to take add the first 10 positive even numbers, 
+and then write another loop  to divide the result repeatedly by the first 5 positive
+odd numbers. Then write code to round the result to three digits. What is the answer? 
+
+```{r}
+# write code below 
+first_10_even <- seq(2, by = 2, length.out = 10)
+first_5_odd <- seq(1, by = 2, length.out = 5)
+
+new_num <- 0
+  
+for (num in first_10_even){
+  new_num <- new_num + num
+}
+
+for (num in first_5_odd){
+  new_num <- new_num / num
+}
+
+round(new_num, 3)
+```
+
+5. Write a function `count_rows_cols()` that takes as input a dataframe and 
+outputs a vector which contains two items: the number of rows and the number of columns. 
+
+```{r}
+# write code below 
+count_rows_cols <- function(df){
+  rows_ct <- nrow(df)
+  cols_ct <- nrow(df)
+  
+  c(rows_ct, cols_ct)
+}
+```
+
+5. Write a function `find_mean_sd_age()` that takes as input a dataframe and 
+outputs a vector which contains two items: the mean and the standard
+deviation of the `age` column. 
+
+```{r}
+# write code below 
+find_mean_sd_age <- function(df){
+  mean_val <- mean(df$age)
+  sd_val <- sd(df$age)
+  
+  c(mean_val, sd_val)
+}
+```
+
+
+
+
