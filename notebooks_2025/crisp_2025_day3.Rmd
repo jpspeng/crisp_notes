@@ -1,0 +1,479 @@
+---
+title: 'CRISP Day 2 2025: Basic R Syntax'
+output:
+  html_document:
+    toc: yes
+    toc_float: yes
+---
+
+```{r setup, include=FALSE}
+library(dplyr)
+```
+
+In today's lesson, we will learn about how to do basic dataset processing
+using both base R and the `dplyr` package. 
+
+# Dataframe summaries (copied from Day 2 notes)
+
+```{r}
+# read in dataset 
+my_data <- read.csv("crisp-2024-sample100.csv")
+```
+
+From last time, remember that we can obtain summaries of specific columns of a 
+dataset using the `mean()`, `median()`, `min()`, `max()`, etc. functions: 
+
+```{r}
+mean(my_data$age)
+median(my_data$age)
+min(my_data$age)
+max(my_data$age)
+```
+
+What if we want to obtain multiple summaries of the data at once? We can use the 
+`summary()` function to obtain the minimum, 25th percentile, median, mean, 75th 
+percentile, and maximum of a vector, with one line of code: 
+
+```{r}
+summary(my_data$age)
+```
+
+You can also take a `summary()` of the entire dataframe, which provides these 
+summaries for each column of the dataframe. 
+
+```{r}
+# the summary() function can take in either a vector or a dataframe as an input
+summary(my_data)
+```
+
+What about categorical data? For example, the treatment `tx` variable takes the value 
+of 0 or 1, corresponding to BUP-NX and XR-NTX, respectively. How can we get counts 
+of each category? We can use the `table()` function to obtain these counts: 
+
+```{r}
+table(my_data$tx)
+```
+
+If we use `table()`, it will not tabulate the missing data (NAs). To show the 
+missing data, we have to add an extra argument `useNA = "always"` to our function call: 
+
+```{r}
+# tabulating the mhdx column, don't show NAs
+table(my_data$mhdx)
+
+# tabulating the mhdx column, show NAs
+table(my_data$mhdx, useNA = "always")
+```
+
+**Example**: What is the count of those who are insured and uninsured 
+(variable: `insure`)? What about smokers and non-smokers (variable: `smoke100`)? 
+Is there any missing data in these columns? 
+
+```{r}
+# write code below
+
+```
+
+# Changing / creating new columns 
+
+Suppose that we wanted to add new columns or change existing columns of our 
+dataset. We can do this by assigning a vector to a new or existing column as
+follows: 
+
+```{r}
+# create vector of numbers 1 to 100
+new_ids_vec <- 1:100
+
+# add new column called new_id which equals the new_ids_vec vector
+my_data$new_id <- new_ids_vec
+
+# we can also do this in one step 
+my_data$new_id <- 1:100 
+
+# this line of code would replace the existing id column with 1:100 
+my_data$id <- 1:100
+```
+
+**Example**: Modify the `my_data` dataframe to create a new column called
+`age_months` which equals the `age` column multiplied by 12. 
+
+```{r}
+# write code below
+
+```
+
+# Subsetting dataframes using base R
+
+Remember that we can subset (i.e. take select elements from) vector objects using
+the bracket `[]` notation. 
+
+```{r}
+my_vec <- c(1,3,5,7,9)
+
+# select the second and third elements 
+my_vec[c(2,3)]
+```
+
+We can also subset dataframes, which means that we take a selection of the columns 
+and/or rows. Like subsetting vectors, subsetting dataframes also follows the 
+bracket `[]` notation. However, dataframes have two dimensions, so we need to 
+specify both row and column subset "instructions". The subset "instructions" are 
+separated by a comma: 
+
+* The text before the comma specifies the rows selected
+* The text after the comma specifies the columns selected
+
+```{r}
+# pull out the id and age of participant in the second row 
+my_data[2, c("id", "age")]
+```
+
+```{r}
+# pull out the id and tx column of participants in the first 10 rows 
+my_data[1:10, c("id", "tx")]
+```
+
+```{r}
+# select the id and tx column for all participants
+my_data[, c("id", "tx")]
+```
+
+```{r}
+# select all columns for the first 10 rows 
+my_data[1:10, ]
+```
+
+We can also use this functionality to subset rows based on logic. For this, 
+we can use the `>, >=, <, <=, ==, !=` (not equal to) logic operators. For example, the 
+code below shows how to filter for subjects who are not treated (`tx == 0`) and 
+those who are over the age of 30 (`age > 30`).
+
+```{r}
+# Select all columns for all rows where tx == 0. 
+# NOTE: This is NOT written as my_data[tx == 0,]
+# ALSO: It is written as == (double equal) not = 
+my_data[my_data$tx == 0,]
+```
+
+```{r}
+# select the id, educyrs column for those who age > 30 
+my_data[my_data$age > 30, c("id", "educyrs")]
+```
+
+We can also subset for those who are missing or not missing a specific variable. 
+To do this, we can use the `is.na()` logic check command. For example, the code
+below filters for all of those who are missing the BMI variable. 
+
+```{r}
+my_data[is.na(my_data$bmi), ]
+```
+Also, the `!` operator means "not" in R. For example, the lines of code below 
+count the number of people are **not** missing the `mhdx` variable. 
+
+```{r}
+has_mhdx_df <- my_data[!is.na(my_data$mhdx), ]
+
+nrow(has_mhdx_df)
+```
+
+**Example**: Subset `my_data` to select only those who are male (sex equals 0), 
+and then save this as a new dataframe called `male_data`. Find the mean BMI of 
+those who are male (and who are not missing BMI data). 
+
+```{r}
+# write code below 
+
+```
+
+
+# Dataframe manipulation using `dplyr` (my preference!) 
+
+We can also subset data using the `dplyr` package. In my opinion, this is easier 
+and more readable than using base R. First, we read in the `dplyr` package, 
+which you should have already installed: 
+
+```{r, warning = F}
+library(dplyr)
+```
+
+The `dplyr` package using a special syntax called **piping**. This involves using a 
+special symbol that looks like this `%>%`. This is equivalent to applying a function 
+to an object. For example, to find the mean age, we could use the following code: 
+
+```{r}
+mean(my_data$age)
+```
+
+Alternatively, we could write the following code, using this special syntax: 
+
+```{r}
+my_data$age %>% 
+  mean()
+```
+
+This line of code says to take the `df$age` column and apply the `mean()` 
+function to it. Functionally, this is the same as doing `mean(df$age)`. 
+We'll use this syntax when manipulating datasets. 
+
+## Selecting specific columns
+
+Suppose that we want to reduce
+the dataset `df` to a specific set of columns - id, tx, age, and sex. We can use 
+the `select()` function in the `dplyr` package:
+
+```{r}
+# select id, tx, age, and sex
+# then, view the first few rows using head()
+my_data %>% 
+  select(id, tx, age, sex) %>% 
+  head() 
+```
+
+Note that this will NOT change the original `df` object. If we look at `df`, we can
+still see that it has all of the original columns: 
+
+```{r}
+my_data %>% 
+  head()
+```
+
+If we want to save the dataframe with the select columns, we can save it as a new 
+object: 
+
+```{r}
+# create new variable df_select_columns
+# which is a dataframe with only the id, tx, age, and sex columns
+df_select_columns <- my_data %>% 
+  select(id, tx, age, sex)
+
+# view the first few rows 
+df_select_columns %>% 
+  head()
+```
+
+## Selecting specific rows
+
+Next, we will learn how to select specific rows of a dataframe. We can filter 
+using the `filter()` function based on some logic. For example, suppose that we 
+want to create a dataframe which only includes BUP-NX (where tx takes the value 
+of 0) participants: 
+
+```{r}
+my_data %>% 
+  filter(tx == 0) %>% 
+  head()
+```
+
+Inside the `filter()` function, we specify the logic. In this example, you can see
+that we specify `tx == 0`, which means that we only want to include treatment = 0 
+participants in our filtered dataset. 
+
+Note that we use a double equal sign `==`, NOT a single equal sign `=` in this 
+logic statement. 
+
+Some other examples: 
+
+1. Greater or less than (< or >): 
+
+```{r}
+# filter for age > 30 participants 
+my_data %>% 
+  filter(age > 30) %>% 
+  head()
+```
+
+2. Not (using !)
+
+```{r}
+# filter for sex NOT equal to 1  
+# use != to say "not equal to 
+my_data %>% 
+  filter(sex != 1) %>% 
+  head()
+```
+
+3. Composite logic using and (&) / or (|)
+
+```{r}
+# filter for male and BUP-NX participants 
+my_data %>% 
+  filter(sex == 0 & tx == 0) %>% 
+  head()
+```
+
+```{r}
+# filter for male OR BUP-NX participants
+my_data %>% 
+  filter(sex == 0 | tx == 0) %>% 
+  head()
+```
+
+4. Missing rows using (`is.na()`)
+
+```{r}
+# select rows that are missing their mhdx value
+my_data %>% 
+  filter(is.na(mhdx))
+```
+
+```{r}
+# select rows that are NOT missing their mhdx value
+my_data %>% 
+  filter(!is.na(mhdx)) %>% 
+  head()
+```
+
+**Example:** Explain what these lines of code do. Run the code and examine the 
+`df_new` object to check your hypothesis.
+
+```{r}
+df_new <- my_data %>% 
+  filter(!is.na(mhdx) & age > 30 & tx == 0) %>% 
+  select(id, tx, age, mhdx)
+```
+
+**Example:** Write code to filter a dataframe for those 30 or older, select 
+the `mhdx` column, and count the number of 0's and 1's in that column. How does it
+compare to the number of 0's and 1's in the `mhdx` column for those under the
+age of 30. 
+
+```{r}
+# write code below 
+
+```
+
+## Changing / creating new columns
+
+We can also create / change new columns using `dplyr` with the `mutate()` 
+function. The syntax for that looks like this:
+
+* Start with the dataset and add a pipe `%>%` symbol. 
+* Operate on the dataset with the `mutate()` 
+* Within the `mutate()` function, specify `col = val`, where col is the 
+column name that you want to add/change and val is what we want the column to 
+look like (can reference other columns).
+
+Some examples: 
+
+```{r}
+# creates a new column called age_months which is equal to the age column * 12 
+my_data %>% 
+  mutate(age_months = age * 12) %>% 
+  select(id, age, age_months) %>% 
+  head() 
+
+```
+
+```{r}
+# replaces the id column with a vector from 1:100 
+my_data %>% 
+  mutate(id = 1:100) %>% 
+  head() 
+
+```
+
+```{r}
+# uses the cars R dataset, calculates time as distance divided by speed
+cars %>% 
+  mutate(time = dist / speed) %>% 
+  head() 
+```
+
+You can also manipulate multiple columns as the same time; just list the things
+you want to change sequentially inside the `mutate()` function, separated by 
+commas. 
+
+```{r}
+# replaces the id column with a vector from 1:100 
+my_data %>% 
+  mutate(id = 1:100, 
+         age_months = age * 12, 
+         age_days = age_months * 12) %>% 
+  head() 
+```
+
+Remember, just running these commands does not save the dataset in the variable. 
+To do that, we will need to assign the object to the variable (or replace it with 
+a new variable).
+
+```{r}
+cars_new <- cars %>% 
+  mutate(time = dist/speed)
+
+colnames(cars_new)
+```
+
+# Exercises
+
+1. Explain what these lines of code do. Run the code to check your answer. 
+
+```{r}
+my_data %>% 
+  filter(sex == 0) %>% 
+  nrow()
+```
+
+2. Explain what these lines of code do. Run the code to check your answer.
+
+```{r}
+df_new2 <- my_data %>% 
+  filter(sex == 0)
+
+summary(df_new2$age)
+
+```
+
+3. Explain what these lines of code do. Run the code to check your answer. 
+
+```{r}
+my_data %>% 
+  filter(sex == 0) %>% 
+  select(smoke100) %>% 
+  table()
+```
+
+4. Write code to calculate the mean and standard deviation of BMI of those who 
+are insured (`insure == 1`) versus those not who are not. 
+
+```{r}
+# write code here 
+
+# Hint:
+# (1) Create subsetted dataset called insured_df which filters for insure == 1
+# (2) Take the mean and sd of the bmi column of this subsetted dataset 
+# (3) Repeat for those who are uninsured (insure == 0)
+```
+
+5. How old are the participants who are missing a value for `bmi`? Are they 
+male or female? 
+
+```{r}
+# write code here 
+```
+
+6. Write code to create a new dataset called `more_educ_df` which first creates a
+new column called `educ_months` (equal to `educyrs` multiplied by 12) and then
+filters for the rows with more than 125 months of education. What proportion of 
+participants in this new dataset is insured? 
+
+```{r}
+# write code here 
+```
+
+
+7. Hypothesize what this line of code does. Run the code and check the output to 
+test your hypothesis. 
+
+```{r}
+modified_data <- my_data %>% 
+  mutate(sex_str = ifelse(sex == 1, "Female", "Male")) %>% 
+  select(id, sex, sex_str)
+```
+
+8. Use what you learned from exercise (6) to create new columns for `insure` and 
+`smoke100` which have readable names for the cell values (e.g. yes / no) rather
+than 0's and 1's.
+
+```{r}
+# write code here 
+```
