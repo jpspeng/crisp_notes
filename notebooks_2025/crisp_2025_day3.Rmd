@@ -1,5 +1,5 @@
 ---
-title: 'CRISP Day 2 2025: Basic R Syntax'
+title: 'CRISP Day 3 2025: Dataframe processing and subsetting'
 output:
   html_document:
     toc: yes

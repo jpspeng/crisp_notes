@@ -1,0 +1,436 @@
+---
+title: 'CRISP Day 4 2025: dplyr and table1'
+output:
+  html_document:
+    toc: yes
+    toc_float: yes
+---
+
+In today's lesson, we will learn about how to use the `dplyr` package for 
+data processing and how to create a Table 1. 
+
+# Dataframe manipulation using `dplyr` (copied from Day 3 notes) 
+
+```{r}
+# read in dataset 
+my_data <- read.csv("crisp-2024-sample100.csv")
+```
+
+Remember that we can subset dataframes using `[row_filter , column_filter]`.
+An example of this looks like the following. 
+
+```{r}
+# select the id, educyrs column for those who age > 30 
+my_data[my_data$age > 30 , c("id", "educyrs")]
+```
+
+We can also subset data using the `dplyr` package. In my opinion, this is easier 
+and more readable than using base R. First, we read in the `dplyr` package, 
+which you should have already installed: 
+
+```{r, warning = F}
+library(dplyr)
+```
+
+The `dplyr` package using a special syntax called **piping**. This involves using a 
+special symbol that looks like this `%>%`. This is equivalent to applying a function 
+to an object. For example, to find the mean age, we could use the following code: 
+
+```{r}
+mean(my_data$age)
+```
+
+Alternatively, we could write the following code, using this special syntax: 
+
+```{r}
+my_data$age %>% 
+  mean()
+```
+
+This line of code says: "Take the `df$age` column and apply the `mean()` 
+function to it." Functionally, this is the same as doing `mean(df$age)`. 
+We'll use this syntax when manipulating datasets. 
+
+## Selecting specific columns
+
+Suppose that we want to reduce the dataset `df` to a specific set of columns - 
+id, tx, age, and sex. We can use the `select()` function in the `dplyr` package:
+
+```{r}
+# select id, tx, age, and sex
+# then, view the first few rows using head()
+my_data %>% 
+  select(id, tx, age, sex) %>% 
+  head() 
+```
+
+Note that this will NOT change the original `df` object. If we look at `df`, we can
+still see that it has all of the original columns: 
+
+```{r}
+my_data %>% 
+  head()
+```
+
+If we want to save the dataframe with the select columns, we can save it as a new 
+object: 
+
+```{r}
+# create new variable df_select_columns
+# which is a dataframe with only the id, tx, age, and sex columns
+df_select_columns <- my_data %>% 
+  select(id, tx, age, sex)
+
+# view the first few rows 
+df_select_columns %>% 
+  head()
+```
+
+## Selecting specific rows
+
+Next, we will learn how to select specific rows of a dataframe. We can filter 
+using the `filter()` function based on some logic. For example, suppose that we 
+want to create a dataframe which only includes BUP-NX (where tx takes the value 
+of 0) participants: 
+
+```{r}
+my_data %>% 
+  filter(tx == 0) %>% 
+  head()
+```
+
+Inside the `filter()` function, we specify the logic. In this example, you can see
+that we specify `tx == 0`, which means that we only want to include treatment = 0 
+participants in our filtered dataset. 
+
+Remember that we use a double equal sign `==`, NOT a single equal sign `=` in this 
+logic statement. 
+
+Some other examples: 
+
+1. Greater or less than (< or >): 
+
+```{r}
+# filter for age > 30 participants 
+my_data %>% 
+  filter(age > 30) %>% 
+  head()
+```
+
+2. Not (using !)
+
+```{r}
+# filter for sex NOT equal to 1  
+# use != to say "not equal to 
+my_data %>% 
+  filter(sex != 1) %>% 
+  head()
+```
+
+3. Composite logic using and (&) / or (|)
+
+```{r}
+# filter for male and BUP-NX participants 
+my_data %>% 
+  filter(sex == 0 & tx == 0) %>% 
+  head()
+```
+
+```{r}
+# filter for male OR BUP-NX participants
+my_data %>% 
+  filter(sex == 0 | tx == 0) %>% 
+  head()
+```
+
+4. Missing rows using (`is.na()`)
+
+```{r}
+# select rows that are missing their mhdx value
+my_data %>% 
+  filter(is.na(mhdx))
+```
+
+```{r}
+# select rows that are NOT missing their mhdx value
+my_data %>% 
+  filter(!is.na(mhdx)) %>% 
+  head()
+```
+
+**Example 1:** Explain what these lines of code do. Run the code and examine the 
+`df_new` object to check your hypothesis.
+
+```{r}
+df_new <- my_data %>% 
+  filter(!is.na(mhdx) & age > 30 & tx == 0) %>% 
+  select(id, tx, age, mhdx)
+```
+
+**Example 2:** Write code to: 
+
+* Filter the `my_data` dataframe for those `age` 30 or older
+* Select the `mhdx` column
+* Count the number of 0's and 1's in that column. 
+
+How does it compare to the number of 0's and 1's in the `mhdx` column for 
+those under the age of 30. 
+
+```{r}
+# write code below 
+
+```
+
+## Changing / creating new columns
+
+We can also create / change new columns using `dplyr` with the `mutate()` 
+function. The syntax for that looks like this:
+
+* Start with the dataset and add a pipe `%>%` symbol. 
+* Operate on the dataset with the `mutate()` 
+* Within the `mutate()` function, specify `col = val`, where col is the 
+column name that you want to add/change and val is what we want the column to 
+look like (can reference other columns).
+
+Some examples: 
+
+```{r}
+# creates a new column called age_months which is equal to the age column * 12 
+my_data %>% 
+  mutate(age_months = age * 12) %>% 
+  select(id, age, age_months) %>% 
+  head() 
+
+```
+
+```{r}
+# replaces the id column with a vector from 1:100 
+my_data %>% 
+  mutate(id = 1:100) %>% 
+  head() 
+
+```
+
+```{r}
+# uses the cars R dataset, calculates time as distance divided by speed
+cars %>% 
+  mutate(time = dist / speed) %>% 
+  head() 
+```
+
+You can also manipulate multiple columns as the same time; just list the things
+you want to change sequentially inside the `mutate()` function, separated by 
+commas. 
+
+```{r}
+# replaces the id column with a vector from 1:100 
+my_data %>% 
+  mutate(id = 1:100, 
+         age_months = age * 12, 
+         age_days = age_months * 12) %>% 
+  head() 
+```
+
+Remember, just running these commands does not save the dataset in the variable. 
+To do that, we will need to assign the object to the variable (or replace it with 
+a new variable).
+
+```{r}
+cars_new <- cars %>% 
+  mutate(time = dist/speed)
+
+colnames(cars_new)
+```
+
+# Creating Table 1's 
+
+We have learned everything that we need to make a "Table 1" by hand. It may look 
+something like this. 
+
+```{r}
+# split into BUP-NX and XR-NTX datasets
+df_bup <- my_data %>% filter(tx == 0)
+df_xr <- my_data %>% filter(tx == 1)
+
+# mean age for BUP-NX group 
+mean(df_bup$age)
+
+# sd of age for BUP-NX group 
+sd(df_bup$age)
+
+# mean age for XR-NTX group
+mean(df_xr$age)
+
+# sd of age for XR-NTX group
+sd(df_xr$age)
+
+# etc... 
+```
+
+The problem with this is that this is a very manual, time-intensive process. 
+Alternatively, we can use the `table1` package to help us do this. 
+
+## Factor variables 
+
+Before we get into learning how to use the `table1` package, we will need to 
+first learn about **factor** variable types. 
+
+Each dataframe column can have different types. Some variable are *string* variables 
+(e.g. text); others are *numeric* variables (e.g. numbers). There is another type 
+of variable in R, called a **factor**. These are categorical variables, which often 
+are coded as integers in a dataset (e.g. 0, 1, 2, etc.). 
+
+One example: we may want to consider the variable `tx` in the crisp-2024-sample100.csv 
+dataset as a factor variable because it only takes two distinct values: 0 and 1, where
+0 corresponds to BUP-NX and 1 corresponds to XR-NTX. 
+
+```{r}
+table(my_data$tx)
+```
+
+By default, R will read in number variables as in *numeric*. It starts off by 
+thinking this column is just a number. But, we may want to change it into a 
+factor before we perform our analysis. To do this, we can use the following line of code: 
+
+```{r}
+# using base R 
+# the labels correspond to the order of the numbers (i.e. 0 = BUP-NX, 1 = XR-NTX)
+my_data$tx_factor <- factor(my_data$tx, labels = c("BUP-NX", "XR-NTX"))
+my_data[ , c("tx", "tx_factor")]
+```
+
+```{r}
+# using dplyr
+my_data %>% 
+  mutate(tx_factor = factor(tx, labels = c("BUP-NX", "XR-NTX"))) %>% 
+  select(tx, tx_factor)
+```
+
+**Example 3:** Complete the following code to convert the following variables 
+into factor variables with the following labels: 
+
+* `sex`: 0 = males, 1 = females 
+* `insure`: 0 = uninsured, 1 = insured
+* `smoke100`: 0 = no, 1  = yes
+* `mhdx`: 0 = no, 1 = yes
+
+```{r}
+# complete the "FILL IN HERE" blanks in the code below 
+my_data_factor <- my_data %>% 
+  mutate(tx = factor(tx, labels = c("BUP-NX", "XR-NTX")),
+         sex = "FILL IN HERE", 
+         insure = "FILL IN HERE", 
+         smoke100 = "FILL IN HERE", 
+         mhdx = "FILL IN HERE") 
+
+```
+
+**Note**: Remember the `summary()` function? Once we convert the variables into 
+factors, we can now use it to correctly summarize categorical variables in the data. 
+
+```{r}
+summary(my_data_factor)
+```
+
+## Using `table1` package
+
+Let's read in the package: 
+
+```{r, message = F}
+library(table1)
+```
+
+Before we use this package, we will need to convert our categorical variables 
+into factors. Luckily, we already did this in Example 3. This is a necessary 
+first step if there are coded categorical variables, or else the `table1` 
+package will this that these columns are numeric!
+
+After this, we can run the `table1()` function: 
+
+```{r}
+table1(~ age | tx, data = my_data_factor)
+```
+
+The `table1()` function includes two argument: 
+
+* First, we specify the formula for
+how we want the table to look. This formula takes the form `~ var1 | var2`, where
+`var1` are the columns that we want to summarize, followed by a `|`, and then `var2`, 
+which is the column that we want to stratify by. So `~ age | tx` means that we want to 
+summarize the age column, stratified across the two treatment arms. 
+* Next, we specify the dataframe, which is why we include a `data = my_data_factor` additional argument. 
+
+We can add variables to summarize by using `+`. The following line of code summarizes 
+both the age and sex variable across treatment arms: 
+
+```{r}
+table1(~ age + sex | tx, data = my_data_factor)
+```
+Note that by default, `table1` will provide the mean, median, min, max, and standard 
+deviation for continuous numeric variables and proportions for categorical factor variables.
+
+# Exercises
+
+1. Explain what these lines of code do. Run the code to check your answer.
+
+```{r}
+df_new <- my_data %>% 
+  filter(sex == 0)
+
+summary(df_new$age)
+
+```
+
+2. Explain what these lines of code do. Run the code to check your answer. 
+
+```{r}
+my_data %>% 
+  filter(sex == 0) %>% 
+  select(smoke100) %>% 
+  table()
+```
+
+3. Write code to calculate the mean and standard deviation of BMI of those who 
+are insured (`insure == 1`) versus those not who are not. 
+
+```{r}
+# write code here 
+
+# Hint:
+# (1) Create subsetted dataset called insured_df which filters for insure == 1
+# (2) Take the mean and sd of the bmi column of this subsetted dataset 
+# (3) Repeat for those who are uninsured (insure == 0)
+```
+
+4. How old are the participants who are missing a value for `bmi`? Are they 
+male or female? 
+
+```{r}
+# write code here 
+```
+
+5. Write code to create a new dataset called `more_educ_df` which first creates a
+new column called `educ_months` (equal to `educyrs` multiplied by 12) and then
+filters for the rows with more than 125 months of education. What proportion of 
+participants in this new dataset is insured? 
+
+```{r}
+# write code here 
+```
+
+6. In the dataset `my_data_factor` (defined in Example 3 above), convert the 
+`coclft` variable to a factor (0 = no, 1 = yes). 
+
+```{r}
+# write code here 
+```
+
+7. Write code to show descriptive statistics for age (`age`), 
+number of years of education (`educyrs`), smoking status (`smoke100`), 
+and lifetime cocaine usage (`coclft`) stratified by sex 
+using the `table1` package. 
+
+```{r}
+# write code here 
+```
+
