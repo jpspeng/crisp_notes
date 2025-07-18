@@ -1709,6 +1709,28 @@ testing if there is a difference between the mean number of years of
 education (<code>educyrs</code>) between the two treatment
 (<code>tx</code>) arms.</p>
 <pre class="r"><code># write code below </code></pre>
+<p><strong>Update (7/18)</strong>: Here is an alternative way to run the
+t-test, which does not require you to subset the dataset. Instead of
+specifying two vectors containing the values that you wish to compare,
+we can instead specify a formula which looks like
+<code>variable ~ group</code>. In this case, we want to compare the the
+<code>age</code> across <code>tx</code>, so we specify
+<code>age ~ tx</code>. In the second argument, we specify the dataframe
+to reference.</p>
+<pre class="r"><code># perform t-test, which tests the null hypothesis that the
+# mean ages are the same between the tx = 0 and tx = 1 groups
+t.test(age ~ tx, data = my_data)</code></pre>
+<pre><code>## 
+##  Welch Two Sample t-test
+## 
+## data:  age by tx
+## t = -0.38382, df = 93.767, p-value = 0.702
+## alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
+## 95 percent confidence interval:
+##  -4.309204  2.913100
+## sample estimates:
+## mean in group 0 mean in group 1 
+##        32.39286        33.09091</code></pre>
 </div>
 </div>
 <div id="comparing-proportions" class="section level2">

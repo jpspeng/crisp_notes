@@ -369,6 +369,18 @@ table1(~ age + sex | tx, data = my_data_factor)
 Note that by default, `table1` will provide the mean, median, min, max, and standard 
 deviation for continuous numeric variables and proportions for categorical factor variables.
 
+**Update 7/18**: We can change the labels in these Table 1's by setting labels 
+for each column of interest. To do this, the code looks like this: 
+
+```{r}
+label(my_data_factor$sex) <- "Sex"
+label(my_data_factor$age) <- "Age"
+
+table1(~ age + sex | tx, data = my_data_factor)
+
+```
+
+
 # Exercises
 
 1. Explain what these lines of code do. Run the code to check your answer.

@@ -189,6 +189,19 @@ the two treatment (`tx`) arms.
 # write code below 
 ```
 
+**Update (7/18)**: Here is an alternative way to run the t-test, which does 
+not require you to subset the dataset. Instead of specifying two vectors
+containing the values that you wish to compare, we can instead specify a formula 
+which looks like `variable ~ group`. In this case, we want to compare the the 
+`age` across `tx`, so we specify `age ~ tx`. In the second argument, we specify 
+the dataframe to reference. 
+
+```{r}
+# perform t-test, which tests the null hypothesis that the
+# mean ages are the same between the tx = 0 and tx = 1 groups
+t.test(age ~ tx, data = my_data)
+```
+
 ## Comparing proportions
 
 Another common statistical task is to examine two proportions and determine 
