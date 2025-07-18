@@ -39,9 +39,9 @@ We won't have time to cover everything in this mini-course. Here are some additi
 
 | Topic | Notes and Exercises | R Markdown |
 |----------| ----------| ----------|
-| Lists | [Notes and Exercises](https://jpspeng.github.io/crisp_notes/pages/lists.html)| [RMD](https://jpspeng.github.io/crisp_notes/pages/lists.Rmd)|
-| Loops | [Notes and Exercises](https://jpspeng.github.io/crisp_notes/pages/loops.html)| [RMD](https://jpspeng.github.io/crisp_notes/pages/loops.Rmd)|
-| Functions | [Notes and Exercises](https://jpspeng.github.io/crisp_notes/pages/functions.html) | [RMD](https://jpspeng.github.io/crisp_notes/pages/functions.Rmd)|
+| Lists | [Notes and exercises](https://jpspeng.github.io/crisp_notes/pages/lists.html)| [RMD](https://jpspeng.github.io/crisp_notes/pages/lists.Rmd)|
+| Loops | [Notes and exercises](https://jpspeng.github.io/crisp_notes/pages/loops.html)| [RMD](https://jpspeng.github.io/crisp_notes/pages/loops.Rmd)|
+| Functions | [Notes and exercises](https://jpspeng.github.io/crisp_notes/pages/functions.html) | [RMD](https://jpspeng.github.io/crisp_notes/pages/functions.Rmd)|
 | Risk differences, risk ratios, and odds ratios | [Notes and exercises](https://jpspeng.github.io/crisp_notes/pages/risk_differences.html)| [RMD](https://jpspeng.github.io/crisp_notes/pages/risk_differences.Rmd)|
 
 
