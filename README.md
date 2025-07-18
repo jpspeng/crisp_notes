@@ -34,6 +34,11 @@ Here is the [data documentation](https://jpspeng.github.io/crisp_notes/pages/Cri
 
 ## Extra Lessons 
 
+We won't have time to cover everything in this mini-course. Here are some additional guides to help you with R: 
+
+| Topic | Powerpoint | Notes and Exercises | R Markdown |
+|----------|----------| ----------| ----------|
+
 --- 
 
 ## Old Courses 
