@@ -30,14 +30,21 @@ Here is the [data documentation](https://jpspeng.github.io/crisp_notes/pages/Cri
 | Day 3 (7/11)    | Data processing and manipulation [(Recording)](https://washington.zoom.us/rec/share/iREzt3feeubSgfDnwPSooL2uulQ38uuGAxV6O7K1_WnQOsxsU79myFAnfv2aJzkb.d7PXEiySnDNYhEoB)    | [PPTX](https://jpspeng.github.io/crisp_notes/powerpoints_2025/crisp_2025_R_day3.pptx)    | [Notes and exercises](https://jpspeng.github.io/crisp_notes/notebooks_2025/crisp_2025_day3.html)      | [RMD](https://jpspeng.github.io/crisp_notes/notebooks_2025/crisp_2025_day3.Rmd)    |
 | Day 4 (7/14)    | Using dplyr and table1 [(Recording)](https://washington.zoom.us/rec/share/qb7InVbXLbX2jTmUGWtA-VSRQWsEoTy5hm65g_Aq0_dViOL98r3w51N5KhadBiZi.46iJ7LS8OIndrY-B)   | [PPTX](https://jpspeng.github.io/crisp_notes/powerpoints_2025/crisp_2025_R_day4.pptx)    | [Notes and exercises](https://jpspeng.github.io/crisp_notes/notebooks_2025/crisp_2025_day4.html)      | [RMD](https://jpspeng.github.io/crisp_notes/notebooks_2025/crisp_2025_day4.Rmd) / [Answer Key](https://jpspeng.github.io/crisp_notes/notebooks_2025/crisp_2025_day4_answers.Rmd)    |
 | Day 5 (7/16)    | Factor variables and hypothesis testing [(Recording)](https://washington.zoom.us/rec/share/MyCyY2KQsGZ3lqbK_19wjuO70VAMJ4lyxjRO-SyTylg9Amo7Po1oPVbGscSOkyXj.weZugf2Owmpmt8zN)  | [PPTX](https://jpspeng.github.io/crisp_notes/powerpoints_2025/crisp_2025_R_day5.pptx)    | [Notes and exercises](https://jpspeng.github.io/crisp_notes/notebooks_2025/crisp_2025_day5.html)      | [RMD](https://jpspeng.github.io/crisp_notes/notebooks_2025/crisp_2025_day5.Rmd) / [Midterm CSV](https://jpspeng.github.io/crisp_notes/notebooks_2025/midterm_practicum_sample.csv)    |
+| Day 6 (7/18)    | Linear regression [(Recording)](https://washington.zoom.us/rec/share/jm8RgqOqjwTqWijwHUjD94SHKPdyrh8mu7CkxD5v44sVKfQeOlC7I1GIvnI7OyY.T6PZQ_VMFsw3-6_K) | [PPTX](https://jpspeng.github.io/crisp_notes/powerpoints_2025/crisp_2025_R_day6.pptx) / [Annotated Notes]()    | [Notes and exercises](https://jpspeng.github.io/crisp_notes/notebooks_2025/crisp_2025_day6.html)      | [RMD](https://jpspeng.github.io/crisp_notes/notebooks_2025/crisp_2025_day6.Rmd)    |
 
 
 ## Extra Lessons 
 
 We won't have time to cover everything in this mini-course. Here are some additional guides to help you with R: 
 
-| Topic | Powerpoint | Notes and Exercises | R Markdown |
-|----------|----------| ----------| ----------|
+| Topic | Notes and Exercises | R Markdown |
+|----------| ----------| ----------|
+| Lists | [Notes and exercises](https://jpspeng.github.io/crisp_notes/pages/lists.html)| [RMD](https://jpspeng.github.io/crisp_notes/pages/lists.Rmd)|
+| Loops | [Notes and exercises](https://jpspeng.github.io/crisp_notes/pages/loops.html)| [RMD](https://jpspeng.github.io/crisp_notes/pages/loops.Rmd)|
+| Functions | [Notes and exercises](https://jpspeng.github.io/crisp_notes/pages/functions.html) | [RMD](https://jpspeng.github.io/crisp_notes/pages/functions.Rmd)|
+| Risk differences, risk ratios, and odds ratios | [Notes and exercises](https://jpspeng.github.io/crisp_notes/pages/risk_differences.html)| [RMD](https://jpspeng.github.io/crisp_notes/pages/risk_differences.Rmd)|
+
+
 
 --- 
 
