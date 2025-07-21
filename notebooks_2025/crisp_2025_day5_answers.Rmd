@@ -1,0 +1,378 @@
+---
+title: 'CRISP Day 5 2025: Factor Variables and Comparing Means/Proportions'
+output:
+  html_document:
+    toc: yes
+    toc_float: yes
+---
+
+In today's lesson, we will learn about how to manipulate categorical variables 
+and compare means/proportions with hypothesis tests. 
+
+# Factor variables 
+
+```{r message = F}
+library(dplyr)
+library(table1)
+
+my_data <- read.csv("crisp-2024-sample100.csv")
+```
+
+To better use the `table1` package, we will need to learn about **factor** 
+variable types. 
+
+Each dataframe column can have different types. Some variable are *string* variables 
+(e.g. text); others are *numeric* variables (e.g. numbers). There is another type 
+of variable in R, called a **factor**. These are categorical variables, which often 
+are coded as integers in a dataset (e.g. 0, 1, 2, etc.). 
+
+One example: we may want to consider the variable `tx` in the crisp-2024-sample100.csv 
+dataset as a factor variable because it only takes two distinct values: 0 and 1, where
+0 corresponds to BUP-NX and 1 corresponds to XR-NTX. 
+
+```{r}
+table(my_data$tx)
+```
+
+By default, R will read in number variables as in *numeric*. It starts off by 
+thinking this column is just a number. But, we may want to change it into a 
+factor before we perform our analysis. To do this, we can use the following line of code: 
+
+```{r}
+# using base R 
+# the labels correspond to the order of the numbers (i.e. 0 = BUP-NX, 1 = XR-NTX)
+my_data$tx_factor <- factor(my_data$tx)
+head(my_data[ , c("tx", "tx_factor")])
+```
+
+```{r}
+# using dplyr
+my_data %>% 
+  mutate(tx_factor = factor(tx, labels = c("BUP-NX", "XR-NTX"))) %>% 
+  select(tx, tx_factor) %>% 
+  head()
+```
+
+We can use the `labels = ` argument to specify the labels of the factors. You 
+have to be careful with this! It is very easy to misspecify the factor names (which 
+may mess up your analysis downstream).
+
+```{r}
+# adding a label 
+my_data %>% 
+  mutate(tx_factor = factor(tx, labels = c("BUP-NX", "XR-NTX"))) %>% 
+  select(tx, tx_factor) %>% 
+  head()
+```
+
+
+**Example 1:** Complete the following code to convert the following variables 
+into factor variables with the following labels: 
+
+* `sex`: 0 = males, 1 = females 
+* `insure`: 0 = uninsured, 1 = insured
+* `smoke100`: 0 = no, 1  = yes
+* `mhdx`: 0 = no, 1 = yes
+
+```{r}
+# complete the "FILL IN HERE" blanks in the code below 
+my_data_factor <- my_data %>% 
+  mutate(tx = factor(tx, labels = c("BUP-NX", "XR-NTX")),
+         sex = factor(sex, labels = c("Male", "Female")), 
+         insure = factor(insure, labels = c("Uninsured", "Insured")), 
+         smoke100 = factor(smoke100, labels = c("No", "Yes")), 
+         mhdx = factor(mhdx, labels = c("No", "Yes"))) 
+
+```
+
+**Example 2:** Write code to show create a "Table 1" for age (`age`), 
+number of years of education (`educyrs`), smoking status (`smoke100`), 
+and insurance status (`insure`) stratified by `tx` using the `table1` package. 
+
+```{r}
+# write code here 
+table1(~ age + educyrs + smoke100 + insure | tx, data = my_data_factor)
+```
+
+**Note**: Remember the `summary()` function? Once we convert the variables into 
+factors, we can now use it to correctly summarize categorical variables in the data. 
+
+```{r}
+summary(my_data_factor)
+```
+
+# Comparing means and proportions
+
+## Comparing means 
+
+One common statistical task is to examine two groups of values and determine if
+the means are equal.
+
+Here's an example using the crisp-2024-sample100.csv dataset. Suppose we would like 
+to know if the age is different between the two treatment groups. 
+
+We can start by taking a look at what these means are: 
+
+```{r, warning = F, message = F}
+# create dataframe with just tx == 0 participants
+df_tx0 <- my_data %>% 
+  filter(tx == 0)
+
+# create dataframe with just tx == 1 participants
+df_tx1 <- my_data %>% 
+  filter(tx == 1)
+
+# find mean age for tx == 0 participants
+mean(df_tx0$age)
+
+# find mean age for tx == 1 participants
+mean(df_tx1$age)
+```
+
+So the mean age of the `tx == 0` is slightly lower than the `tx == 1` group 
+(32.39 versus 33.09). Is this difference significantly different? 
+
+### Hypothesis testing
+
+To determine if this is a statistically significant difference, we can perform a
+hypothesis test. For hypothesis testing, we start off by specifying a null hypothesis, 
+which is the statement that we want to disprove. So if our question is: "Are the 
+mean ages in the two treatment groups different?" then our null hypothesis ($H_0$) 
+would be that the mean ages in the two treatment groups are the same: 
+
+$H_0$: Mean age in `tx == 0` group EQUALS mean age in the `tx == 1` group
+
+The alternative hypothesis ($H_a$) is the opposite, which is: 
+
+$H_a$: Mean age in tx == 0 group does NOT equal the mean age in the tx == 1 group
+
+There are several hypothesis tests to test this hypothesis. One very popular one is 
+called the t-test. To implement the t-test in R, we can use the function `t.test()`. 
+Within `t.test()`, we include two arguments for the two vectors of numeric data 
+that we want to test.
+
+```{r}
+# perform t-test, which tests the null hypothesis that the
+# mean ages are the same between the tx = 0 and tx = 1 groups
+t.test(df_tx0$age, df_tx1$age)
+```
+
+The output of `t.test` gives us a lot of information. We'll focus on a few 
+aspects of the output: 
+
+* **p-value**: This is the p-value for the hypothesis test. The p-value is the 
+probability of obtaining a test statistic at least as extreme as what we get with 
+our data, given that the null hypothesis is true. So with a p-value of 0.702, 
+we have approximately a 70% probability of obtaining a test statistic at least 
+as extreme as what we get in our data, given the null hypothesis is true. 
+Typically, we set the p-value threshold (or alpha) to 0.05 in our hypothesis 
+test. This means we reject the null hypothesis if our p-value is less than 0.05.
+Intuitively, we want to reject the null hypothesis if our data is extreme compared 
+to what our null hypothesis says.
+* **95 percent confidence interval**: This is a confidence interval for the difference 
+in mean age between the `tx == 0` and `tx == 1` groups. So we estimate that a 
+95% CI for the difference in age between the `tx == 0` and `tx == 1` groups is 
+(-4.31, 2.91).
+
+In this output, we fail the reject the null hypothesis ($p = 0.702$), meaning 
+that we fail to find evidence that the two groups have a significantly different 
+mean age. 
+
+There are several other hypothesis tests comparing the mean or median of two 
+samples: paired t-test (for paired data), Wilcoxon rank-sum test (to test for 
+equal medians), etc.
+
+**Example 3:** Write code to perform a hypothesis test, testing if there is a 
+difference between the mean number of years of education (`educyrs`) between
+the two treatment (`tx`) arms. 
+
+```{r}
+# write code below 
+t.test(df_tx0$educyrs, df_tx1$educyrs)
+```
+
+**Update (7/18)**: Here is an alternative way to run the t-test, which does 
+not require you to subset the dataset. Instead of specifying two vectors
+containing the values that you wish to compare, we can instead specify a formula 
+which looks like `variable ~ group`. In this case, we want to compare the the 
+`age` across `tx`, so we specify `age ~ tx`. In the second argument, we specify 
+the dataframe to reference. 
+
+```{r}
+# perform t-test, which tests the null hypothesis that the
+# mean ages are the same between the tx = 0 and tx = 1 groups
+t.test(age ~ tx, data = my_data)
+```
+
+## Comparing proportions
+
+Another common statistical task is to examine two proportions and determine 
+if they are equal. 
+
+For example, suppose that we want to know the proportion of people with 
+insurance is the same between the treatment arms. 
+
+The first step to doing this might be to calculate the raw numbers of those 
+with insurance in each treatment arm. 
+
+We can do this by hand using the code below:
+
+```{r}
+# number of tx = 0, no insurance
+my_data %>% 
+  filter(tx == 0 & insure == 0) %>% 
+  nrow()
+
+# number of tx = 0, has insurance
+my_data %>% 
+  filter(tx == 0 & insure == 1) %>% 
+  nrow()
+
+# number of tx = 1, no insurance
+my_data %>% 
+  filter(tx == 1 & insure == 0) %>% 
+  nrow()
+
+# number of tx = 1, has insurance
+my_data %>% 
+  filter(tx == 1 & insure == 1) %>% 
+  nrow()
+
+```
+
+Alternatively, we can create a 2x2 table using the the `table()` function, 
+where we include as an input a two-column dataframe with the columns of interest. 
+
+```{r}
+# create 2x2 table from two column, binary variable dataframe
+tx_insure_tab <- table(my_data %>% select(tx, insure))
+
+tx_insure_tab
+```
+
+We observe that 41/66 (73%) of those in the `tx == 0` arm have insurance, 
+compared to 36/44 (82%) of those in the `tx == 1` arm. 
+
+```{r}
+# proportion in tx == 0 arm 
+41/(41 + 15)
+
+# proportion in tx == 1 arm
+36/(36 + 8)
+```
+
+### Hypothesis testing
+
+The next question to ask is are these proportions significantly different. 
+We will use a hypothesis test to test this. The null hypothesis is that the 
+proportions are the same. The alternative hypothesis is that the proportions 
+are different. 
+
+One option is the two-sample z-test for proportions. We can implement this in 
+`R` using `prop.test()`. 
+
+```{r}
+prop.test(tx_insure_tab)
+```
+
+Another options is the chi-squared test. We can implement this in R using 
+`chisq.test()`: 
+
+```{r}
+chisq.test(tx_insure_tab)
+```
+
+Note that the chi-squared test gives the same p-value result (p = 0.438)  as the 
+two-sample z-test for proportion. This is because the two tests are the same! 
+The only difference is that the chi-squared test can be used for bigger tables 
+(e.g. 3x2, 3x3 tables, etc.). 
+
+**Example 4:** Write code to perform a hypothesis test, testing if there is a 
+difference between the proportion of smokers and non-smokers (`smoke100`) between
+the two treatment (`tx`) arms. 
+
+```{r}
+# write code below 
+smoker_tbl <- table(my_data %>% select(smoke100, tx))
+
+prop.test(smoker_tbl)
+```
+
+
+# Midterm practicum 
+
+The goal of this practicum is to apply what we've learned so far on a new 
+dataset! 
+
+The dataset is the **midterm_practicum_sample.csv** file on the course website. 
+Download this dataset and save it in your CRISP R notes folder. 
+
+The dataset shows data from two randomized studies (Study 1 and Study 2), which 
+study the efficacy of a treatment on some disease's severity. 
+The dataset has the following structure: 
+
+* id: 1 to 1000 
+* study: 1 = study 1, 2 = study 2
+* tx: 0 = placebo, 1 = treatment 
+* age: numeric age variable 
+* alcohol_usage: 0 = no/low, 1 = medium, 2 = high 
+* disease_severity: numeric disease severity variable 
+
+The goal is to create a Table 1, with the results of hypothesis testing comparing
+the two treatment arms. 
+
+1. Read in the the dataset and save it as the `df_hw` variable. 
+
+```{r}
+# write code below (uncomment the below line)
+df_hw <- read.csv("midterm_practicum_sample.csv")
+```
+
+2. You wish to analyze data for Study 1 ONLY. Also, you would like to remove the 
+children (age < 18) from the dataset. Also, you'd like to create a new variable 
+called `disease_severity_scaled` which equals `disease_severity` divided by 100.
+Create a new dataset called `df_filter` which includes only the rows of interest 
+and creates this new variable. 
+
+```{r}
+# write code below
+df_filter <- df_hw %>% 
+  filter(study == 1 & age >= 18) %>% 
+  mutate(disease_severity_scaled = disease_severity / 100)
+```
+
+3. Convert the `tx` and `alcohol_usage` to factor variables. Re-save it the new
+dataframe into your `df_filter` variable. 
+
+```{r}
+# write code below 
+df_filter <- df_filter %>% 
+  mutate(tx = factor(tx, labels = c("placebo", "treatment")), 
+         alcohol_usage = factor(alcohol_usage, labels = c("no/low", "medium", "high")))
+```
+
+4. Use the `table1` package to create a Table 1, summarizing age, alcohol usage, 
+and disease severity stratified by treatment status. 
+
+```{r}
+# write code below 
+table1(~ age + alcohol_usage + disease_severity_scaled | tx, data = df_filter)
+```
+
+5. Perform hypothesis tests to test the differences in these variables between
+the treatment and placebo arms. What is the null hypothesis for each hypothesis
+test? Provide an interpretation for the results. 
+
+```{r}
+# write code below
+
+# test for age 
+t.test(age ~ tx, data = df_filter)
+
+# test for alcohol_usage
+alcohol_tbl <- table(df_filter %>% select(tx, alcohol_usage))
+chisq.test(alcohol_tbl)
+
+# test for disease_severity 
+t.test(disease_severity_scaled ~ tx, data = df_filter)
+```

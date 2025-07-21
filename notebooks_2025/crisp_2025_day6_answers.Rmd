@@ -1,0 +1,203 @@
+---
+title: 'CRISP Day 6 2025: Linear regression'
+output:
+  html_document:
+    toc: yes
+    toc_float: yes
+---
+
+In today's lesson, we will learn how to run and interpret linear regression.  
+
+```{r}
+my_data <- read.csv("crisp-2024-sample100.csv")
+```
+
+# Linear regression with continuous predictor 
+
+The goal of linear regression is to relate an outcome to one (or more) predictors. 
+For example, **how does number of years of education associate with age, on average?**
+
+The first step in running a linear regression is to write out the model that we
+are trying to fit. In this example, here is our working model:
+
+$$
+YrsEduc = \beta_0 + \beta_1age 
+$$
+
+Where $YrsEduc$ is the participant's number of years of education, 
+$age$ is the participant's age, $\beta_0$ is the intercept coefficient, and $\beta_1$ is
+the coefficient of interest. 
+
+With linear regression, our goal is to to find the values of $\beta_0$ 
+and $\beta_1$ which best fit the data. Behind the scenes, the software will find the 
+values of $\beta_0$ and $\beta_1$ which minimize the the squared error between the 
+fitted line's values and the true data's values. 
+
+Running this in R is relatively straightforward. We can use the `lm()` function, which 
+is a pre-built function in R (no packages needed). The `lm()` function takes in two 
+arguments: (1) the formula, which looks like `outcome ~ predictor`, and (2) the data. 
+In the code below, we run a linear regression with `educyrs` as our outcome and `age` 
+as our predictor, and then save it in the variable `fitted_mod`. 
+
+```{r}
+fitted_mod <- lm(educyrs ~ age, data = my_data)
+```
+
+To see the fitted coefficient of this model, we can apply the `summary()` function
+on `fitted_mod`. 
+
+```{r}
+summary(fitted_mod)
+```
+We focus in on the Coefficients section of the summary. 
+
+1. The Estimate column tells us the fitted values for the intercept ($\beta_0$) and the 
+coefficient on age ($\beta_1$). We estimate the intercept of the best fit line to be
+14.30 and the coefficient on age to be -0.064.
+
+2. The Std. Error gives us the standard error on the estimate. Essentially, this is a measure
+of how much uncertainty we have in our estimate. Larger standard errors indicate that 
+we have less certainty in the estimate. 
+
+3. The last column Pr(>|t|) gives us a p-value for a hypothesis test. Specifically, 
+it tests the hypothesis that the coefficient is equal to 0. For example, the p-value 
+on the age coefficient is 0.00573, so if we use 0.05 as our testing threshold, then we
+reject the null hypothesis that the coefficient on age is 0. 
+
+Next, we can obtain confidence intervals using the `confint()` function: 
+
+```{r}
+confint(fitted_mod)
+```
+
+This will give us 95% confidence intervals on the coefficients. For example, 
+this tells us that a 95% confidence interval for the coefficient on age is 
+(-0.109, -0.019).
+
+How can we interpret this in plain language? 
+
+*We estimate that for two groups differing in age by one year, the older group has 
+on average 0.064 years fewer education (95% CI: 0.019, 0.109). At the 5% level,
+we reject the null hypothesis that the coefficient on age is 0. That is, we find 
+evidence of an association between age and years of education.* 
+
+# Linear regression with binary predictor 
+
+Suppose that we are examining number of years of education (`educyrs`) as our outcome, 
+and binarized sex (`sex`) as our single predictor. 
+
+Note that `sex` takes the value of 0 or 1 in our dataset, with 0 representing males
+and 1 representing females. 
+
+We aim to find the best linear fit considering these data points. That is, we aim 
+to fit the model: 
+
+$$
+educyrs = \beta_0 + \beta_1 sex
+$$
+
+We perform a linear regression, regressing `educyrs` on `sex` using the `lm()`
+function. 
+
+```{r}
+fitted_mod2 <- lm(educyrs ~ sex, data = my_data)
+
+summary(fitted_mod2)
+```
+
+How can we interpret this output?
+
+* *Intercept*: The mean number of years of education for males (or those with 
+sex = 0). That is, males have on average 12.21 years of education. 
+* *Coefficient on sex*: The difference in the mean number of years of education 
+between females and males. That is, we estimate that females have on average 0.039 
+fewer years of education than males. 
+  * *p-value*: The result from testing the null hypothesis that the coefficient on 
+  sex is equal to 0. Equivalently, we are testing the null hypothesis that there is 
+  no difference in number of years of education between males and females. With
+  $p = 0.93$, we fail to find evidence of a difference in the number of years of 
+  education comparing males and females. 
+
+We can also obtain confidence intervals on these estimates using `confint()`. 
+
+```{r}
+confint(fitted_mod2)
+```
+
+# Linear regression with more than one predictor
+
+Suppose that we run a linear regression, with number of years of education `educyrs` 
+as the outcome, and `age` and `sex` as the predictors. That is, we are trying 
+find the best estimates of $\beta_0$, $\beta_1$, and $\beta_2$ in the equation below: 
+
+$$
+educyrs = \beta_0 + \beta_1 age + \beta_2 sex
+$$
+
+To do this in R, we can use `lm()` with `age + sex` as our predictors in the formula: 
+
+```{r}
+fitted_mod3 <- lm(educyrs ~ age + sex, data = my_data)
+
+summary(fitted_mod3)
+
+confint(fitted_mod3)
+```
+
+How can we interpret the output? 
+
+* *Intercept*: The predicted number of years of education for males (sex = 0) with
+age = 0. Note that this is not meaningful, since we don't have age = 0 in our
+population of interest. 
+* *Coefficient on age*: The estimated difference in number of years of education comparing 
+two groups *of the same sex* differing by one year of age. 
+* *Coefficient on sex*: The estimated difference in the number of years of education 
+comparing females versus males *of the same age*. 
+
+# Exercises 
+
+1. We are interested in learning about the association between BMI (`bmi`) and 
+smoking status (`smoke100`). Run a linear regression with `bmi` as the outcome 
+and `smoke100` as the regressor. Provide an interpretation of the results. 
+
+```{r}
+# write code here 
+q1_mod <- lm(bmi ~ smoke100, data = my_data)
+
+summary(q1_mod)
+confint(q1_mod)
+```
+
+2. We believe that the relationship between BMI and smoking status is confounded 
+by age. Adjust for age in your linear regression in question 1. Run the regression 
+and provide an interpretation of the results. 
+
+```{r}
+# write code here 
+q2_mod <- lm(bmi ~ smoke100 + age, data = my_data)
+
+summary(q2_mod)
+confint(q2_mod)
+```
+
+3. We wish to run the same regression from question 2 separately among men and 
+women. Perform two separate regressions below for both sexes. Provide an interpretation
+for your results. 
+
+```{r}
+# write code here 
+df_male <- my_data %>% filter(sex == 0)
+df_female <- my_data %>% filter(sex == 1)
+
+q3_mod_males <- lm(bmi ~ smoke100 + age, data = df_male)
+
+summary(q3_mod_males)
+confint(q3_mod_males)
+
+q3_mod_females <- lm(bmi ~ smoke100 + age, data = df_female)
+
+summary(q3_mod_females)
+confint(q3_mod_females)
+
+```
+
