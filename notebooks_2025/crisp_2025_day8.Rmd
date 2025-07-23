@@ -1,0 +1,265 @@
+---
+title: 'CRISP Day 8 2025: Graphing with ggplot2'
+output:
+  html_document:
+    toc: yes
+    toc_float: yes
+---
+
+In today's lesson, we will learn the basics of graphing with the `ggplot2` package
+and using ChatGPT as a tool to help conduct data analysis. 
+
+```{r message = F}
+library(dplyr)
+
+# read in data 
+my_data <- read.csv("crisp-2024-sample100.csv")
+
+# convert some columns to factors 
+my_data <- my_data %>% 
+  mutate(tx = factor(tx, labels = c("BUP-NX", "XR-NTX")), 
+         sex = factor(sex, labels = c("Male", "Female")), 
+         smoke100 = factor(smoke100, labels = c("Non-smoker", "Smoker")))
+```
+
+# Graphing with ggplot2
+
+`ggplot2` is a very popular plotting package in R. Base R contains default 
+plotting functions (with the `plot()` function), but these are often not intuitive 
+and difficult to customize. `ggplot2` provides a more intuitive and customizable 
+interface for graphing data. We start by reading in the library. 
+
+```{r}
+library(ggplot2)
+```
+
+## ggplot2 syntax
+
+To create a `ggplot2` graph, you start off with the `ggplot()` function. Within
+the `ggplot()` function, you specify the dataset and which columns you want to put 
+in each axis in an aesthetic layer `aes(x = x_var, y = y_var)`. 
+
+```{r}
+ggplot(data = my_data, aes(x = age, y = bmi)) 
+```
+
+In our `aes()` call, we want `age` to be on our x-axis, and `bmi` to be on our y-axis. 
+Note that this code plots an empty graph. That is because we haven't specified 
+what objects we want to include in our plot. To do this, we use `+` to add geometric features 
+to our plot. 
+
+## Scatter plots 
+
+If we want to create a scatter plot, we can add `+ geom_point()` to our 
+code. For example: 
+
+```{r, warning = F}
+ggplot(data = my_data, aes(x = age, y = bmi)) + 
+  geom_point()
+```
+
+Now we have successfully graphed a scatter plot! Let's now make some customizations. 
+
+Suppose that we want the colors of the points to correspond to the treatment 
+arm. We can add a `color = tx` argument within the `aes()` call: 
+
+```{r, warning = F}
+ggplot(data = my_data, aes(x = age, y = bmi, color = tx)) + 
+  geom_point()
+```
+
+We can also change the "look" of our plot. For example, if we add `+ xlim(0, 60)` and `+ ylim(0,40)`,
+we can change the x and y axis ranges of our plot to 0-60 and 0-40, respectively. 
+
+```{r, warning = F}
+ggplot(data = my_data, aes(x = age, y = bmi, color = tx)) + 
+  geom_point() + 
+  xlim(0,60) + 
+  ylim(0,40)
+```
+
+We can also add a title to our graph using `ggtitle()`: 
+
+```{r, warning = F}
+ggplot(data = my_data, aes(x = age, y = bmi, color = tx)) + 
+  geom_point() + 
+  xlim(0,60) + 
+  ylim(0,40) + 
+  ggtitle("My first graph")
+```
+
+We can continue to add customizations using `+`. Learning all the customizations will take time. 
+In the meantime, you can easily Google (or ask ChatGPT) about customizations. For example, 
+you can look up "How do I change the x-axis label in ggplot?" in Google, and it will tell you how 
+to change that configuration. 
+
+**Example**: Create a scatter plot with `educyrs` on the x-axis, `bmi` on the y-axis,
+and different colors for each `sex`. 
+
+```{r, warning = F}
+# write code here 
+```
+
+## Line plot 
+
+For this example, we will first create a fake dataset saved to a variable
+`my_fake_data` which has the year, number of births, and number of deaths. 
+
+```{r}
+# manually create a dataset with year, births, deaths
+my_fake_data <- data.frame(year = c(2000, 2001, 2002, 2003, 2004, 2005), 
+                           births = c(240, 280, 290, 270, 500, 550), 
+                           deaths = c(500, 400, 300, 200, 120, 88))
+
+my_fake_data
+```
+
+Suppose that we wanted to graph a line graph with year on the x-axis and births 
+on the y-axis. To do this, we can use the `geom_line()` geometric feature. 
+
+```{r}
+ggplot(data = my_fake_data, aes(x = year, y = births)) + 
+  geom_line()
+```
+
+**Example**: Using `my_fake_data`, create a line plot with `year` on the x-axis, 
+`deaths` on the y-axis. Use the `+ ylim()` customization to change the y-axis 
+range from 0 to 600. 
+
+```{r, warning = F}
+# write code here 
+```
+
+## Bar plots 
+
+We can also create bar plots using `+ geom_bar()`. 
+For example, suppose that we wanted to graph the number in each treatment arm.
+We can write the following: 
+
+```{r}
+ggplot(data = my_data, aes(x = tx)) + 
+  geom_bar()
+```
+
+Note that we don't need a `y = y_var` specification in our `aes()` call. This
+is because `geom_bar()` by default counts the number in each category and uses 
+that number as the height of the bar. So no need to specify the y-axis of this graph. 
+
+Now, suppose that we want to stratify the bars by sex. We can do this by adding 
+a `fill` to our `aes()` call: 
+
+```{r}
+ggplot(data = my_data, aes(x = tx, fill = sex)) + 
+  geom_bar()
+```
+
+We now have different colors indicating what proportion of each bar represent
+males and females. 
+
+**Example**: Create a bar plot showing the number of males and females (`sex`) in the 
+dataset, with different colors for smokers and non-smokers (`smoke100`). 
+
+```{r}
+# write code here 
+```
+
+
+
+## Histograms 
+
+We can create histograms by `+ geom_histogram()`. For example, suppose
+that we want to create a histogram to look at the distribution of ages in our dataset. 
+
+```{r, message = F}
+ggplot(data = my_data, aes(x = age)) + 
+  geom_histogram()
+```
+
+We can customize the histogram by including additional arguments within the 
+`geom_histogram()` function call. For example, to decrease to 5 bins (which increases the
+width of the bins), we can write the following:
+
+```{r, message = F}
+ggplot(data = my_data, aes(x = age)) + 
+  geom_histogram(bins = 5)
+```
+
+**Example**: Create two separate histograms showing the distribution of the number of 
+years of education for each treatment arm: `tx == "BUP-NX"` and `tx == "XR-NTX"`.
+
+```{r}
+# write code here 
+```
+
+
+## Boxplots 
+
+Another common type of plot is a boxplot. In this type of plot, we can visually 
+compare the distributions of a variable between different categories. For example, suppose that we
+wanted to compare the ages between the treatment arms. We can create a boxplot using 
+`+ geom_boxplot()`: 
+
+```{r}
+ggplot(data = my_data, aes(x = tx, y = age)) + 
+  geom_boxplot()
+```
+
+**Example**: Create a boxplot comparing the distribution of BMIs (`bmi`) between
+males and females (`sex`).
+
+```{r}
+# write code here 
+```
+
+# ChatGPT Demo 
+
+1. Read in your dataset and inspect it in R Studio. 
+
+```{r}
+chatgpt_demo_df <- read.csv("chatgpt_demo.csv")
+
+head(chatgpt_demo_df)
+```
+
+2. Tell ChatGPT the structure of your dataset, including variable types and coding.  
+
+*I have a dataset which I’ve read into R into a dataframe variable called 
+chatgpt_demo_df. It has four columns: (1) id: numeric id of the individual, 
+(2) age: numeric age of the individual, (3) smoke: a binary variable coded as 0/1,
+and (4) disease_score: a score for disease severity. I want to ask you how to 
+write R code to process and analyze this dataset.*
+
+3. Be very specific with your asks. If you want to use familiar tools, ask it 
+to use libraries that you are used to. 
+
+*I’d first like to process the dataset. I want to create a new dataframe, saved 
+in the my_data_processed variable, which has age_month  = age times 12, converts 
+smoke to a factor with levels labelled “Non-Smoker” and “Smoker”, and remove all
+rows that have a missing age. I’d like to use the dplyr package. Can you help me
+write code to do this?* 
+
+```{r}
+# paste ChatGPT's code below 
+```
+
+*I’d like to run a linear regression, with disease severity as the outcome and 
+smoking status and age as the predictors. I’d also like confidence intervals for 
+the coefficients. Can you help me write code to do this?*
+
+```{r}
+# paste ChatGPT's code below 
+```
+
+4. Check the code. Ask it to explain lines of code that you don’t understand. 
+This is how you learn and ensure that it’s not making a mistake! 
+
+5. If you are asking it to debug, paste both the code and the error message! 
+
+6. Interpret it yourself, but you can also use ChatGPT for help. 
+
+**Warning**: ChatGPT makes mistakes and is over-confident. Double check the code
+and make sure you understand what it does! Also, do not put any sensitive data 
+into ChatGPT! 
+
+
+
