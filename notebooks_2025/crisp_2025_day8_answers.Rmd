@@ -98,6 +98,8 @@ and different colors for each `sex`.
 
 ```{r, warning = F}
 # write code here 
+ggplot(data = my_data, aes(x = educyrs, y = bmi, color = sex)) + 
+  geom_point() 
 ```
 
 ## Line plot 
@@ -128,6 +130,9 @@ range from 0 to 600.
 
 ```{r, warning = F}
 # write code here 
+ggplot(data = my_fake_data, aes(x = year, y = births)) + 
+  geom_line() + 
+  ylim(0, 600)
 ```
 
 ## Bar plots 
@@ -161,6 +166,8 @@ dataset, with different colors for smokers and non-smokers (`smoke100`).
 
 ```{r}
 # write code here 
+ggplot(data = my_data, aes(x = sex, fill = smoke100)) + 
+  geom_bar()
 ```
 
 
@@ -189,6 +196,15 @@ years of education for each treatment arm: `tx == "BUP-NX"` and `tx == "XR-NTX"`
 
 ```{r}
 # write code here 
+df_tx0 <- my_data %>% filter(tx == "BUP-NX")
+df_tx1 <- my_data %>% filter(tx == "XR-NTX")
+
+ggplot(data = df_tx0, aes(x = educyrs)) + 
+  geom_histogram()
+
+ggplot(data = df_tx1, aes(x = educyrs)) + 
+  geom_histogram()
+
 ```
 
 
@@ -209,6 +225,8 @@ males and females (`sex`).
 
 ```{r}
 # write code here 
+ggplot(data = my_data, aes(x = sex, y = bmi)) + 
+  geom_boxplot()
 ```
 
 # ChatGPT Demo 
@@ -268,5 +286,6 @@ Error in eval(mf, parent.frame()) : object 'disease_score' not found*
 **Warning**: ChatGPT makes mistakes and is over-confident. Double check the code
 and make sure you understand what it does! Also, do not put any sensitive data 
 into ChatGPT! 
+
 
 

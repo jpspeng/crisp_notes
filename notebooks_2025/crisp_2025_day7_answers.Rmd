@@ -1,0 +1,175 @@
+---
+title: 'CRISP Day 7 2025: Logistic regression'
+output:
+  html_document:
+    toc: yes
+    toc_float: yes
+---
+
+In today's lesson, we will learn how to run and interpret logistic regression.  
+
+```{r}
+my_data <- read.csv("crisp-2024-sample100.csv")
+```
+
+# Logistic regression with one predictor 
+
+In logistic regression, the outcome is binary - either 0 or 1. For example, 
+in this example, suppose that we consider history of psychotic diagnosis (`mhdx`) 
+as our outcome, and age as our exposure. 
+
+In the logistic model, we model the **odds** of the outcome. In this example, we 
+are modeling the odds of having a history of psychotic diagnosis, which we
+denote as $Odds(mhdx)$. Logistic regression also uses a logarithmic transform on 
+this outcome, for reasons not explained in this tutorial. So our model is:  
+
+$$
+log(Odds(mhdx)) = \beta_0 + \beta_1 age
+$$
+
+The right hand side of the model should be familiar; this is a just a normal linear
+model. 
+
+Equivalently, we can exponentiate both sides and write this as: 
+
+$$
+Odds(mhdx) = exp(\beta_0 + \beta_1 age) 
+$$
+
+To run this in R, we can use the `glm()` function. `glm` stands for "generalized 
+linear model," which is a more flexible form of a linear model. Within the `glm()` 
+function call, we specify the: 
+
+1. Formula: `outcome ~ predictor` (similar to linear regression)
+2. Data: `data = df` 
+3. Family: `family = binomial` (this configures the function to run logistic regression)
+
+**Note**: The outcome can either be coded as a numeric (0/1) variable or as
+a factor variable with two levels. 
+
+So our function call looks like this: 
+
+```{r}
+mod1 <- glm(mhdx ~ age, data = my_data, family = binomial)
+
+summary(mod1)
+```
+The estimates for the intercepts and age correspond to estimates for $\beta_0$ and
+$\beta_1$, respectively. In logistic regression, it is often more useful to interpret 
+the exponentiated coefficient estimates. To do that, we exponentiate the 
+coefficient table using the `exp()` function on the `coef()` table from 
+the `mod` object: 
+
+```{r}
+exp(coef(mod1))
+```
+
+How can we interpret these coefficients?
+
+* *Intercept*: The exponentiated intercept represents the predicted odds of having a 
+history of psychotic diagnosis for someone with age = 0. That is, we estimate that 
+the odds of having a history of psychotic diagnosis for someone with age = 0 is 0.75. 
+* *Coefficient on age*: The exponentiated coefficient on age represents the odds ratio 
+comparing the odds of having a history of psychotic diagnosis for two groups differing 
+by one year of age. That is, we estimate that for two groups differing in one year of age, 
+the older group has around a 4% lower odds ($1 - 0.962$) of having a history of psychotic
+diagnosis compared to the younger group. 
+  * *p-value*: The result from testing the null hypothesis that the coefficient on 
+  age is 0 (or equivalently the exponentiated coefficient is 1). With $p = 0.275$, we 
+  fail to find a significant association between age and history of psychotic diagnosis. 
+
+To obtain confidence intervals for these exponentiated estimates, we can 
+exponentiate the output of `confint(mod)`: 
+
+```{r, message = F}
+exp(confint(mod1))
+```
+
+# Logistic regression with more than one predictor 
+
+Suppose that we run a logistic regression with history of psychotic diagnosis (`mhdx`)
+as the outcome, and `tx` and `age` as the predictors. That is, we are trying 
+find the best estimates of $\beta_0$, $\beta_1$, and $\beta_2$ in the equation below: 
+
+$$
+log(Odds(mhdx)) = \beta_0 + \beta_1 treatment +  \beta_2 age
+$$
+
+Equivalently, we can exponentiate both sides and write this as: 
+
+$$
+Odds(mhdx) = exp(\beta_0 + \beta_1 treatment + \beta_2 age) 
+$$
+
+Like in the previous section, we run this in R using the `glm()` function. In this case, 
+we specify the formula as `mhdx ~ tx + age`, with `mhdx` as the outcome, and 
+`tx` and `age` as the predictors 
+
+```{r}
+mod2 <- glm(mhdx ~ tx + age, data = my_data, family = binomial)
+
+summary(mod2)
+```
+
+Again, we interpret the exponentiated coefficients (as well as their confidence
+intervals). 
+
+```{r}
+exp(coef(mod2))
+exp(confint(mod2))
+```
+* *Intercept*: The exponentiated intercept represents the predicted odds of having a 
+history of psychotic diagnosis for someone with age = 0 and tx = 0. That is, we estimate that 
+the odds of having a history of psychotic diagnosis for someone with age = 0 and 
+tx = 0 is 0.64. 
+* *Coefficient on tx*: The exponentiated coefficient on tx represents the odds ratio 
+comparing the odds of having a history of psychotic diagnosis for those with tx = 1 
+to that for those with tx = 0 of the same age. That is, comparing individuals of the same 
+age, we estimate that those with tx = 1 have a 48% higher odds ($1.48 - 1$) of 
+psychotic diagnosis than those with tx = 0.
+  * *p-value*:  The result from testing the null hypothesis that the coefficient on 
+  tx is 0 (or equivalently the exponentiated coefficient is 1). With $p = 0.459$, we 
+  fail to find a significant association between tx and history of psychotic diagnosis, 
+  after controlling for age. 
+* *Coefficient on age*: The exponentiated coefficient on age represents the odds ratio 
+comparing the odds of having a history of psychotic diagnosis for two groups differing 
+by one year of age with the same treatment status. That is, we estimate that for two groups
+with the same treatment status differing in one year of age, the older group has 
+around a 4% lower odds ($1 - 0.962$) of having a history of psychotic diagnosis 
+compared to the younger group. 
+  * *p-value*: The result from testing the null hypothesis that the coefficient on 
+  age is 0 (or equivalently the exponentiated coefficient is 1). With $p = 0.274$, we 
+  fail to find a significant association between age and history of psychotic diagnosis
+  after controlling for treatment status.
+
+# Exercises 
+
+1. Perform logistic regression with cannabis use (`canlft`) as the outcome and 
+sex (`sex`) as the predictor. Obtain estimates and confidence intervals for the
+exponentiated coefficients. Provide an interpretation of the output. 
+
+```{r}
+# write code here
+q1_mod <- glm(canlft ~ sex, data = my_data, family = binomial)
+
+summary(q1_mod)
+exp(coef(q1_mod))
+exp(confint(q1_mod))
+```
+
+2. Perform logistic regression with cannabis use (`canlft`) as the outcome and 
+sex (`sex`) and treatment status (`tx`) as predictors. Obtain estimates and confidence
+intervals for the exponentiated coefficients. Provide an interpretation 
+of the output. 
+
+```{r}
+# write code here
+q2_mod <- glm(canlft ~ sex + tx, data = my_data, family = binomial)
+
+summary(q2_mod)
+exp(coef(q2_mod))
+exp(confint(q2_mod))
+
+```
+
+
