@@ -22,6 +22,21 @@ We will be using the following sample data in our tutorials:
 
 Here is the [data documentation](https://jpspeng.github.io/crisp_notes/pages/Crisp-2024-sample100-dictionary.pdf). 
 
+## Lessons 
+
+| Day | Topic | Powerpoint | Notes and Exercises | R Markdown |
+|----------|----------|----------| ----------| ----------|
+| Day 1 (7/6/26) | Getting started with R   | [PPTX]     | [Notes and exercises]     | [RMD]  |
+
+
+## Homeworks
+
+Homeworks for this course are optional but encouraged! You can turn in homework by emailing me at jpspeng@uw.edu, and I will aim to provide feedback to you by the following Wednesday.  
+
+1. Homework 1: due Friday, July 10
+2. Homework 2 (midterm): due Friday, July 17
+3. Homework 3 (final): due Thursday, July 16 
+
 --- 
 
 ## Old Courses 
