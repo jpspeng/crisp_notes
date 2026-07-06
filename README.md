@@ -9,8 +9,9 @@ By the end of the course, you will be able to:
 * Learn about basic syntax in R (objects, functions, etc.) 
 * Perform basic data processing and manipulation
 * Create basic data summaries and create a “Table 1”
-* Perform linear and logistic regression 
-* Other potential topics: more syntax (lists, loops, functions), plotting using ggplot2, survival analysis using Cox regression, using ChatGPT for coding
+* Perform linear and logistic regression
+* Create plots with the `ggplot2` package
+* Other potential topics: more syntax (lists, loops, functions), survival analysis using Cox regression, using AI tools for coding
 
 The goal of this course is to get a taste for how to code in R; it is not meant to be comprehensive! 
 
@@ -21,22 +22,28 @@ We will be using the following sample data in our tutorials:
 
 Here is the [data documentation](https://jpspeng.github.io/crisp_notes/pages/Crisp-2024-sample100-dictionary.pdf). 
 
-## Lessons 
+--- 
+
+## Old Courses 
+
+Here are the files from the CRISP 2025 course.
+
+### 2025
+
+#### Lessons 
 
 | Day | Topic | Powerpoint | Notes and Exercises | R Markdown |
 |----------|----------|----------| ----------| ----------|
-| Day 1 (7/7) | Getting started with R [(Recording)](https://washington.zoom.us/rec/share/xS-0EjKlYLbrXihW4LUw2dfitoVJZC6hYPbovslDAdrZYxuVbMr-ei9P-UIbXXcT._mrf8OTTY1USV9k-?startTime=1751949750000)   | [PPTX](https://jpspeng.github.io/crisp_notes/powerpoints_2025/crisp_2025_R_day1.pptx)     | [Notes and exercises](https://jpspeng.github.io/crisp_notes/notebooks_2025/crisp_2025_day1.html)     | [RMD](https://jpspeng.github.io/crisp_notes/notebooks_2025/crisp_2025_day1.Rmd) / [Answer Key](https://jpspeng.github.io/crisp_notes/notebooks_2025/crisp_2025_day1_answers.Rmd)   |
-| Day 2 (7/9)    | Basic syntax [(Recording)](https://washington.zoom.us/rec/share/3TGMegNu_lK2Dd5tyS-Rz42N5xwQ95UHwrj-BAjpd7EHx6OMhGSh-9sAVuHDVJjH.j8ANygOalg7KPjnn)     | [PPTX](https://jpspeng.github.io/crisp_notes/powerpoints_2025/crisp_2025_R_day2.pptx)     | [Notes and exercises](https://jpspeng.github.io/crisp_notes/notebooks_2025/crisp_2025_day2.html)   | [RMD](https://jpspeng.github.io/crisp_notes/notebooks_2025/crisp_2025_day2.Rmd) / [Answer Key](https://jpspeng.github.io/crisp_notes/notebooks_2025/crisp_2025_day2_answers.Rmd)   |
-| Day 3 (7/11)    | Data processing and manipulation [(Recording)](https://washington.zoom.us/rec/share/iREzt3feeubSgfDnwPSooL2uulQ38uuGAxV6O7K1_WnQOsxsU79myFAnfv2aJzkb.d7PXEiySnDNYhEoB)    | [PPTX](https://jpspeng.github.io/crisp_notes/powerpoints_2025/crisp_2025_R_day3.pptx)    | [Notes and exercises](https://jpspeng.github.io/crisp_notes/notebooks_2025/crisp_2025_day3.html)      | [RMD](https://jpspeng.github.io/crisp_notes/notebooks_2025/crisp_2025_day3.Rmd)    |
-| Day 4 (7/14)    | Using dplyr and table1 [(Recording)](https://washington.zoom.us/rec/share/qb7InVbXLbX2jTmUGWtA-VSRQWsEoTy5hm65g_Aq0_dViOL98r3w51N5KhadBiZi.46iJ7LS8OIndrY-B)   | [PPTX](https://jpspeng.github.io/crisp_notes/powerpoints_2025/crisp_2025_R_day4.pptx)    | [Notes and exercises](https://jpspeng.github.io/crisp_notes/notebooks_2025/crisp_2025_day4.html)      | [RMD](https://jpspeng.github.io/crisp_notes/notebooks_2025/crisp_2025_day4.Rmd) / [Answer Key](https://jpspeng.github.io/crisp_notes/notebooks_2025/crisp_2025_day4_answers.Rmd)    |
-| Day 5 (7/16)    | Factor variables and hypothesis testing [(Recording)](https://washington.zoom.us/rec/share/MyCyY2KQsGZ3lqbK_19wjuO70VAMJ4lyxjRO-SyTylg9Amo7Po1oPVbGscSOkyXj.weZugf2Owmpmt8zN)  | [PPTX](https://jpspeng.github.io/crisp_notes/powerpoints_2025/crisp_2025_R_day5.pptx)    | [Notes and exercises](https://jpspeng.github.io/crisp_notes/notebooks_2025/crisp_2025_day5.html)      | [RMD](https://jpspeng.github.io/crisp_notes/notebooks_2025/crisp_2025_day5.Rmd) / [Midterm CSV](https://jpspeng.github.io/crisp_notes/notebooks_2025/midterm_practicum_sample.csv) / [Answer Key](https://jpspeng.github.io/crisp_notes/notebooks_2025/crisp_2025_day5_answers.Rmd)   |
-| Day 6 (7/18)    | Linear regression [(Recording)](https://washington.zoom.us/rec/share/jm8RgqOqjwTqWijwHUjD94SHKPdyrh8mu7CkxD5v44sVKfQeOlC7I1GIvnI7OyY.T6PZQ_VMFsw3-6_K) | [PPTX](https://jpspeng.github.io/crisp_notes/powerpoints_2025/crisp_2025_R_day6.pptx) / [Annotated Notes](https://jpspeng.github.io/crisp_notes/powerpoints_2025/crisp_2025_R_day6_annotated.pdf)    | [Notes and exercises](https://jpspeng.github.io/crisp_notes/notebooks_2025/crisp_2025_day6.html)      | [RMD](https://jpspeng.github.io/crisp_notes/notebooks_2025/crisp_2025_day6.Rmd) / [Answer Key](https://jpspeng.github.io/crisp_notes/notebooks_2025/crisp_2025_day6_answers.Rmd)    |
-| Day 7 (7/21)    | Logistic regression [(Recording)](https://washington.zoom.us/rec/share/1amS8_sK7F8NwDTwr79SU1bapit5imbRowJ_-bFBW1mIxXqoGltddtXzicG8l4hu.eb3t432KdQAPMB7y) | [PPTX](https://jpspeng.github.io/crisp_notes/powerpoints_2025/crisp_2025_R_day7.pptx) / [Annotated Notes](https://jpspeng.github.io/crisp_notes/powerpoints_2025/crisp_2025_R_day7_annotated.pdf)    | [Notes and exercises](https://jpspeng.github.io/crisp_notes/notebooks_2025/crisp_2025_day7.html)      | [RMD](https://jpspeng.github.io/crisp_notes/notebooks_2025/crisp_2025_day7.Rmd) / [Answer Key](https://jpspeng.github.io/crisp_notes/notebooks_2025/crisp_2025_day7_answers.Rmd)   |
-| Day 8 (7/21)    | Plotting with ggplot2 [(Recording)](https://washington.zoom.us/rec/share/Pa15TOgRwE9ENWMNCUBdPrHynRsu7MtWtd4OQGFUDvt9zdfRp43VKQBWmf3UczoS.MeAh8xgfuUIc_D5h) | [PPTX](https://jpspeng.github.io/crisp_notes/powerpoints_2025/crisp_2025_R_day8.pptx)    | [Notes and exercises](https://jpspeng.github.io/crisp_notes/notebooks_2025/crisp_2025_day8.html)      | [RMD](https://jpspeng.github.io/crisp_notes/notebooks_2025/crisp_2025_day8.Rmd) / [Demo CSV](https://jpspeng.github.io/crisp_notes/notebooks_2025/chatgpt_demo.csv) / [Answer Key](https://jpspeng.github.io/crisp_notes/notebooks_2025/crisp_2025_day8_answers.Rmd)   |
+| Day 1 (7/7) | Getting started with R   | [PPTX](https://jpspeng.github.io/crisp_notes/powerpoints_2025/crisp_2025_R_day1.pptx)     | [Notes and exercises](https://jpspeng.github.io/crisp_notes/notebooks_2025/crisp_2025_day1.html)     | [RMD](https://jpspeng.github.io/crisp_notes/notebooks_2025/crisp_2025_day1.Rmd)  |
+| Day 2 (7/9)    | Basic syntax     | [PPTX](https://jpspeng.github.io/crisp_notes/powerpoints_2025/crisp_2025_R_day2.pptx)     | [Notes and exercises](https://jpspeng.github.io/crisp_notes/notebooks_2025/crisp_2025_day2.html)   | [RMD](https://jpspeng.github.io/crisp_notes/notebooks_2025/crisp_2025_day2.Rmd)   |
+| Day 3 (7/11)    | Data processing and manipulation    | [PPTX](https://jpspeng.github.io/crisp_notes/powerpoints_2025/crisp_2025_R_day3.pptx)    | [Notes and exercises](https://jpspeng.github.io/crisp_notes/notebooks_2025/crisp_2025_day3.html)      | [RMD](https://jpspeng.github.io/crisp_notes/notebooks_2025/crisp_2025_day3.Rmd)    |
+| Day 4 (7/14)    | Using dplyr and table1   | [PPTX](https://jpspeng.github.io/crisp_notes/powerpoints_2025/crisp_2025_R_day4.pptx)    | [Notes and exercises](https://jpspeng.github.io/crisp_notes/notebooks_2025/crisp_2025_day4.html)      | [RMD](https://jpspeng.github.io/crisp_notes/notebooks_2025/crisp_2025_day4.Rmd)    |
+| Day 5 (7/16)    | Factor variables and hypothesis testing  | [PPTX](https://jpspeng.github.io/crisp_notes/powerpoints_2025/crisp_2025_R_day5.pptx)    | [Notes and exercises](https://jpspeng.github.io/crisp_notes/notebooks_2025/crisp_2025_day5.html)      | [RMD](https://jpspeng.github.io/crisp_notes/notebooks_2025/crisp_2025_day5.Rmd) / [Midterm CSV](https://jpspeng.github.io/crisp_notes/notebooks_2025/midterm_practicum_sample.csv)  |
+| Day 6 (7/18)    | Linear regression | [PPTX](https://jpspeng.github.io/crisp_notes/powerpoints_2025/crisp_2025_R_day6.pptx) / [Annotated Notes](https://jpspeng.github.io/crisp_notes/powerpoints_2025/crisp_2025_R_day6_annotated.pdf)    | [Notes and exercises](https://jpspeng.github.io/crisp_notes/notebooks_2025/crisp_2025_day6.html)      | [RMD](https://jpspeng.github.io/crisp_notes/notebooks_2025/crisp_2025_day6.Rmd)   |
+| Day 7 (7/21)    | Logistic regression | [PPTX](https://jpspeng.github.io/crisp_notes/powerpoints_2025/crisp_2025_R_day7.pptx) / [Annotated Notes](https://jpspeng.github.io/crisp_notes/powerpoints_2025/crisp_2025_R_day7_annotated.pdf)    | [Notes and exercises](https://jpspeng.github.io/crisp_notes/notebooks_2025/crisp_2025_day7.html)      | [RMD](https://jpspeng.github.io/crisp_notes/notebooks_2025/crisp_2025_day7.Rmd)   |
+| Day 8 (7/21)    | Plotting with ggplot2 | [PPTX](https://jpspeng.github.io/crisp_notes/powerpoints_2025/crisp_2025_R_day8.pptx)    | [Notes and exercises](https://jpspeng.github.io/crisp_notes/notebooks_2025/crisp_2025_day8.html)      | [RMD](https://jpspeng.github.io/crisp_notes/notebooks_2025/crisp_2025_day8.Rmd) / [Demo CSV](https://jpspeng.github.io/crisp_notes/notebooks_2025/chatgpt_demo.csv)   |
 
-
-
-## Extra Lessons 
+#### Extra Lessons 
 
 We won't have time to cover everything in this mini-course. Here are some additional guides to help you with R: 
 
@@ -51,15 +58,9 @@ We won't have time to cover everything in this mini-course. Here are some additi
 | Cox regression | [Notes and exercises](https://jpspeng.github.io/crisp_notes/pages/cox_regression.html)| [RMD](https://jpspeng.github.io/crisp_notes/pages/cox_regression.Rmd)|
 
 
-
-
---- 
-
-## Old Courses 
-
 ### 2024 
 
-Here are the files from the CRISP 2024 course 
+Here are the files from the CRISP 2024 course.
 
 #### Data 
 
