@@ -58,6 +58,8 @@ We won't have time to cover everything in this mini-course. Here are some additi
 | Cox regression | [Notes and exercises](https://jpspeng.github.io/crisp_notes/pages/cox_regression.html)| [RMD](https://jpspeng.github.io/crisp_notes/pages/cox_regression.Rmd)|
 
 
+--- 
+
 ### 2024 
 
 Here are the files from the CRISP 2024 course.
