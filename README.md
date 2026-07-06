@@ -33,9 +33,9 @@ Here is the [data documentation](https://jpspeng.github.io/crisp_notes/pages/Cri
 
 Homeworks for this course are optional but encouraged! You can turn in homework by emailing me at jpspeng@uw.edu, and I will aim to provide feedback to you by the following Wednesday.  
 
-1. Homework 1: due Friday, July 10
+1. Homework 1: due Monday, July 13
 2. Homework 2 (midterm): due Friday, July 17
-3. Homework 3 (final): due Thursday, July 16 
+3. Homework 3 (final): due Thursday, July 23 
 
 --- 
 
