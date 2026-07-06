@@ -11,7 +11,7 @@ By the end of the course, you will be able to:
 * Create basic data summaries and create a “Table 1”
 * Perform linear and logistic regression
 * Create plots with the `ggplot2` package
-* Other potential topics: more syntax (lists, loops, functions), survival analysis using Cox regression, using AI tools for coding
+* Other potential topics: survival analysis using Cox regression, using AI tools for coding
 
 The goal of this course is to get a taste for how to code in R; it is not meant to be comprehensive! 
 
