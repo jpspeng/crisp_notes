@@ -26,7 +26,7 @@ Here is the [data documentation](https://jpspeng.github.io/crisp_notes/pages/Cri
 
 | Day | Topic | Powerpoint | Notes and Exercises | R Markdown |
 |----------|----------|----------| ----------| ----------|
-| Day 1 (7/6/26) | Getting started with R ([Recording](https://washington.zoom.us/rec/share/Ugr5og7I6w8xhjdoXQxA7CJn_efZWCRsCRa0H3lc4mxLYqSfgmH3ABlVhvfzbtA6.r3AoM6Wny_HGL8qp?startTime=1783366528000) - sorry no sound!)   | [PPTX](https://jpspeng.github.io/crisp_notes/powerpoints_2026/crisp_2026_R_day1.pptx)     | [Notes and exercises](https://jpspeng.github.io/crisp_notes/notebooks_2026/crisp_2026_day1.html)     | [RMD](https://jpspeng.github.io/crisp_notes/notebooks_2026/crisp_2026_day1.Rmd)  |
+| Day 1 (7/6/26) | Getting started with R ([Recording](https://washington.zoom.us/rec/share/Ugr5og7I6w8xhjdoXQxA7CJn_efZWCRsCRa0H3lc4mxLYqSfgmH3ABlVhvfzbtA6.r3AoM6Wny_HGL8qp?startTime=1783366528000) - sorry no sound!)   | [PPTX](https://jpspeng.github.io/crisp_notes/powerpoints_2026/crisp_2026_R_day1.pptx)     | [Notes and exercises](https://jpspeng.github.io/crisp_notes/notebooks_2026/crisp_2026_day1.html)     | [RMD](https://jpspeng.github.io/crisp_notes/notebooks_2026/crisp_2026_day1.Rmd) / [Solutions](https://jpspeng.github.io/crisp_notes/notebooks_2026/crisp_2026_day1_answers.Rmd)  |
 | Day 2 (7/8/26) | Basic R syntax   | [PPTX](https://jpspeng.github.io/crisp_notes/powerpoints_2026/crisp_2026_R_day2.pptx)     | [Notes and exercises](https://jpspeng.github.io/crisp_notes/notebooks_2026/crisp_2026_day2.html)     | [RMD](https://jpspeng.github.io/crisp_notes/notebooks_2026/crisp_2026_day2.Rmd)  |
 
 
@@ -34,7 +34,7 @@ Here is the [data documentation](https://jpspeng.github.io/crisp_notes/pages/Cri
 
 Homeworks for this course are optional but encouraged! You can turn in homework by emailing me at jpspeng@uw.edu, and I will aim to provide feedback to you by the following Wednesday.  
 
-1. *Homework 1*: due Monday, July 13 ([HTML](https://jpspeng.github.io/crisp_notes/notebooks_2026/crisp_2026_homework1.html) / [Rmd](https://jpspeng.github.io/crisp_notes/notebooks_2026/crisp_2026_homework1.Rmd)) 
+1. *Homework 1*: due Monday, July 13 ([HTML](https://jpspeng.github.io/crisp_notes/notebooks_2026/crisp_2026_homework1.html) / [Rmd](https://jpspeng.github.io/crisp_notes/notebooks_2026/crisp_2026_homework1.Rmd) / [CSV used in the homework](https://jpspeng.github.io/crisp_notes/notebooks_2026/hw1_fake_data.csv) ) 
 2. *Homework 2 (midterm)*: due Friday, July 17
 3. *Homework 3 (final)*: due Thursday, July 23 
 
