@@ -1,0 +1,80 @@
+---
+title: 'CRISP 2026: Homework 1'
+output: html_document
+---
+
+1. Load in the library `dplyr` into R. 
+
+```{r}
+# write code here 
+
+```
+
+2. Download in the `hw1_fake_data.csv` dataset, load it into R, and save it as 
+the variable `df`. 
+
+```{r}
+# write code here 
+
+```
+
+Here is the data dictionary for this dataset:
+
+* `id`: Unique person identifier.
+* `treatment`: Treatment group indicator; `0` = control, `1` = treatment.
+* `gender`: Participant gender; `male` or `female`.
+* `weight`: Participant weight in pounds. Some values are missing.
+* `diabetes`: Diabetes status indicator; `0` = no diabetes, `1` = has diabetes.
+
+3. Count the number of rows in the dataset. 
+
+```{r}
+# write code here 
+
+```
+
+4. How many females are in the dataset? How many participants are on treatment? 
+How many participants have diabetes? 
+
+```{r}
+# write code here 
+
+```
+
+5. Provide summary statistics for the weights of all participants. How many 
+participants are missing the `weight` variable? 
+
+```{r}
+# write code here 
+
+```
+
+6. Subset the dataset into participants who have diabetes and participants who 
+don't have diabetes, selecting only the columns `id` and `diabetes`. Assign these 
+into variables with names `diabetes_df` and and `no_diabetes_df`, respectively. 
+
+```{r}
+# write code here 
+
+```
+
+7. Give summary statistics for participants' weights comparing those with 
+diabetes versus those without. 
+
+```{r}
+# write code here 
+
+```
+
+8. Comparing treated versus untreated participants: 
+* How many participants are in each group? 
+* How many participants have diabetes in each group? 
+* How many participants are male in each group? 
+* What proportion in each group have diabetes? 
+* What proportion in each group are male? 
+(Hint: Use `group_by()`, `summarise()`, and `mutate()`)
+
+```{r}
+# write code here 
+
+```
