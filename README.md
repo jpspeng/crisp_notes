@@ -26,17 +26,18 @@ Here is the [data documentation](https://jpspeng.github.io/crisp_notes/pages/Cri
 
 | Day | Topic | Powerpoint | Notes and Exercises | R Markdown |
 |----------|----------|----------| ----------| ----------|
-| Day 1 (7/6/26) | Getting started with R   | [PPTX]     | [Notes and exercises]     | [RMD]  |
+| Day 1 (7/6/26) | Getting started with R ([Recording](https://washington.zoom.us/rec/share/Ugr5og7I6w8xhjdoXQxA7CJn_efZWCRsCRa0H3lc4mxLYqSfgmH3ABlVhvfzbtA6.r3AoM6Wny_HGL8qp?startTime=1783366528000) - sorry no sound!)   | [PPTX](https://jpspeng.github.io/crisp_notes/powerpoints_2026/crisp_2026_R_day1.pptx)     | [Notes and exercises](https://jpspeng.github.io/crisp_notes/notebooks_2026/crisp_2026_day1.html)     | [RMD](https://jpspeng.github.io/crisp_notes/notebooks_2026/crisp_2026_day1.Rmd)  |
 
 
 ## Homeworks
 
 Homeworks for this course are optional but encouraged! You can turn in homework by emailing me at jpspeng@uw.edu, and I will aim to provide feedback to you by the following Wednesday.  
 
-1. Homework 1: due Monday, July 13
-2. Homework 2 (midterm): due Friday, July 17
-3. Homework 3 (final): due Thursday, July 23 
+1. *Homework 1*: due Monday, July 13 (To be posted Wednesday, July 8)
+2. *Homework 2 (midterm)*: due Friday, July 17
+3. *Homework 3 (final)*: due Thursday, July 23 
 
+--- 
 --- 
 
 ## Old Courses 
