@@ -1,5 +1,5 @@
 ---
-title: 'CRISP Day 3 2025: Dataframe processing and subsetting'
+title: 'CRISP Day 3 2026: Dataframe processing and subsetting'
 output:
   html_document:
     toc: yes
