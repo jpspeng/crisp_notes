@@ -27,7 +27,7 @@ Here is the [data documentation](https://jpspeng.github.io/crisp_notes/pages/Cri
 | Day | Topic | Powerpoint | Notes and Exercises | R Markdown |
 |----------|----------|----------| ----------| ----------|
 | Day 1 (7/6/26) | Getting started with R ([Recording](https://washington.zoom.us/rec/share/Ugr5og7I6w8xhjdoXQxA7CJn_efZWCRsCRa0H3lc4mxLYqSfgmH3ABlVhvfzbtA6.r3AoM6Wny_HGL8qp?startTime=1783366528000) - sorry no sound!)   | [PPTX](https://jpspeng.github.io/crisp_notes/powerpoints_2026/crisp_2026_R_day1.pptx)     | [Notes and exercises](https://jpspeng.github.io/crisp_notes/notebooks_2026/crisp_2026_day1.html)     | [RMD](https://jpspeng.github.io/crisp_notes/notebooks_2026/crisp_2026_day1.Rmd) / [Solutions](https://jpspeng.github.io/crisp_notes/notebooks_2026/crisp_2026_day1_answers.Rmd)  |
-| Day 2 (7/8/26) | Basic R syntax   | [PPTX](https://jpspeng.github.io/crisp_notes/powerpoints_2026/crisp_2026_R_day2.pptx)     | [Notes and exercises](https://jpspeng.github.io/crisp_notes/notebooks_2026/crisp_2026_day2.html)     | [RMD](https://jpspeng.github.io/crisp_notes/notebooks_2026/crisp_2026_day2.Rmd)  |
+| Day 2 (7/8/26) | Basic R syntax ([Recording](https://washington.zoom.us/rec/share/jnRIEy_YfAdLkhKR02BDu_k_m-5HYCxls8FQyVnhDQpqZbwLlGRA5bPUMr1ZsMx4.DpCN5uph2PqaIjmZ?startTime=1783539600000)) | [PPTX](https://jpspeng.github.io/crisp_notes/powerpoints_2026/crisp_2026_R_day2.pptx)     | [Notes and exercises](https://jpspeng.github.io/crisp_notes/notebooks_2026/crisp_2026_day2.html)     | [RMD](https://jpspeng.github.io/crisp_notes/notebooks_2026/crisp_2026_day2.Rmd) / [Solutions](https://jpspeng.github.io/crisp_notes/notebooks_2026/crisp_2026_day2_answers.Rmd)  |
 
 
 ## Homeworks
