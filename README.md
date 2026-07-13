@@ -22,7 +22,7 @@ We will be using the following sample data in our tutorials:
 
 Here is the [data documentation](https://jpspeng.github.io/crisp_notes/pages/Crisp-2024-sample100-dictionary.pdf). 
 
-Here is the CRISP survey data (version 1) [CSV file](https://jpspeng.github.io/crisp_notes/notebooks_2026/crisp_survey_data_v1.csv) 
+Here is the CRISP survey data (version 1): [CSV file](https://jpspeng.github.io/crisp_notes/notebooks_2026/crisp_survey_data_v1.csv) 
 
 ## Lessons 
 
