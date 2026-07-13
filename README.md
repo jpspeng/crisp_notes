@@ -22,6 +22,8 @@ We will be using the following sample data in our tutorials:
 
 Here is the [data documentation](https://jpspeng.github.io/crisp_notes/pages/Crisp-2024-sample100-dictionary.pdf). 
 
+Here is the CRISP survey data (version 1) [CSV file](https://jpspeng.github.io/crisp_notes/notebooks_2026/crisp_survey_data_v1.csv) 
+
 ## Lessons 
 
 | Day | Topic | Powerpoint | Notes and Exercises | R Markdown |
@@ -29,6 +31,8 @@ Here is the [data documentation](https://jpspeng.github.io/crisp_notes/pages/Cri
 | Day 1 (7/6/26) | Getting started with R ([Recording](https://washington.zoom.us/rec/share/Ugr5og7I6w8xhjdoXQxA7CJn_efZWCRsCRa0H3lc4mxLYqSfgmH3ABlVhvfzbtA6.r3AoM6Wny_HGL8qp?startTime=1783366528000) - sorry no sound!)   | [PPTX](https://jpspeng.github.io/crisp_notes/powerpoints_2026/crisp_2026_R_day1.pptx)     | [Notes and exercises](https://jpspeng.github.io/crisp_notes/notebooks_2026/crisp_2026_day1.html)     | [RMD](https://jpspeng.github.io/crisp_notes/notebooks_2026/crisp_2026_day1.Rmd) / [Solutions](https://jpspeng.github.io/crisp_notes/notebooks_2026/crisp_2026_day1_answers.Rmd)  |
 | Day 2 (7/8/26) | Basic R syntax ([Recording](https://washington.zoom.us/rec/share/jnRIEy_YfAdLkhKR02BDu_k_m-5HYCxls8FQyVnhDQpqZbwLlGRA5bPUMr1ZsMx4.DpCN5uph2PqaIjmZ?startTime=1783539600000)) | [PPTX](https://jpspeng.github.io/crisp_notes/powerpoints_2026/crisp_2026_R_day2.pptx)     | [Notes and exercises](https://jpspeng.github.io/crisp_notes/notebooks_2026/crisp_2026_day2.html)     | [RMD](https://jpspeng.github.io/crisp_notes/notebooks_2026/crisp_2026_day2.Rmd) / [Solutions](https://jpspeng.github.io/crisp_notes/notebooks_2026/crisp_2026_day2_answers.Rmd)  |
 | Day 3 (7/10/26) | Data processing and manipulation ([Recording](https://washington.zoom.us/rec/play/YtsWjOT70QxJLjjiLPdtDV8orHvbx-q54SEv82u50HuGYIrjcUiqjcNODK_JT-ScJnvSqRA99KAer2r0.Xjgwk_FDlvF1z1SH?accessLevel=meeting&canPlayFromShare=true&from=my_recording&continueMode=true&oldStyle=true&componentName=rec-play&originRequestUrl=https%3A%2F%2Fwashington.zoom.us%2Frec%2Fshare%2FcyCTpOQPT7h_Ql-wFxR_LWNIBUW8hASui2yY5bzAZYIh6aqvrTN8zwA9DT9-FWR0.91QAze54SnZnoqg0)) | [PPTX](https://jpspeng.github.io/crisp_notes/powerpoints_2026/crisp_2026_R_day3.pptx)     | [Notes and exercises](https://jpspeng.github.io/crisp_notes/notebooks_2026/crisp_2026_day3.html)     | [RMD](https://jpspeng.github.io/crisp_notes/notebooks_2026/crisp_2026_day3.Rmd)  |
+| Day 4 (7/13/26) | Using dplyr and table1 | [PPTX](https://jpspeng.github.io/crisp_notes/powerpoints_2026/crisp_2026_R_day4.pptx)     | [Notes and exercises](https://jpspeng.github.io/crisp_notes/notebooks_2026/crisp_2026_day4.html)     | [RMD](https://jpspeng.github.io/crisp_notes/notebooks_2026/crisp_2026_day4.Rmd)  |
+
 
 
 
