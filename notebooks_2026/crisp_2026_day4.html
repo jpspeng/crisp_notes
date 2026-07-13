@@ -1636,9 +1636,9 @@ median(my_data_tx0$age, na.rm = T)</code></pre>
 command: * The first step is to specify what groups you want to examine
 and place it as an argument in the <code>group_by()</code> function. *
 The next step is to configure what summaries you want to perform, and
-specify it in the <code>summary()</code> function. The syntax inside
+specify it in the <code>summarise()</code> function. The syntax inside
 summary, for some generic summary function, looks like
-<code>summary(label = function(column))</code>. For example:</p>
+<code>summarise(label = function(column))</code>. For example:</p>
 <pre class="r"><code>my_data %&gt;% 
   group_by(tx) %&gt;% # study each group
   summarise(mean_age = mean(age)) # want to pull the mean age for each treatment</code></pre>
@@ -1700,8 +1700,8 @@ my_data %&gt;%
 ## 1     0               56        39      0.696
 ## 2     1               44        32      0.727</code></pre>
 </div>
-<div id="data-exploration" class="section level1">
-<h1>Data exploration</h1>
+<div id="crisp-survey-data-exploration" class="section level1">
+<h1>CRISP survey data exploration</h1>
 <p>Let’s explore the CRISP survey data using the tools that you have
 learned so far!</p>
 <ul>
@@ -1745,8 +1745,8 @@ anxious, depressed, or irritable (<code>1</code> = Never; <code>2</code>
 = Severe; <code>5</code> = Very severe).</li>
 </ul>
 <pre class="r"><code>crisp_survey_df &lt;- read.csv(&quot;crisp_survey_data_v1.csv&quot;)</code></pre>
-<p>One example: how many hours of sleep do those under 33 or younger
-tend to get? What about over 33?</p>
+<p>One example: find the mean number of hours of sleep that those 33 or
+younger get? What about over 33?</p>
 <pre class="r"><code>crisp_survey_df %&gt;% 
   group_by(age_group) %&gt;% 
   summarise(count = n(), 
