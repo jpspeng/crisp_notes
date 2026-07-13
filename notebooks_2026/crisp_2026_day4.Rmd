@@ -1,0 +1,305 @@
+---
+title: 'CRISP Day 4 2026: dplyr and table1'
+output:
+  html_document:
+    toc: yes
+    toc_float: yes
+---
+
+```{r setup, include=FALSE}
+library(dplyr)
+```
+
+In today's lesson, we will learn about how to group and summarize data using
+the `dplyr` and `table1` package. 
+
+```{r}
+my_data <- read.csv("crisp-2024-sample100.csv")
+```
+
+# Review exercise 
+
+**Example:** Create a new column called `risk_score` which adds up the columns 
+`canlft`, `smoke100`, and `coclft`. 
+
+What is the mean score among men (`sex == 0`)? What is the mean score among women
+(`sex == 1`)?
+
+Hint: First, use `mutate()` to create the new variable. Then use `filter()`
+to filter for the subgroups. Remember that you can create and reference new 
+variables as you go along. 
+
+```{r}
+# write code here
+
+```
+
+# Summaries for subgroups (copied from Day 3)
+
+Remember how we can obtain descriptive summaries for the entire dataset, by 
+using functions like `mean()`, `sd()`, `median()`, `min()`, and `max()`.
+
+```{r}
+mean(my_data$age)
+median(my_data$bmi, na.rm = T)
+```
+
+What if we wanted to obtain these summaries for specific groups? Say, for example, 
+we wanted to find the median `age`  for each treatment (`tx`). 
+
+One option is to do this in two steps: 
+* Create a subsetted dataset for each treatment 
+* Manually find the median 
+
+```{r}
+my_data_tx0 <- my_data %>% filter(tx == 0)
+my_data_tx1 <- my_data %>% filter(tx == 1)
+
+median(my_data_tx0$age, na.rm = T)
+median(my_data_tx1$age, na.rm = T)
+```
+
+With the `dplyr` package, you can do this all in one command: 
+* The first step is to specify what groups you want to examine and place it as 
+an argument in the `group_by()` function. 
+* The next step is to configure what summaries you want to perform, and specify 
+it in the `summary()` function. The syntax inside summary, for some generic summary
+function, looks like `summary(label = function(column))`. For example:
+
+```{r}
+my_data %>% 
+  group_by(tx) %>% # study each group
+  summarise(mean_age = mean(age)) # want to pull the mean age for each treatment
+```
+
+**Example:** Use `group_by()` and `summarise()` to find the median BMI for each sex. 
+
+```{r}
+# write code below 
+
+```
+
+With `summarise()`, you can obtain multiple summaries at once. For example, suppose
+that we wanted to get the mean age, standard deviation of the age, and the minimum 
+age for each treatment group. 
+
+```{r}
+my_data %>% 
+  group_by(tx) %>% 
+  summarise(mean_age = mean(age), 
+            sd_age = sd(age), 
+            min_age = min(age)) 
+```
+
+You can also count the number of observations in each group with `n()`: 
+
+```{r}
+my_data %>% 
+  group_by(tx) %>% 
+  summarise(num_participants = n())
+```
+
+And, you can count the number of observations based on some logic using `sum()`, 
+with a logic statement inside the parenthesis: 
+
+```{r}
+my_data %>% 
+  group_by(tx) %>% 
+  summarise(num_males = sum(sex == 0), # count the number of males in each treatment arm
+            missing_mhdx = sum(is.na(mhdx))) # count the number missing mhdx
+```
+
+**Example:** Explain what the code below does. Modify it to add the proportion
+of females in each treatment arm into the table. 
+
+```{r}
+# write code below 
+my_data %>% 
+  group_by(tx) %>% 
+  summarise(num_participants = n(), 
+            num_males = sum(sex == 0)) %>% 
+  mutate(prop_males = num_males / num_participants)
+
+```
+
+# Data exploration
+
+Let's explore the CRISP survey data using the tools that you have learned so far! 
+
+* `record_id`: Unique REDCap survey record number.
+* `age_group`: Age category (`0` = 33 or younger; `1` = older than 33).
+* `sex`: Sex (`1` = Woman; `2` = Man; `3` = Non-binary; `4` = Prefer not to say).
+* `pet_preference`: Pet preference (`1` = Dogs; `2` = Cats; `3` = Both; `4` = Neither).
+* `morning_or_evening_person`: Time-of-day preference (`1` = Morning; `2` = Evening; `3` = Equal or neither).
+* `food_preference`: Food preference (`1` = Gourmet; `2` = Upscale; `3` = Home cooking; `4` = Fast food).
+* `spent_time_in_nature`: Spent at least two hours in nature during the past week (`0` = No; `1` = Yes).
+* `interacted_with_clubs`: Interacted with at least one club or organization during the past week (`0` = No; `1` = Yes).
+* `resistance_training_workouts`: Number of resistance-training workouts during the past week (`0` = 0 or 1; `2`–`9` = corresponding number; `10` = 10 or more).
+* `hours_of_sleep`: Average hours of sleep per night (`0` = 0 or 1; `2`–`9` = corresponding number; `10` = 10 or more).
+* `packaged_snacks_per_day`: Average number of packaged snacks consumed per day (`0` = 0 or 1; `2`–`9` = corresponding number; `10` = 10 or more).
+* `anxious_depressed_or_irritable`: Frequency of feeling anxious, depressed, or irritable (`1` = Never; `2` = Rarely; `3` = Sometimes; `4` = Often; `5` = Always).
+* `fatigue_rating`: Average fatigue rating (`1` = None; `2` = Mild; `3` = Moderate; `4` = Severe; `5` = Very severe).
+
+```{r}
+crisp_survey_df <- read.csv("crisp_survey_data_v1.csv")
+```
+
+One example: how many hours of sleep do those under 33 or younger tend to get? 
+What about over 33? 
+
+```{r}
+crisp_survey_df %>% 
+  group_by(age_group) %>% 
+  summarise(count = n(), 
+            mean_sleep = mean(hours_of_sleep, na.rm = T))
+```
+
+Come up with your own questions and explore the data: 
+
+```{r}
+# write code here 
+```
+
+
+# Creating Table 1's 
+
+We have learned everything that we need to make a "Table 1" by hand. 
+
+```{r}
+my_data %>% 
+  group_by(tx) %>% 
+  summarise(mean_age = mean(age), 
+            sd_age = sd(age))
+```
+
+The problem with this can be a very manual, time-intensive process, if we 
+have to do this for every variable. Alternatively, we can use the `table1` 
+package to help us do this. 
+
+## Factor variables 
+
+Before we get into learning how to use the `table1` package, we will need to 
+first learn about **factor** variable types. 
+
+Each dataframe column can have different types. Some variable are *string* variables 
+(e.g. text); others are *numeric* variables (e.g. numbers). There is another type 
+of variable in R, called a **factor**. These are categorical variables, which often 
+are coded as integers in a dataset (e.g. 0, 1, 2, etc.). 
+
+One example: we may want to consider the variable `tx` in the crisp-2024-sample100.csv 
+dataset as a factor variable because it only takes two distinct values: 0 and 1, where
+0 corresponds to BUP-NX and 1 corresponds to XR-NTX. 
+
+```{r}
+table(my_data$tx)
+```
+
+By default, R will read in number variables as in *numeric*. It starts off by 
+thinking this column is just a number. But, we may want to change it into a 
+factor before we perform our analysis. To do this, we can use the following line of code: 
+
+```{r}
+# using base R 
+# the labels correspond to the order of the numbers (i.e. 0 = BUP-NX, 1 = XR-NTX)
+my_data$tx_factor <- factor(my_data$tx, labels = c("BUP-NX", "XR-NTX"))
+my_data[ , c("tx", "tx_factor")]
+```
+
+```{r}
+# using dplyr
+my_data %>% 
+  mutate(tx_factor = factor(tx, labels = c("BUP-NX", "XR-NTX"))) %>% 
+  select(tx, tx_factor)
+```
+
+**Example:** Complete the following code to convert the following variables 
+into factor variables with the following labels: 
+
+* `sex`: 0 = males, 1 = females 
+* `insure`: 0 = uninsured, 1 = insured
+* `smoke100`: 0 = no, 1  = yes
+* `mhdx`: 0 = no, 1 = yes
+
+```{r}
+# complete the "FILL IN HERE" blanks in the code below 
+my_data_factor <- my_data %>% 
+  mutate(tx = factor(tx, labels = c("BUP-NX", "XR-NTX")),
+         sex = "FILL IN HERE", 
+         insure = "FILL IN HERE", 
+         smoke100 = "FILL IN HERE", 
+         mhdx = "FILL IN HERE") 
+
+```
+
+**Note**: Remember the `summary()` function? Once we convert the variables into 
+factors, we can now use it to correctly summarize categorical variables in the data. 
+
+```{r}
+summary(my_data_factor)
+```
+
+## Using `table1` package
+
+Let's read in the package: 
+
+```{r, message = F}
+library(table1)
+```
+
+Before we use this package, we will need to convert our categorical variables 
+into factors. Luckily, we already did this in Example 3. This is a necessary 
+first step if there are coded categorical variables, or else the `table1` 
+package will this that these columns are numeric!
+
+After this, we can run the `table1()` function: 
+
+```{r}
+table1(~ age | tx, data = my_data_factor)
+```
+
+The `table1()` function includes two argument: 
+
+* First, we specify the formula for
+how we want the table to look. This formula takes the form `~ var1 | var2`, where
+`var1` are the columns that we want to summarize, followed by a `|`, and then `var2`, 
+which is the column that we want to stratify by. So `~ age | tx` means that we want to 
+summarize the age column, stratified across the two treatment arms. 
+* Next, we specify the dataframe, which is why we include a `data = my_data_factor` additional argument. 
+
+We can add variables to summarize by using `+`. The following line of code summarizes 
+both the age and sex variable across treatment arms: 
+
+```{r}
+table1(~ age + sex | tx, data = my_data_factor)
+```
+Note that by default, `table1` will provide the mean, median, min, max, and standard 
+deviation for continuous numeric variables and proportions for categorical factor variables.
+
+We can change the labels in these Table 1's by setting labels 
+for each column of interest. To do this, the code looks like this: 
+
+```{r}
+label(my_data_factor$sex) <- "Sex"
+label(my_data_factor$age) <- "Age"
+
+table1(~ age + sex | tx, data = my_data_factor)
+
+```
+
+
+# Exercises
+
+1. Write code to calculate the mean and standard deviation of BMI of those who 
+are insured (`insure == 1`) versus those not who are not. 
+
+```{r}
+# write code here (HINT: use group_by() and summarise())
+```
+
+2. Write code to show descriptive statistics of the CRISP survey data using 
+the `table1` package. 
+
+```{r}
+# write code here 
+```
+
