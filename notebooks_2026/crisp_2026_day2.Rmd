@@ -4,8 +4,8 @@ output:
   html_document:
     toc: yes
     toc_float: yes
+    df_print: paged
 ---
-
 
 In today's lesson, we will learn basic R syntax.  
 
@@ -86,7 +86,10 @@ multiplied by 20. Print `new_test_var`.
 
 ```{r}
 # write code here 
+test_var <- 10  
+new_test_var <- test_var * 20
 
+new_test_var
 ```
 
 # Variable types 
@@ -104,6 +107,10 @@ my_str <- "This is my string"
 # They can also be written as T/F 
 my_boolean <- TRUE
 
+my_data <- read.csv("crisp-2024-sample100.csv")
+```
+
+```{r}
 my_data <- read.csv("crisp-2024-sample100.csv")
 ```
 
@@ -133,6 +140,8 @@ my_vec[4]
 This line of code selects the first and fourth element of the vector: 
 
 ```{r}
+# want select the 1st and 4th element 
+# [] = subsetting 
 my_vec[c(1,4)]
 ```
 
@@ -140,6 +149,8 @@ This line of code selects the first four elements of the vector.
 
 ```{r}
 my_vec[c(1,2,3,4)]
+# we can make this a little shorter 
+my_vec[1:4] # colon means to take all integers between the two numbers 
 ```
 
 (Note: the `a:b` syntax is a shortcut for writing a vector `c(a, a+1,...,b-1, b)`)
@@ -162,13 +173,16 @@ my_even_vec
 ```
 
 **Example**: Create a new variable vector called `test_vec`. Set it equal to 
-the a vector containing the numbers 1 through 5. Multiply the vector by 10, 
+the vector containing the numbers 1 through 5. Multiply the vector by 10, 
 and then save the result as a new vector called `new_test_vec`. Then select 
 the 2nd through 4th element of `new_test_vec`. 
 
 ```{r}
 # write code here 
+test_vec <- 1:5
+new_test_vec <- test_vec * 10 
 
+new_test_vec[2:4]
 ```
 
 # Functions 
@@ -184,6 +198,7 @@ and returns the mean of the vector.
 ```{r}
 my_numbers <- c(1, 2, 4, 5, 6)
 
+# uses the mean() function on my_numbers 
 mean(my_numbers)
 ```
 
@@ -211,7 +226,7 @@ mean(x = my_numbers)
 
 ```{r}
 # write code here 
-
+round(3.14159, 3)
 ```
 
 # Writing your own functions (*optional*)
@@ -330,7 +345,7 @@ We can use the `head()` function to look at the first few rows of the `cars`
 dataset.
 
 ```{r}
-head(cars)
+cars
 ```
 
 We can also read in dataframes. If your data is in a csv format, then you can use 
@@ -346,6 +361,8 @@ We may want to count the number of rows and columns of our dataset.
 We can use the `nrow()` and `ncol()` function to do this: 
 
 ```{r}
+# nrow() and ncol() are functions that take in the dataframe as an argument
+# outputs the rows and columns, respectively 
 nrow(my_data)
 ncol(my_data)
 ```
@@ -372,6 +389,8 @@ mean age by using the `mean()` function:
 
 ```{r}
 mean(age_vec)
+median(age_vec)
+sd(age_vec)
 ```
 
 Note that we combine this into a single step by just directly taking the mean 
@@ -425,6 +444,7 @@ the `summary()` function to obtain the minimum, 25th percentile, median,
 mean, 75th percentile, and maximum of the data, with one line of code: 
 
 ```{r}
+# for numeric variables
 summary(my_data$age)
 ```
 
@@ -433,6 +453,7 @@ of 0 or 1, corresponding to BUP-NX and XR-NTX, respectively. How can we get coun
 of each category? We can use the `table()` function to obtain these counts: 
 
 ```{r}
+# for binary variables, use the table() function 
 table(my_data$tx)
 ```
 
@@ -453,6 +474,8 @@ Is there any missing data in these columns?
 
 ```{r}
 # write code below
+table(my_data$insure, useNA = "always")
+table(my_data$smoke100, useNA = "always")
 
 ```
 

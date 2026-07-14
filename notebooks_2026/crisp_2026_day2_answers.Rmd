@@ -4,6 +4,7 @@ output:
   html_document:
     toc: yes
     toc_float: yes
+    df_print: paged
 ---
 
 In today's lesson, we will learn basic R syntax.  
