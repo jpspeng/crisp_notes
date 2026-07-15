@@ -1,0 +1,326 @@
+---
+title: 'CRISP Day 5 2026: Creating Table 1s and comparing means/proportions'
+output:
+  html_document:
+    toc: yes
+    toc_float: yes
+    df_print: paged
+---
+
+```{r, warning = F, message = F}
+library(dplyr)
+```
+
+```{r}
+my_data <- read.csv("crisp-2024-sample100.csv")
+```
+
+## Introduction 
+
+Last time, we learned how to construct summaries of subgroups of our data. To do
+this, we first `group_by()` the subgroup of interest and then define our summary 
+in the `summarise()` function. For example: 
+
+```{r}
+my_data %>% 
+  group_by(tx) %>% 
+  summarise(mean_age = mean(age), 
+            sd_age = sd(age), 
+            mean_bmi = mean(bmi, na.rm = T), 
+            sd_bmi = sd(bmi, na.rm = T),
+            num_males = sum(sex == 0))
+```
+
+What if we want to do this for several variables? Doing this manually 
+will take a long time! Today, we are going to learn a shortcut for doing this 
+using the `table1` package. 
+
+## Factor variables 
+
+Before we get into learning how to use the `table1` package, we will need to 
+first learn about **factor** variable types. 
+
+Each dataframe column can have different types. Some variable are *string* variables 
+(e.g. text); others are *numeric* variables (e.g. numbers). There is another type 
+of variable in R, called a **factor**. These are categorical variables, which often 
+are coded as integers in a dataset (e.g. 0, 1, 2, etc.). 
+
+One example: we may want to consider the variable `tx` in the crisp-2024-sample100.csv 
+dataset as a factor variable because it only takes two distinct values: 0 and 1, where
+0 corresponds to BUP-NX and 1 corresponds to XR-NTX. 
+
+```{r}
+table(my_data$tx)
+```
+
+By default, R will read in number variables as in *numeric*. It starts off by 
+thinking this column is just a number. But, we may want to change it into a 
+factor before we perform our analysis. To do this, we can use the following line of code: 
+
+```{r}
+my_data %>% 
+  mutate(tx_factor = factor(tx, labels = c("BUP-NX", "XR-NTX"))) %>% 
+  select(tx, tx_factor)
+```
+
+**Example:** Complete the following code to convert the following variables 
+into factor variables with the following labels: 
+
+* `sex`: 0 = males, 1 = females 
+* `insure`: 0 = uninsured, 1 = insured
+* `smoke100`: 0 = no, 1  = yes
+* `mhdx`: 0 = no, 1 = yes
+
+```{r}
+# complete the "FILL IN HERE" blanks in the code below 
+my_data_factor <- my_data %>% 
+  mutate(tx = factor(tx, labels = c("BUP-NX", "XR-NTX")),
+         insure = factor(insure, labels = c("uninsured", "insured")),
+         sex = "FILL IN HERE", 
+         smoke100 = "FILL IN HERE", 
+         mhdx = "FILL IN HERE") 
+
+```
+
+**Note**: Remember the `summary()` function? Once we convert the variables into 
+factors, we can now use it to correctly summarize categorical variables in the data. 
+
+```{r}
+summary(my_data_factor)
+```
+
+## Using `table1` package
+
+Let's read in the package: 
+
+```{r, message = F}
+library(table1)
+```
+
+Before we use this package, we will need to convert our categorical variables 
+into factors. Luckily, we already did this in the previous example. This is a necessary 
+first step if there are coded categorical variables, or else the `table1` 
+package will this that these columns are numeric!
+
+After this, we can run the `table1()` function: 
+
+```{r}
+table1(~ age | tx, data = my_data_factor)
+```
+
+The `table1()` function includes two argument: 
+
+* First, we specify the formula for
+how we want the table to look. This formula takes the form `~ var1 | var2`, where
+`var1` are the columns that we want to summarize, followed by a `|`, and then `var2`, 
+which is the column that we want to stratify by. So `~ age | tx` means that we want to 
+summarize the age column, stratified across the two treatment arms. 
+* Next, we specify the dataframe, which is why we include a `data = my_data_factor` additional argument. 
+
+We can add variables to summarize by using `+`. The following line of code summarizes 
+both the age and sex variable across treatment arms: 
+
+```{r}
+table1(~ age + sex | tx, data = my_data_factor)
+```
+
+Note that by default, `table1` will provide the mean, median, min, max, and standard 
+deviation for continuous numeric variables and proportions for categorical factor variables.
+
+We can also obtain the overall summary statistics by excluding the `|` notation. 
+For example: 
+
+```{r}
+table1(~ age + sex, data = my_data_factor)
+```
+
+We can change the labels in these Table 1's by setting labels 
+for each column of interest. To do this, the code looks like this: 
+
+```{r}
+label(my_data_factor$sex) <- "Sex"
+label(my_data_factor$age) <- "Age"
+
+table1(~ age + sex | tx, data = my_data_factor)
+
+```
+
+**Example**: Write code to create a table summarizing the age (`age`), 
+number of years of education (`educyrs`), insurance statue (`insure`), 
+and smoking status (`smoke100`) stratified by treatment `tx` 
+using the `table1` package. 
+
+```{r}
+# write code here
+```
+
+## Comparing means 
+
+Table 1's often include p-values which tell us whether there is a significant 
+difference between groups using a hypothesis test. 
+
+For hypothesis testing, we start off by specifying a null hypothesis, 
+which is the statement that we want to disprove. So if our question is: "Are the 
+mean ages in the two treatment groups different?" then our null hypothesis ($H_0$) 
+would be that the mean ages in the two treatment groups are the same: 
+
+$H_0$: Mean age in `tx == 0` group EQUALS mean age in the `tx == 1` group
+
+The alternative hypothesis ($H_a$) is the opposite, which is: 
+
+$H_a$: Mean age in tx == 0 group does NOT equal the mean age in the tx == 1 group
+
+There are several hypothesis tests to test this hypothesis. One very popular one is 
+called the t-test. To implement the t-test in R, we can use the function `t.test()`. 
+Within `t.test()`, we specify a formula which looks like `variable ~ group`. 
+In this case, we want to compare the the `age` across `tx`, so we specify 
+`age ~ tx`. In the second argument, we specify the dataframe to reference. 
+
+```{r}
+# perform t-test, which tests the null hypothesis that the
+# mean ages are the same between the tx = 0 and tx = 1 groups
+t.test(age ~ tx, data = my_data_factor)
+```
+
+* **p-value**: This is the p-value for the hypothesis test. The p-value is the 
+probability of obtaining a test statistic at least as extreme as what we get with 
+our data, given that the null hypothesis is true. So with a p-value of 0.702, 
+we have approximately a 70% probability of obtaining a test statistic at least 
+as extreme as what we get in our data, given the null hypothesis is true. 
+Typically, we set the p-value threshold (or alpha) to 0.05 in our hypothesis 
+test. This means we reject the null hypothesis if our p-value is less than 0.05.
+Intuitively, we want to reject the null hypothesis if our data is extreme compared 
+to what our null hypothesis says.
+* **95 percent confidence interval**: This is a confidence interval for the difference 
+in mean age between the `tx == 0` and `tx == 1` groups. So we estimate that a 
+95% CI for the difference in age between the `tx == 0` and `tx == 1` groups is 
+(-4.31, 2.91).
+
+There are several other hypothesis tests comparing the mean or median of two 
+samples: paired t-test (for paired data), Wilcoxon rank-sum test (to test for 
+equal medians), etc.
+
+**Example:** Write code to perform a hypothesis test, testing if there is a 
+difference between the mean number of years of education (`educyrs`) between
+the two treatment (`tx`) arms. 
+
+```{r}
+# write code below 
+```
+
+## Comparing proportions 
+
+Another common statistical task is to examine two proportions and test 
+if they are equal. 
+
+For example, suppose that we want to know the proportion of people with 
+insurance is the same between the treatment arms. 
+
+The first step to doing this is to create a 2x2 table using the the 
+`table()` function, where we include as an input a two-column dataframe with the 
+columns of interest.
+
+```{r}
+# create 2x2 table from two column, binary variable dataframe
+tx_insure_tab <- table(my_data_factor %>% select(tx, insure))
+
+tx_insure_tab
+```
+
+Then, we will use a hypothesis test to test this. The null hypothesis is that the 
+proportions are the same. The alternative hypothesis is that the proportions 
+are different. 
+
+One option is the two-sample z-test for proportions. We can implement this in 
+`R` using `prop.test()`. 
+
+```{r}
+prop.test(tx_insure_tab)
+```
+
+Another options is the chi-squared test. We can implement this in R using 
+`chisq.test()`: 
+
+```{r}
+chisq.test(tx_insure_tab)
+```
+
+Note that the chi-squared test gives the same p-value result (p = 0.438)  as the 
+two-sample z-test for proportion. This is because the two tests are the same! 
+The only difference is that the chi-squared test can be used for bigger tables 
+(e.g. 3x2, 3x3 tables, etc.). 
+
+**Example:** Write code to perform a hypothesis test, testing if there is a 
+difference between the proportion of smokers and non-smokers (`smoke100`) between
+the two treatment (`tx`) arms. 
+
+```{r}
+# write code below 
+```
+
+## Exercises
+
+Let's explore the CRISP survey data using the tools that you have learned so far! 
+
+* `record_id`: Unique REDCap survey record number.
+* `age_group`: Age category (`0` = 33 or younger; `1` = older than 33).
+* `sex`: Sex (`1` = Woman; `2` = Man; `3` = Non-binary; `4` = Prefer not to say).
+* `pet_preference`: Pet preference (`1` = Dogs; `2` = Cats; `3` = Both; `4` = Neither).
+* `morning_or_evening_person`: Time-of-day preference (`1` = Morning; `2` = Evening; `3` = Equal or neither).
+* `food_preference`: Food preference (`1` = Gourmet; `2` = Upscale; `3` = Home cooking; `4` = Fast food).
+* `spent_time_in_nature`: Spent at least two hours in nature during the past week (`0` = No; `1` = Yes).
+* `interacted_with_clubs`: Interacted with at least one club or organization during the past week (`0` = No; `1` = Yes).
+* `resistance_training_workouts`: Number of resistance-training workouts during the past week (`0` = 0 or 1; `2`–`9` = corresponding number; `10` = 10 or more).
+* `hours_of_sleep`: Average hours of sleep per night (`0` = 0 or 1; `2`–`9` = corresponding number; `10` = 10 or more).
+* `packaged_snacks_per_day`: Average number of packaged snacks consumed per day (`0` = 0 or 1; `2`–`9` = corresponding number; `10` = 10 or more).
+* `anxious_depressed_or_irritable`: Frequency of feeling anxious, depressed, or irritable (`1` = Never; `2` = Rarely; `3` = Sometimes; `4` = Often; `5` = Always).
+* `fatigue_rating`: Average fatigue rating (`1` = None; `2` = Mild; `3` = Moderate; `4` = Severe; `5` = Very severe).
+
+```{r}
+crisp_survey_df <- read.csv("crisp_survey_data_v1.csv")
+```
+
+1. Convert the `spent_time_in_nature` and `food_preference` variables into 
+factor variables. 
+
+```{r}
+# write code here 
+
+```
+
+2. Create a Table 1 examining the variables `hours_of_sleep`, 
+`anxious_depressed_or_irritable`, and `food_preference`, stratifying by people who 
+spent time in nature versus those who haven't. 
+
+```{r}
+# write code here 
+
+```
+
+3. Perform a hypothesis test comparing the hours of sleep for those who spent
+time in nature versus those who haven't. What is the null hypothesis for this 
+hypothesis test? Interpret the result. 
+
+```{r}
+# write code here 
+
+```
+
+4. Perform a hypothesis test comparing the anxiety/depression score for those who spent
+time in nature versus those who haven't. What is the null hypothesis for this 
+hypothesis test? Interpret the result. 
+
+```{r}
+# write code here 
+
+```
+
+5. Is there evidence that the proportion of men who spend time in nature differ
+from the proportion of women that spend time in nature in this dataset? 
+
+```{r}
+# write code here 
+
+```
+
+

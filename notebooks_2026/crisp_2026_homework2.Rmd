@@ -1,0 +1,64 @@
+---
+title: 'CRISP 2026: Homework 2'
+output: html_document
+---
+
+The goal of this practicum is to apply what we've learned so far on a new 
+dataset! 
+
+The dataset is the **midterm_practicum_sample.csv** file on the course website. 
+Download this dataset and save it in your CRISP R notes folder. 
+
+The dataset shows data from two randomized studies (Study 1 and Study 2), which 
+study the efficacy of a treatment on some disease's severity. 
+The dataset has the following structure: 
+
+* id: 1 to 1000 
+* study: 1 = study 1, 2 = study 2
+* tx: 0 = placebo, 1 = treatment 
+* age: numeric age variable 
+* alcohol_usage: 0 = no/low, 1 = medium, 2 = high 
+* disease_severity: numeric disease severity variable 
+
+The goal is to create a Table 1, with the results of hypothesis testing comparing
+the two treatment arms. 
+
+1. Read in the the dataset and save it as the `df_hw` variable. Load in the 
+`dplyr` and `table1` package. 
+
+```{r}
+# write code below 
+
+```
+
+2. You wish to analyze data for Study 1 ONLY. Also, you would like to remove the 
+children (age < 18) from the dataset. Also, you'd like to create a new variable 
+called `disease_severity_scaled` which equals `disease_severity` divided by 100.
+Create a new dataset called `df_filter` which includes only the rows of interest 
+and creates this new variable. 
+
+```{r}
+# write code below
+```
+
+3. Convert the `tx` and `alcohol_usage` to factor variables. Re-save it the new
+dataframe into your `df_filter` variable. 
+
+```{r}
+# write code below 
+```
+
+4. Use the `table1` package to create a Table 1, summarizing age, alcohol usage, 
+and disease severity stratified by treatment status. 
+
+```{r}
+# write code below 
+```
+
+5. Perform hypothesis tests to test the differences in these variables between
+the treatment and placebo arms. What is the null hypothesis for each hypothesis
+test? Provide an interpretation for the results. 
+
+```{r}
+# write code below
+```
