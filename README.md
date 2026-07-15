@@ -32,7 +32,7 @@ Here is the CRISP survey data (version 1): [CSV file](https://jpspeng.github.io/
 | Day 2 (7/8/26) | Basic R syntax ([Recording](https://washington.zoom.us/rec/share/jnRIEy_YfAdLkhKR02BDu_k_m-5HYCxls8FQyVnhDQpqZbwLlGRA5bPUMr1ZsMx4.DpCN5uph2PqaIjmZ?startTime=1783539600000)) | [PPTX](https://jpspeng.github.io/crisp_notes/powerpoints_2026/crisp_2026_R_day2.pptx)     | [Notes and exercises](https://jpspeng.github.io/crisp_notes/notebooks_2026/crisp_2026_day2.html)     | [RMD](https://jpspeng.github.io/crisp_notes/notebooks_2026/crisp_2026_day2.Rmd) / [Solutions](https://jpspeng.github.io/crisp_notes/notebooks_2026/crisp_2026_day2_answers.Rmd)  |
 | Day 3 (7/10/26) | Data processing and manipulation ([Recording](https://washington.zoom.us/rec/play/YtsWjOT70QxJLjjiLPdtDV8orHvbx-q54SEv82u50HuGYIrjcUiqjcNODK_JT-ScJnvSqRA99KAer2r0.Xjgwk_FDlvF1z1SH?accessLevel=meeting&canPlayFromShare=true&from=my_recording&continueMode=true&oldStyle=true&componentName=rec-play&originRequestUrl=https%3A%2F%2Fwashington.zoom.us%2Frec%2Fshare%2FcyCTpOQPT7h_Ql-wFxR_LWNIBUW8hASui2yY5bzAZYIh6aqvrTN8zwA9DT9-FWR0.91QAze54SnZnoqg0)) | [PPTX](https://jpspeng.github.io/crisp_notes/powerpoints_2026/crisp_2026_R_day3.pptx)     | [Notes and exercises](https://jpspeng.github.io/crisp_notes/notebooks_2026/crisp_2026_day3.html)     | [RMD](https://jpspeng.github.io/crisp_notes/notebooks_2026/crisp_2026_day3.Rmd)  |
 | Day 4 (7/13/26) | Using dplyr and table1 ([Recording](https://washington.zoom.us/rec/share/VetAtbK7FFy107VVT-ML0jPo2wX9ZoGUldGDtI18lnJK9cHmy7dfzLz7ZxxKY2-r.ZhdExQG_Qhzn9fmo)) | [PPTX](https://jpspeng.github.io/crisp_notes/powerpoints_2026/crisp_2026_R_day4.pptx)     | [Notes and exercises](https://jpspeng.github.io/crisp_notes/notebooks_2026/crisp_2026_day4.html)     | [RMD](https://jpspeng.github.io/crisp_notes/notebooks_2026/crisp_2026_day4.Rmd)  |
-
+| Day 5 (7/15/26) | Creating Table 1 and hypothesis testing | [PPTX](https://jpspeng.github.io/crisp_notes/powerpoints_2026/crisp_2026_R_day5.pptx)     | [Notes and exercises](https://jpspeng.github.io/crisp_notes/notebooks_2026/crisp_2026_day5.html)     | [RMD](https://jpspeng.github.io/crisp_notes/notebooks_2026/crisp_2026_day5.Rmd)  |
 
 
 
@@ -41,7 +41,7 @@ Here is the CRISP survey data (version 1): [CSV file](https://jpspeng.github.io/
 Homeworks for this course are optional but encouraged! You can turn in homework by emailing me at jpspeng@uw.edu, and I will aim to provide feedback to you by the following Wednesday.  
 
 1. *Homework 1*: due Monday, July 13 ([HTML](https://jpspeng.github.io/crisp_notes/notebooks_2026/crisp_2026_homework1.html) / [Rmd](https://jpspeng.github.io/crisp_notes/notebooks_2026/crisp_2026_homework1.Rmd) / [CSV used in the homework](https://jpspeng.github.io/crisp_notes/notebooks_2026/hw1_fake_data.csv) ) / [Homework 1 solutions](https://jpspeng.github.io/crisp_notes/notebooks_2026/crisp_2026_homework1_solutions.Rmd)
-2. *Homework 2 (midterm)*: due Friday, July 17
+2. *Homework 2 (midterm)*: due Friday, July 17 ([HTML](https://jpspeng.github.io/crisp_notes/notebooks_2026/crisp_2026_homework2.html) / [Rmd](https://jpspeng.github.io/crisp_notes/notebooks_2026/crisp_2026_homework2.Rmd) / [CSV used in the homework](https://jpspeng.github.io/crisp_notes/notebooks_2025/midterm_practicum_sample.csv) ) 
 3. *Homework 3 (final)*: due Thursday, July 23 
 
 --- 
