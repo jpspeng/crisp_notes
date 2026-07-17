@@ -18,11 +18,9 @@ The goal of this course is to get a taste for how to code in R; it is not meant 
 ## Data 
 
 We will be using the following sample data in our tutorials: 
-[CSV file](https://jpspeng.github.io/crisp_notes/pages/crisp-2024-sample100.csv) 
+[CSV file](https://jpspeng.github.io/crisp_notes/pages/crisp-2024-sample100.csv) / [data documentation](https://jpspeng.github.io/crisp_notes/pages/Crisp-2024-sample100-dictionary.pdf). 
 
-Here is the [data documentation](https://jpspeng.github.io/crisp_notes/pages/Crisp-2024-sample100-dictionary.pdf). 
-
-Here is the CRISP survey data (version 1): [CSV file](https://jpspeng.github.io/crisp_notes/notebooks_2026/crisp_survey_data_v2.csv) 
+Here is the CRISP survey data (version 2): [CSV file](https://jpspeng.github.io/crisp_notes/notebooks_2026/crisp_survey_data_v2.csv) / [data documentation]()
 
 ## Lessons 
 
