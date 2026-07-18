@@ -1503,7 +1503,8 @@ div.tocify {
 <pre class="r"><code>library(dplyr)</code></pre>
 <p>In today’s lesson, we will learn how to run and interpret linear
 regression.</p>
-<pre class="r"><code>my_data &lt;- read.csv(&quot;crisp-2024-sample100.csv&quot;)
+<pre class="r"><code># read data 
+my_data &lt;- read.csv(&quot;crisp-2024-sample100.csv&quot;)
 crisp_survey_data &lt;- read.csv(&quot;crisp_survey_data_v2.csv&quot;)
 
 # create factor variables 
@@ -1512,7 +1513,7 @@ my_data &lt;- my_data %&gt;%
 
 crisp_survey_data &lt;- crisp_survey_data %&gt;% 
   mutate(sex = factor(sex, labels = c(&quot;female&quot;, &quot;male&quot;)), 
-         age_group = factor(age_group, labels = c(&quot;under30&quot;, &quot;over30&quot;)),
+         age_group = factor(age_group, labels = c(&quot;under33&quot;, &quot;over33&quot;)),
          pet_preference = factor(pet_preference, labels = c(&quot;dogs&quot;, &quot;cats&quot;, &quot;both&quot;, &quot;neither&quot;)), 
          morning_or_evening_person = factor(morning_or_evening_person, labels = c(&quot;morning&quot;, &quot;evening&quot;, &quot;neither&quot;)))</code></pre>
 <div id="linear-regression-with-continuous-predictor" class="section level1">
@@ -1540,6 +1541,41 @@ packages needed). The <code>lm()</code> function takes in two arguments:
 (2) the data. In the code below, we run a linear regression with
 <code>educyrs</code> as our outcome and <code>age</code> as our
 predictor, and then save it in the variable <code>fitted_mod</code>.</p>
+<pre class="r"><code># to run linear regression in R, use lm() 
+
+# first argument in the lm() function is your formula 
+# formula looks like outcome ~ predictor 
+# outcome: educyrs
+# exposure: age 
+
+# second argument is the dataframe  
+fitted_mod &lt;- lm(educyrs ~ age,  data = my_data)
+
+# to summarize the fitted model, you can use the summary() function 
+summary(fitted_mod)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = educyrs ~ age, data = my_data)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -4.4739 -1.3735 -0.4378  1.0281  7.5622 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) 14.30130    0.77132  18.541  &lt; 2e-16 ***
+## age         -0.06426    0.02275  -2.825  0.00573 ** 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 2.042 on 98 degrees of freedom
+## Multiple R-squared:  0.07531,    Adjusted R-squared:  0.06587 
+## F-statistic: 7.981 on 1 and 98 DF,  p-value: 0.005727</code></pre>
+<pre class="r"><code># to get confidence intervals, use the confint() function 
+confint(fitted_mod)</code></pre>
+<pre><code>##                  2.5 %      97.5 %
+## (Intercept) 12.7706525 15.83195262
+## age         -0.1093984 -0.01912165</code></pre>
 <pre class="r"><code>fitted_mod &lt;- lm(educyrs ~ age, data = my_data)</code></pre>
 <p>To see the fitted coefficient of this model, we can apply the
 <code>summary()</code> function on <code>fitted_mod</code>.</p>
@@ -1594,11 +1630,44 @@ older group has on average 0.064 years fewer education (95% CI: 0.019,
 0.109). At the 5% level, we reject the null hypothesis that the
 coefficient on age is 0. That is, we find evidence of an association
 between age and years of education.</em></p>
-<p><em>Example</em>: In the CRISP survey data, regress
+<p><strong>Example</strong>: In the CRISP survey data, regress
 anxiety/depression/irritability score
 (<code>anxious_depressed_or_irritable</code>) on hours of sleep
 (<code>hours_of_sleep</code>). Interpret your result.</p>
-<pre class="r"><code># write code here </code></pre>
+<pre class="r"><code>crisp_mod &lt;- lm(anxious_depressed_or_irritable ~ hours_of_sleep, data = crisp_survey_data)
+
+summary(crisp_mod)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = anxious_depressed_or_irritable ~ hours_of_sleep, 
+##     data = crisp_survey_data)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -2.26190 -0.51701 -0.01361  0.23469  1.98639 
+## 
+## Coefficients:
+##                Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)      4.5034     1.2311   3.658 0.000935 ***
+## hours_of_sleep  -0.2483     0.1767  -1.405 0.169886    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.9135 on 31 degrees of freedom
+##   (9 observations deleted due to missingness)
+## Multiple R-squared:  0.05989,    Adjusted R-squared:  0.02956 
+## F-statistic: 1.975 on 1 and 31 DF,  p-value: 0.1699</code></pre>
+<pre class="r"><code>confint(crisp_mod)</code></pre>
+<pre><code>##                     2.5 %    97.5 %
+## (Intercept)     1.9925637 7.0142390
+## hours_of_sleep -0.6086658 0.1120671</code></pre>
+<p><em>Interpretation</em>: We estimate that someone with 0 hours of
+sleep will have a anxiety score of 4.5 (95% CI: 2.00, 7.01).</p>
+<p>Comparing two groups differing in one hour of sleep, we estimate that
+the group with more sleep will have an anxiety score of 0.25 less (95%
+CI: -0.61, 0.11) than the group with less sleep. We do not find a
+significant association between hours of sleep and anxiety score (p =
+0.17).</p>
 </div>
 <div id="linear-regression-with-binary-predictor" class="section level1">
 <h1>Linear regression with binary predictor</h1>
@@ -1658,10 +1727,109 @@ of years of education comparing males and females.</li>
 <pre><code>##                  2.5 %     97.5 %
 ## (Intercept) 11.7111206 12.7114146
 ## sexfemale   -0.9676034  0.8898958</code></pre>
-<p><em>Example</em>: In the CRISP survey data, regress weekly minutes of
-cardio exercise (<code>cardio_exercise</code>) on age group
+<p><strong>Example</strong>: In the CRISP survey data, regress weekly
+minutes of cardio exercise (<code>cardio_exercise</code>) on age group
 (<code>age_group</code>). Interpret your result.</p>
-<pre class="r"><code># write code here </code></pre>
+<pre class="r"><code># write code here 
+crisp_mod2 &lt;- lm(cardio_exercise ~ age_group, data = crisp_survey_data)
+
+summary(crisp_mod2)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = cardio_exercise ~ age_group, data = crisp_survey_data)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -177.000  -78.529    7.235   91.853  206.471 
+## 
+## Coefficients:
+##                 Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)       192.00      26.13   7.348 3.48e-08 ***
+## age_groupover33   -98.47      35.85  -2.747   0.0101 *  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 101.2 on 30 degrees of freedom
+##   (10 observations deleted due to missingness)
+## Multiple R-squared:  0.201,  Adjusted R-squared:  0.1743 
+## F-statistic: 7.545 on 1 and 30 DF,  p-value: 0.01008</code></pre>
+<pre class="r"><code>confint(crisp_mod2)</code></pre>
+<pre><code>##                     2.5 %    97.5 %
+## (Intercept)      138.6373 245.36272
+## age_groupover33 -171.6836 -25.25754</code></pre>
+<p><em>Interpretation</em>: We estimate that those over age 33 exercise
+98 minutes (95% CI: 25, 171) less on average per week compared to those
+under age 33. We reject the null that the mean cardio exercise time is
+the same between the two groups (p = 0.01).</p>
+</div>
+<div id="linear-regression-with-categorical-variable" class="section level1">
+<h1>Linear regression with categorical variable</h1>
+<p>Suppose that we have a categorical predictor. If we run linear
+regression, then the output displays the comparison between each group
+and the reference group (which defaulted as the lowest factor
+group).</p>
+<p><strong>Example</strong>: In the CRISP survey data, regress weekly
+minutes of cardio exercise (<code>cardio_exercise</code>) on pet
+preference (<code>pet_preference</code>). Interpret the coefficient on
+the cats coefficient.</p>
+<pre class="r"><code>crisp_mod3 &lt;- lm(cardio_exercise ~ pet_preference, data = crisp_survey_data)
+
+summary(crisp_mod3)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = cardio_exercise ~ pet_preference, data = crisp_survey_data)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -163.1  -97.0    1.0  121.0  195.0 
+## 
+## Coefficients:
+##                       Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)             119.00      29.11   4.088 0.000286 ***
+## pet_preferencecats       59.12      49.36   1.198 0.240041    
+## pet_preferenceboth       56.71      51.61   1.099 0.280235    
+## pet_preferenceneither   -14.00      58.22  -0.240 0.811549    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 112.7 on 31 degrees of freedom
+##   (7 observations deleted due to missingness)
+## Multiple R-squared:  0.07766,    Adjusted R-squared:  -0.0116 
+## F-statistic:  0.87 on 3 and 31 DF,  p-value: 0.4671</code></pre>
+<p><em>Interpretation (of the cats coefficient</em>): We estimate that
+those who prefer cats exercise 59 minutes more on average per week
+compared to those that prefer dogs.</p>
+<p>Note: To specify the order of factor variables, you can use the
+<code>levels</code> argument when you are creating the factor variable.
+For example:</p>
+<pre class="r"><code>crisp_survey_data &lt;- crisp_survey_data %&gt;% 
+  mutate(pet_preference = factor(pet_preference, levels = c(&quot;cats&quot;, &quot;dogs&quot;, 
+                                                            &quot;both&quot;, &quot;neither&quot;)))
+
+crisp_mod4 &lt;- lm(cardio_exercise ~ pet_preference, data = crisp_survey_data)
+
+summary(crisp_mod4)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = cardio_exercise ~ pet_preference, data = crisp_survey_data)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -163.1  -97.0    1.0  121.0  195.0 
+## 
+## Coefficients:
+##                       Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)            178.125     39.860   4.469 9.78e-05 ***
+## pet_preferencedogs     -59.125     49.358  -1.198    0.240    
+## pet_preferenceboth      -2.411     58.349  -0.041    0.967    
+## pet_preferenceneither  -73.125     64.272  -1.138    0.264    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 112.7 on 31 degrees of freedom
+##   (7 observations deleted due to missingness)
+## Multiple R-squared:  0.07766,    Adjusted R-squared:  -0.0116 
+## F-statistic:  0.87 on 3 and 31 DF,  p-value: 0.4671</code></pre>
 </div>
 <div id="linear-regression-with-more-than-one-predictor" class="section level1">
 <h1>Linear regression with more than one predictor</h1>

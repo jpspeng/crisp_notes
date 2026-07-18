@@ -13,6 +13,7 @@ library(dplyr)
 In today's lesson, we will learn how to run and interpret linear regression.  
 
 ```{r}
+# read data 
 my_data <- read.csv("crisp-2024-sample100.csv")
 crisp_survey_data <- read.csv("crisp_survey_data_v2.csv")
 
@@ -22,11 +23,10 @@ my_data <- my_data %>%
 
 crisp_survey_data <- crisp_survey_data %>% 
   mutate(sex = factor(sex, labels = c("female", "male")), 
-         age_group = factor(age_group, labels = c("under30", "over30")),
+         age_group = factor(age_group, labels = c("under33", "over33")),
          pet_preference = factor(pet_preference, labels = c("dogs", "cats", "both", "neither")), 
          morning_or_evening_person = factor(morning_or_evening_person, labels = c("morning", "evening", "neither")))
 ```
-
 
 # Linear regression with continuous predictor 
 
@@ -56,6 +56,24 @@ In the code below, we run a linear regression with `educyrs` as our outcome and 
 as our predictor, and then save it in the variable `fitted_mod`. 
 
 ```{r}
+# to run linear regression in R, use lm() 
+
+# first argument in the lm() function is your formula 
+# formula looks like outcome ~ predictor 
+# outcome: educyrs
+# exposure: age 
+
+# second argument is the dataframe  
+fitted_mod <- lm(educyrs ~ age,  data = my_data)
+
+# to summarize the fitted model, you can use the summary() function 
+summary(fitted_mod)
+
+# to get confidence intervals, use the confint() function 
+confint(fitted_mod)
+```
+
+```{r}
 fitted_mod <- lm(educyrs ~ age, data = my_data)
 ```
 
@@ -65,6 +83,7 @@ on `fitted_mod`.
 ```{r}
 summary(fitted_mod)
 ```
+
 We focus in on the Coefficients section of the summary. 
 
 1. The Estimate column tells us the fitted values for the intercept ($\beta_0$) and the 
@@ -97,15 +116,22 @@ on average 0.064 years fewer education (95% CI: 0.019, 0.109). At the 5% level,
 we reject the null hypothesis that the coefficient on age is 0. That is, we find 
 evidence of an association between age and years of education.* 
 
-
-*Example*: In the CRISP survey data, regress anxiety/depression/irritability score (`anxious_depressed_or_irritable`)
-on hours of sleep (`hours_of_sleep`). Interpret your result. 
+**Example**: In the CRISP survey data, regress anxiety/depression/irritability score (`anxious_depressed_or_irritable`) on hours of sleep (`hours_of_sleep`). Interpret your result. 
 
 ```{r}
-# write code here 
+crisp_mod <- lm(anxious_depressed_or_irritable ~ hours_of_sleep, data = crisp_survey_data)
 
+summary(crisp_mod)
+confint(crisp_mod)
 ```
 
+*Interpretation*: We estimate that someone with 0 hours of sleep will have a 
+anxiety score of 4.5 (95% CI: 2.00, 7.01). 
+
+Comparing two groups differing in one hour of sleep, we estimate that the group 
+with more sleep will have an anxiety score of 0.25 less (95% CI: -0.61, 0.11)
+than the group with less sleep. We do not find a significant association between 
+hours of sleep and anxiety score (p = 0.17).
 
 # Linear regression with binary predictor 
 
@@ -150,14 +176,51 @@ We can also obtain confidence intervals on these estimates using `confint()`.
 confint(fitted_mod2)
 ```
 
-*Example*: In the CRISP survey data, regress weekly minutes of cardio exercise
+**Example**: In the CRISP survey data, regress weekly minutes of cardio exercise
 (`cardio_exercise`) on age group (`age_group`). Interpret your result. 
 
 ```{r}
 # write code here 
+crisp_mod2 <- lm(cardio_exercise ~ age_group, data = crisp_survey_data)
 
+summary(crisp_mod2)
+confint(crisp_mod2)
 ```
+*Interpretation*: We estimate that those over age 33 exercise 98 minutes 
+(95% CI: 25, 171) less on average per week compared to those under age 33. 
+We reject the null that the mean cardio exercise time is the same between the 
+two groups (p = 0.01).
 
+# Linear regression with categorical variable 
+
+Suppose that we have a categorical predictor. If we run linear regression, then 
+the output displays the comparison between each group and the reference group 
+(which defaulted as the lowest factor group).
+
+**Example**: In the CRISP survey data, regress weekly minutes of cardio exercise
+(`cardio_exercise`) on pet preference (`pet_preference`). Interpret the coefficient on 
+the cats coefficient. 
+
+```{r}
+crisp_mod3 <- lm(cardio_exercise ~ pet_preference, data = crisp_survey_data)
+
+summary(crisp_mod3)
+```
+*Interpretation (of the cats coefficient*): We estimate that those who prefer 
+cats exercise 59 minutes more on average per week compared to those that prefer dogs. 
+
+Note: To specify the order of factor variables, you can use the `levels` argument
+when you are creating the factor variable. For example: 
+
+```{r}
+crisp_survey_data <- crisp_survey_data %>% 
+  mutate(pet_preference = factor(pet_preference, levels = c("cats", "dogs", 
+                                                            "both", "neither")))
+
+crisp_mod4 <- lm(cardio_exercise ~ pet_preference, data = crisp_survey_data)
+
+summary(crisp_mod4)
+```
 
 # Linear regression with more than one predictor
 
