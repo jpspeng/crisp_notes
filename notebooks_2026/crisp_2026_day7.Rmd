@@ -1,0 +1,265 @@
+---
+title: 'CRISP Day 7 2026: Logistic regression'
+output:
+  html_document:
+    toc: yes
+    toc_float: yes
+---
+
+```{r, warning = F, message = F}
+library(dplyr)
+```
+
+In today's lesson, we will learn how to adjust for covariates in linear regression 
+as well as run and interpret logistic regression.  
+
+```{r}
+# read data 
+my_data <- read.csv("crisp-2024-sample100.csv")
+crisp_survey_data <- read.csv("crisp_survey_data_v2.csv")
+
+# create factor variables 
+my_data <- my_data %>% 
+  mutate(sex = factor(sex, labels = c("male", "female")))
+
+crisp_survey_data <- crisp_survey_data %>% 
+  mutate(sex = factor(sex, labels = c("female", "male")), 
+         age_group = factor(age_group, labels = c("under33", "over33")),
+         pet_preference = factor(pet_preference, labels = c("dogs", "cats", "both", "neither")), 
+         morning_or_evening_person = factor(morning_or_evening_person, labels = c("morning", "evening", "neither")), 
+         interacted_with_clubs = factor(interacted_with_clubs, labels = c("no", "yes")), 
+         spent_time_in_nature = factor(spent_time_in_nature, labels = "no", "yes"))
+```
+
+# Linear regression with more than one predictor
+
+Suppose that we run a linear regression, with number of years of education `educyrs` 
+as the outcome, and `age` and `sex` as the predictors. That is, we are trying 
+find the best estimates of $\beta_0$, $\beta_1$, and $\beta_2$ in the equation below: 
+
+$$
+educyrs = \beta_0 + \beta_1 age + \beta_2 sex
+$$
+
+To do this in R, we can use `lm()` with `age + sex` as our predictors in the formula: 
+
+```{r}
+linear_mod <- lm(educyrs ~ age + sex, data = my_data)
+
+summary(linear_mod)
+
+confint(linear_mod)
+```
+
+How can we interpret the output? 
+
+* *Intercept*: The predicted number of years of education for males (sex = 0) with
+age = 0. Note that this is not meaningful, since we don't have age = 0 in our
+population of interest. 
+* *Coefficient on age*: The estimated difference in number of years of education comparing 
+two groups *of the same sex* differing by one year of age. 
+* *Coefficient on sex*: The estimated difference in the number of years of education 
+comparing females versus males *of the same age*. 
+
+We can also pull the coefficients intervals all in one line using the `tidy()` 
+function in the `broom` package. For this function, we should specify `conf.int = TRUE`. 
+
+```{r}
+# install.packages("broom")
+library(broom)
+
+tidy(linear_mod, conf.int = TRUE)
+
+```
+
+
+*Example*: In the CRISP survey data, regress anxiety/depression/irritability score (`anxious_depressed_or_irritable`) on hours of sleep (`hours_of_sleep`) 
+adjusting for sex (`sex`). Interpret your result. 
+
+```{r}
+# write code here 
+
+```
+
+
+# Logistic regression with one predictor 
+
+In logistic regression, the outcome is binary - either 0 or 1. For example, 
+in this example, suppose that we consider history of psychotic diagnosis (`mhdx`) 
+as our outcome, and age as our exposure. 
+
+In the logistic model, we model the **odds** of the outcome. In this example, we 
+are modeling the odds of having a history of psychotic diagnosis, which we
+denote as $Odds(mhdx)$. Logistic regression also uses a logarithmic transform on 
+this outcome, for reasons not explained in this tutorial. So our model is:  
+
+$$
+log(Odds(mhdx)) = \beta_0 + \beta_1 age
+$$
+
+The right hand side of the model should be familiar; this is a just a normal linear
+model. 
+
+Equivalently, we can exponentiate both sides and write this as: 
+
+$$
+Odds(mhdx) = exp(\beta_0 + \beta_1 age) 
+$$
+
+To run this in R, we can use the `glm()` function. `glm` stands for "generalized 
+linear model," which is a more flexible form of a linear model. Within the `glm()` 
+function call, we specify the: 
+
+1. Formula: `outcome ~ predictor` (similar to linear regression)
+2. Data: `data = df` 
+3. Family: `family = binomial` (this configures the function to run logistic regression)
+
+**Note**: The outcome can either be coded as a numeric (0/1) variable or as
+a factor variable with two levels. 
+
+So our function call looks like this: 
+
+```{r}
+mod1 <- glm(mhdx ~ age, data = my_data, family = binomial)
+
+summary(mod1)
+```
+The estimates for the intercepts and age correspond to estimates for $\beta_0$ and
+$\beta_1$, respectively. In logistic regression, it is often more useful to interpret 
+the exponentiated coefficient estimates. To do that, we exponentiate the 
+coefficient table using the `exp()` function on the `coef()` table from 
+the `mod` object: 
+
+```{r}
+exp(coef(mod1))
+```
+
+How can we interpret these coefficients?
+
+* *Intercept*: The exponentiated intercept represents the predicted odds of having a 
+history of psychotic diagnosis for someone with age = 0. That is, we estimate that 
+the odds of having a history of psychotic diagnosis for someone with age = 0 is 0.75. 
+* *Coefficient on age*: The exponentiated coefficient on age represents the odds ratio 
+comparing the odds of having a history of psychotic diagnosis for two groups differing 
+by one year of age. That is, we estimate that for two groups differing in one year of age, 
+the older group has around a 4% lower odds ($1 - 0.962$) of having a history of psychotic
+diagnosis compared to the younger group. 
+  * *p-value*: The result from testing the null hypothesis that the coefficient on 
+  age is 0 (or equivalently the exponentiated coefficient is 1). With $p = 0.275$, we 
+  fail to find a significant association between age and history of psychotic diagnosis. 
+
+To obtain confidence intervals for these exponentiated estimates, we can 
+exponentiate the output of `confint(mod)`: 
+
+```{r, message = F}
+exp(confint(mod1))
+```
+
+We can also pull the exponentiated coefficients and confidence intervals all 
+in one line using the `tidy()` function in the `broom` package. For this function, 
+we should specify `exponentiate = TRUE` (for logistic regression) and `conf.int = TRUE`. 
+
+```{r}
+# install.packages("broom")
+library(broom)
+
+tidy(mod1, exponentiate = TRUE, conf.int = TRUE)
+```
+**Example**: In the CRISP survey data, run a logistic regression with
+`spent_time_in_nature` as the binary outcome and `hours_of_sleep` as the 
+predictor. Interpret your result. 
+
+```{r}
+# write code here
+```
+
+# Logistic regression with more than one predictor 
+
+Suppose that we run a logistic regression with history of psychotic diagnosis (`mhdx`)
+as the outcome, and `tx` and `age` as the predictors. That is, we are trying 
+find the best estimates of $\beta_0$, $\beta_1$, and $\beta_2$ in the equation below: 
+
+$$
+log(Odds(mhdx)) = \beta_0 + \beta_1 treatment +  \beta_2 age
+$$
+
+Equivalently, we can exponentiate both sides and write this as: 
+
+$$
+Odds(mhdx) = exp(\beta_0 + \beta_1 treatment + \beta_2 age) 
+$$
+
+Like in the previous section, we run this in R using the `glm()` function. In this case, 
+we specify the formula as `mhdx ~ tx + age`, with `mhdx` as the outcome, and 
+`tx` and `age` as the predictors 
+
+```{r}
+mod2 <- glm(mhdx ~ tx + age, data = my_data, family = binomial)
+
+summary(mod2)
+```
+
+Again, we interpret the exponentiated coefficients (as well as their confidence
+intervals). 
+
+```{r}
+exp(coef(mod2))
+exp(confint(mod2))
+
+# alternatively use tidy() in the broom package
+tidy(mod2, exponentiate = TRUE, conf.int = TRUE)
+```
+* *Intercept*: The exponentiated intercept represents the predicted odds of having a 
+history of psychotic diagnosis for someone with age = 0 and tx = 0. That is, we estimate that 
+the odds of having a history of psychotic diagnosis for someone with age = 0 and 
+tx = 0 is 0.64. 
+* *Coefficient on tx*: The exponentiated coefficient on tx represents the odds ratio 
+comparing the odds of having a history of psychotic diagnosis for those with tx = 1 
+to that for those with tx = 0 of the same age. That is, comparing individuals of the same 
+age, we estimate that those with tx = 1 have a 48% higher odds ($1.48 - 1$) of 
+psychotic diagnosis than those with tx = 0.
+  * *p-value*:  The result from testing the null hypothesis that the coefficient on 
+  tx is 0 (or equivalently the exponentiated coefficient is 1). With $p = 0.459$, we 
+  fail to find a significant association between tx and history of psychotic diagnosis, 
+  after controlling for age. 
+* *Coefficient on age*: The exponentiated coefficient on age represents the odds ratio 
+comparing the odds of having a history of psychotic diagnosis for two groups differing 
+by one year of age with the same treatment status. That is, we estimate that for two groups
+with the same treatment status differing in one year of age, the older group has 
+around a 4% lower odds ($1 - 0.962$) of having a history of psychotic diagnosis 
+compared to the younger group. 
+  * *p-value*: The result from testing the null hypothesis that the coefficient on 
+  age is 0 (or equivalently the exponentiated coefficient is 1). With $p = 0.274$, we 
+  fail to find a significant association between age and history of psychotic diagnosis
+  after controlling for treatment status.
+  
+**Example**: In the CRISP survey data, run a logistic regression with 
+`interacted_with_clubs` as the binary outcome and `age_group` as the predictor, 
+adjusting for `sex`. Interpret your result. 
+
+```{r}
+# write code here
+```
+
+# Exercises 
+
+For the exercise below, use the crisp-2024-sample100.csv dataset (`my_data`). 
+
+1. Perform logistic regression with cannabis use (`canlft`) as the outcome and 
+sex (`sex`) as the predictor. Obtain estimates and confidence intervals for the
+exponentiated coefficients. Provide an interpretation of the output. 
+
+```{r}
+# write code here
+```
+
+2. Perform logistic regression with cannabis use (`canlft`) as the outcome and 
+sex (`sex`) and treatment status (`tx`) as predictors. Obtain estimates and confidence
+intervals for the exponentiated coefficients. Provide an interpretation 
+of the output. 
+
+```{r}
+# write code here
+```
+
+
