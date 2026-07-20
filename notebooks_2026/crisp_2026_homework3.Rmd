@@ -41,7 +41,7 @@ you wish to study.
 
 
 2. Write your *research question of interest*. There should be two research questions 
-of interest for each outcome. An example is: We aim to examine the association between 
+of interest, one for each outcome. An example is: We aim to examine the association between 
 weekly minutes of cardio exercise and age, adjusted by sex, among CRISP students
 and their friends.
 
