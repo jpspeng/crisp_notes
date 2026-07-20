@@ -1,3 +1,11 @@
+---
+title: 'CRISP Day 7 2026: Logistic regression'
+output:
+  html_document:
+    toc: yes
+    toc_float: yes
+---
+
 ```{r, warning = F, message = F}
 library(dplyr)
 ```
