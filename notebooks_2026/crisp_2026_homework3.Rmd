@@ -1,0 +1,120 @@
+---
+title: 'CRISP 2026: Homework 3'
+output:
+  html_document:
+    toc: yes
+    toc_float: yes
+---
+
+# Part 1: Choose your research question 
+
+In this final homework, we will conduct a guided analysis of the CRISP survey 
+data. The goal of this homework is to apply everything that you learned this 
+quarter for a real analysis. 
+
+**Guidelines for the analysis**: 
+
+* The study population should exclude instructors of CRISP.
+
+* All analyses should adjust for age group. 
+
+* Use the dataset specifically created for this homework: crisp_survey_data_hw3.csv.
+The data dictionary is on the course website. 
+
+**Choose your research question**: 
+
+1. Choose two outcomes (one in each column) and one exposure of interest that 
+you wish to study.
+
+| Outcome 1 (numeric)      | Outcome 2 (binary)                                   | Exposure                         |
+|--------------------------|------------------------------------------------------|----------------------------------|
+| Cardio exercise          | Able to deal with stressors                          | Spent time in nature             |
+| Stress / anxiety score   | Woke up refreshed                                    | Morning or evening person        |
+| Pain score               | Satisfied with social activities and relationships   | Prefer home cooking or not       |
+| Sleep quality            |                                                      | Drink alcohol                    |
+
+* Outcome 1: 
+
+* Outcome 2: 
+
+* Exposure: 
+
+
+2. Write your *research question of interest*. There should be two research questions 
+of interest for each outcome. An example is: We aim to examine the association between 
+weekly minutes of cardio exercise and age, adjusted by sex, among CRISP students
+and their friends.
+
+* Research Question 1: 
+
+* Research Question 2: 
+
+
+3. Write your *analysis plan*. Specify how you wish to analyze the data. 
+An example is: We plan to run a linear regression with cardio exercise as the outcome, 
+age as the predictor, and sex as the adjustment variable. 
+
+* Analysis plan for Research Question 1: 
+
+* Analysis plan for Research Question 2: 
+
+
+
+# Part 2: Conduct your analysis 
+
+1. Read in the CRISP survey data file (crisp_survey_data_hw3.csv) used for this
+homework assignment. 
+
+```{r}
+# write code here 
+
+```
+
+2. Perform cleaning/processing of your dataset. You may wish to convert some 
+variables to factor variables and/or filter your dataset for select rows. 
+
+```{r}
+# write code here
+
+```
+
+3. Create a Table 1 describing characteristics, stratified by your exposure of 
+interest. Include at least five variables in your Table 1 but do not include your
+outcomes of interest. 
+
+```{r}
+# write code here 
+
+```
+
+4. Are there any significant differences in characteristics between the
+two groups as described in the Table 1 above? 
+
+```{r}
+# write code here 
+
+```
+
+5. Conduct an analysis to answer your first research question of interest. 
+Interpret your result! (Don't just give R output.)
+
+```{r}
+# write code here 
+
+```
+
+6. Conduct an analysis to answer your second research question of interest. 
+Interpret your result! (Don't just give R output.)
+
+```{r}
+# write code here 
+
+```
+
+7. Bonus: Create a graph to display your result. 
+
+```{r}
+# write code here 
+
+```
+

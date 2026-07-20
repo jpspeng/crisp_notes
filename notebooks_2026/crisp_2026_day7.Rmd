@@ -1,11 +1,3 @@
----
-title: 'CRISP Day 7 2026: Logistic regression'
-output:
-  html_document:
-    toc: yes
-    toc_float: yes
----
-
 ```{r, warning = F, message = F}
 library(dplyr)
 ```
@@ -28,7 +20,7 @@ crisp_survey_data <- crisp_survey_data %>%
          pet_preference = factor(pet_preference, labels = c("dogs", "cats", "both", "neither")), 
          morning_or_evening_person = factor(morning_or_evening_person, labels = c("morning", "evening", "neither")), 
          interacted_with_clubs = factor(interacted_with_clubs, labels = c("no", "yes")), 
-         spent_time_in_nature = factor(spent_time_in_nature, labels = "no", "yes"))
+         spent_time_in_nature = factor(spent_time_in_nature, labels = c("no", "yes")))
 ```
 
 # Linear regression with more than one predictor

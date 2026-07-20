@@ -1504,12 +1504,15 @@ div.tocify {
 <h1>Part 1: Choose your research question</h1>
 <p>In this final homework, we will conduct a guided analysis of the
 CRISP survey data. The goal of this homework is to apply everything that
-you learned this quarter into a real analysis.</p>
+you learned this quarter for a real analysis.</p>
 <p><strong>Guidelines for the analysis</strong>:</p>
 <ul>
 <li><p>The study population should exclude instructors of
 CRISP.</p></li>
 <li><p>All analyses should adjust for age group.</p></li>
+<li><p>Use the dataset specifically created for this homework:
+crisp_survey_data_hw3.csv. The data dictionary is on the course
+website.</p></li>
 </ul>
 <p><strong>Choose your research question</strong>:</p>
 <ol style="list-style-type: decimal">
@@ -1524,8 +1527,8 @@ interest that you wish to study.</li>
 </colgroup>
 <thead>
 <tr class="header">
-<th>Outcome 1</th>
-<th>Outcome 2</th>
+<th>Outcome 1 (numeric)</th>
+<th>Outcome 2 (binary)</th>
 <th>Exposure</th>
 </tr>
 </thead>
@@ -1559,7 +1562,9 @@ interest that you wish to study.</li>
 </ul>
 <ol start="2" style="list-style-type: decimal">
 <li>Write your <em>research question of interest</em>. There should be
-two research questions of interest for each outcome.</li>
+two research questions of interest for each outcome. An example is: We
+aim to examine the association between weekly minutes of cardio exercise
+and age, adjusted by sex, among CRISP students and their friends.</li>
 </ol>
 <ul>
 <li><p>Research Question 1:</p></li>
@@ -1567,7 +1572,9 @@ two research questions of interest for each outcome.</li>
 </ul>
 <ol start="3" style="list-style-type: decimal">
 <li>Write your <em>analysis plan</em>. Specify how you wish to analyze
-the data.</li>
+the data. An example is: We plan to run a linear regression with cardio
+exercise as the outcome, age as the predictor, and sex as the adjustment
+variable.</li>
 </ol>
 <ul>
 <li><p>Analysis plan for Research Question 1:</p></li>
@@ -1577,8 +1584,8 @@ the data.</li>
 <div id="part-2-conduct-your-analysis" class="section level1">
 <h1>Part 2: Conduct your analysis</h1>
 <ol style="list-style-type: decimal">
-<li>Read in the latest CRISP survey data file
-(crisp_survey_data_v3.csv).</li>
+<li>Read in the CRISP survey data file (crisp_survey_data_hw3.csv) used
+for this homework assignment.</li>
 </ol>
 <pre class="r"><code># write code here </code></pre>
 <ol start="2" style="list-style-type: decimal">
@@ -1588,9 +1595,9 @@ rows.</li>
 </ol>
 <pre class="r"><code># write code here</code></pre>
 <ol start="3" style="list-style-type: decimal">
-<li>Create a Table 1 describing the following baseline characteristics,
-stratified by your exposure of interest. The Table 1 should include the
-following variables:</li>
+<li>Create a Table 1 describing characteristics, stratified by your
+exposure of interest. Include at least five variables in your Table 1
+but do not include your outcomes of interest.</li>
 </ol>
 <pre class="r"><code># write code here </code></pre>
 <ol start="4" style="list-style-type: decimal">
