@@ -45,6 +45,21 @@ Homeworks for this course are optional but encouraged! You can turn in homework 
 2. *Homework 2 (midterm)*: due Friday, July 17 ([HTML](https://jpspeng.github.io/crisp_notes/notebooks_2026/crisp_2026_homework2.html) / [Rmd](https://jpspeng.github.io/crisp_notes/notebooks_2026/crisp_2026_homework2.Rmd) / [CSV used in the homework](https://jpspeng.github.io/crisp_notes/notebooks_2025/midterm_practicum_sample.csv) ) 
 3. *Homework 3 (final)*: due Thursday, July 23 ([HTML](https://jpspeng.github.io/crisp_notes/notebooks_2026/crisp_2026_homework3.html) / [Rmd](https://jpspeng.github.io/crisp_notes/notebooks_2026/crisp_2026_homework3.Rmd) / [CSV used in the homework](https://jpspeng.github.io/crisp_notes/notebooks_2026/crisp_survey_data_hw3.csv) / [Data dictionary](https://jpspeng.github.io/crisp_notes/notebooks_2026/crisp_hw3_data_dictionary.pdf))
 
+## Extra Lessons 
+
+We won't have time to cover everything in this mini-course. Here are some additional guides to help you with R: 
+
+| Topic | Notes and Exercises | R Markdown |
+|----------| ----------| ----------|
+| Lists | [Notes and exercises](https://jpspeng.github.io/crisp_notes/pages/lists.html)| [RMD](https://jpspeng.github.io/crisp_notes/pages/lists.Rmd)|
+| Loops | [Notes and exercises](https://jpspeng.github.io/crisp_notes/pages/loops.html)| [RMD](https://jpspeng.github.io/crisp_notes/pages/loops.Rmd)|
+| Functions | [Notes and exercises](https://jpspeng.github.io/crisp_notes/pages/functions.html) | [RMD](https://jpspeng.github.io/crisp_notes/pages/functions.Rmd)|
+| Risk differences, risk ratios, and odds ratios | [Notes and exercises](https://jpspeng.github.io/crisp_notes/pages/risk_differences.html)| [RMD](https://jpspeng.github.io/crisp_notes/pages/risk_differences.Rmd)|
+| Interaction terms in linear regression | [Notes and exercises](https://jpspeng.github.io/crisp_notes/pages/interaction_term.html)| [RMD](https://jpspeng.github.io/crisp_notes/pages/interaction_term.Rmd)|
+| Survival analysis basics | [Notes and exercises](https://jpspeng.github.io/crisp_notes/pages/survival_analysis.html)| [RMD](https://jpspeng.github.io/crisp_notes/pages/survival_analysis.Rmd)|
+| Cox regression | [Notes and exercises](https://jpspeng.github.io/crisp_notes/pages/cox_regression.html)| [RMD](https://jpspeng.github.io/crisp_notes/pages/cox_regression.Rmd)|
+
+
 --- 
 --- 
 
